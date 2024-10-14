@@ -1,6 +1,7 @@
 /** @format */
 
 import { Link } from "react-router-dom";
+import logo from "../../assets/GCPlogo.png";
 
 // import React from 'react'
 
@@ -21,7 +22,7 @@ const Navbar = () => {
 	];
 	return (
 		<div className="border flex text-base justify-between px-12 py-4 items-center">
-			<img src="/src/assets/GCPlogo.png" alt="logo" height={56} width={106} />
+			<img src={logo} alt="logo" height={56} width={106} />
 			<div>
 				<div className="flex justify-end  p-2">
 					<nav className="flex gap-14 text-customGray text-base font-normal font-figtree">
