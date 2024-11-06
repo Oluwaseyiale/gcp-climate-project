@@ -5,10 +5,12 @@ import AboutUs from "../../components/homepagecomponents/AboutUs";
 import OurCourses from "../../components/homepagecomponents/OurCourses";
 import OurImpacts from "../../components/homepagecomponents/OurImpacts";
 import OurPrograms from "../../components/homepagecomponents/OurPrograms";
+import Navbar from "../../components/navbarcomponent/Navbar";
 
 const HomePage = () => {
 	return (
 		<div className="bg-[#F6FDFB]">
+			<Navbar />
 			<div
 				className="relative h-screen items-center flex w-full"
 				style={{
@@ -41,9 +43,9 @@ const HomePage = () => {
 			</div>
 			<OurPrograms />
 			<OurCourses />
-            <OurImpacts/>
-            <AboutUs/>
-            <Footer/>
+			<OurImpacts />
+			<AboutUs />
+			<Footer />
 		</div>
 	);
 };

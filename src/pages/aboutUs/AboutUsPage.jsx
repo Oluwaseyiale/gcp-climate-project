@@ -4,10 +4,12 @@ import MissionAndVision from "../../components/aboutuscomponent/MissionAndVision
 import Team from "../../components/aboutuscomponent/Team";
 import Footer from "../../components/footercomponent/Footer";
 import OurPrograms from "../../components/homepagecomponents/OurPrograms";
-import "./about.css"
+import Navbar from "../../components/navbarcomponent/Navbar";
+import "./about.css";
 const AboutUsPage = () => {
 	return (
 		<div className="bg-[#F6FDFB]">
+			<Navbar />
 			<div className="imgbackground h-[20rem] px-52">
 				<div className="imgContainer">
 					<h1 className="aboutheader">About Us</h1>
@@ -22,11 +24,11 @@ const AboutUsPage = () => {
 					</p>
 				</div>
 			</div>
-            <MissionAndVision />
-            <Team/>
-            <BeliefsAndObjectives/>
-            <OurPrograms/>
-            <Footer/>
+			<MissionAndVision />
+			<Team />
+			<BeliefsAndObjectives />
+			<OurPrograms />
+			<Footer />
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 /** @format */
 import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
+import { Link } from "react-router-dom";
 // src/pages/Login.jsx
 
 const Login = () => {
@@ -42,9 +43,12 @@ const Login = () => {
 							placeholder="Confirm Password"
 							className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
 						/>
-						<button className="bg-green-600 text-white font-figtree py-2 rounded-lg w-[500px] h-[52px]">
-							Sign Up
-						</button>
+						<Link
+							to="/dashboard"
+							className="bg-green-600 text-white font-figtree flex justify-center items-center py-2 rounded-lg w-[500px] h-[52px]"
+						>
+							<h1>Sign Up</h1>
+						</Link>
 					</form>
 
 					<div className=" justify-center flex py-4">
@@ -53,12 +57,12 @@ const Login = () => {
 
 					<form className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
 						{/* <div className=""> */}
-							<img src={google} alt="" width={24} />
-							<input
-								type="password"
-								placeholder="Sign up with google"
-								className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
-							/>
+						<img src={google} alt="" width={24} />
+						<input
+							type="password"
+							placeholder="Sign up with google"
+							className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
+						/>
 						{/* </div> */}
 					</form>
 				</div>

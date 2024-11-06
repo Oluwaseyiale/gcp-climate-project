@@ -7,6 +7,7 @@ import Footer from "../../components/footercomponent/Footer";
 import ReactPaginate from "react-paginate";
 import CourseDetails from "./CourseDetails";
 import TabsComponent from "./TabsComponent";
+import Navbar from "../../components/navbarcomponent/Navbar";
 
 const CoursesPage = () => {
 	const courseInformation = [
@@ -74,6 +75,7 @@ const CoursesPage = () => {
 
 	return (
 		<div className=" bg-[#FFFFF]">
+			<Navbar />
 			{!selectedCourse && <img src={courseimg} alt="" />}
 
 			<div
