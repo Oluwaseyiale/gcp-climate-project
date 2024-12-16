@@ -1,7 +1,7 @@
 /** @format */
 import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // src/pages/Login.jsx
 import { useForm } from "react-hook-form";
 import { useSignUp } from "../../api/queries";
@@ -111,6 +111,7 @@ const Signup = () => {
 							<div className="  flex relative  ">
 								<input
 									type={showPassword ? "text" : "password"}
+									placeholder="password"
 									{...register("password", {
 										required: "Password is required",
 									})}
@@ -163,6 +164,15 @@ const Signup = () => {
 								{isPending ? "Signing Up..." : "Sign Up"}
 							</button>
 						</form>
+
+						<div className="border flex mt-5 justify-center">
+							<h1>
+								Already have an account?{" "}
+								<span className=" font-bold">
+									<Link to="/login">Login</Link>
+								</span>
+							</h1>
+						</div>
 
 						<div className=" justify-center flex py-4">
 							<p>or</p>
