@@ -11,13 +11,16 @@ import {
 import HomePage from "./pages/homefolder/HomePage";
 import AboutUsPage from "./pages/aboutUs/AboutUsPage";
 import CoursesPage from "./pages/courses/CoursesPage";
-import Login from "./pages/authenticationfolder/LoginPage";
+// import Login from "./pages/authenticationfolder/SignUpPage";
 import LandingPage from "./pages/Dashboard/dashboardComponents/LandingPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import SecondPage from "./pages/Dashboard/dashboardComponents/Tasks";
 import Certificates from "./pages/Dashboard/dashboardComponents/Certificates";
 import Payment from "./pages/Dashboard/dashboardComponents/Payment";
 import Profile from "./pages/Dashboard/dashboardComponents/Profile";
+import Signup from "./pages/authenticationfolder/SignUpPage";
+import LoginPage from "./pages/authenticationfolder/LoginPage";
+import OtpPage from "./pages/authenticationfolder/otp/OtpVerification";
 
 // This component will have the routing logic
 const AppContent = () => {
@@ -31,7 +34,10 @@ const AppContent = () => {
 				<Route path="/" element={<HomePage />} />
 				<Route path="/about" element={<AboutUsPage />} />
 				<Route path="/courses" element={<CoursesPage />} />
-				<Route path="/signin" element={<Login />} />{" "}
+				<Route path="/signup" element={<Signup />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route path="/otp" element={<OtpPage />} />
+
 				{/* Ensure this login route exists */}
 				<Route path="/dashboard" element={<Dashboard />}>
 					<Route index element={<LandingPage />}></Route>

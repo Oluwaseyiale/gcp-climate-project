@@ -1,74 +1,148 @@
 /** @format */
 import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // src/pages/Login.jsx
+import { useForm } from "react-hook-form";
+import { useLogin } from "../../api/queries";
+// import { ToastContainer, toast } from "react-toastify";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
+import { HiEye } from "react-icons/hi";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const LoginPage = () => {
+	const navigate = useNavigate();
+	const { mutate, isPending } = useLogin();
+	const [showPassword, setShowPassword] = useState(false);
+
+	const passwordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const onSubmit = async (data) => {
+		mutate(data, {
+			onSuccess(data) {
+				console.log(data, "this login data");
+				toast.success("Login successful");
+
+				// Add a delay before navigation
+				setTimeout(() => {
+					navigate("/dashboard");
+				}, 2000); // Adjust the delay time as needed (e.g., 2000ms = 2 seconds)
+			},
+			onError(err) {
+				console.error(err);
+				toast.error(err.response?.data?.message || "Something went wrong");
+			},
+		});
+	};
+
 	return (
-		<div className="flex  items-center justify-between h-screen bg-gradient-to-b  from-white to-blue-100">
-			<div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
-				<img src={signupimg} alt="" width={400} />
-			</div>
+		<div>
+			<ToastContainer
+				position="top-center"
+				autoClose={1500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="colored"
+				transition={Slide}
+			/>
 
-			<div className=" flex justify-center items-center h-full w-[50%] bg-blue-100 rounded-tl-[140px]">
-				<div>
-					<h1 className=" font-medium font-figtree text-4xl">Welcome</h1>
-					<form className="flex flex-col gap-4 mt-4">
-						<input
-							type="text"
-							placeholder="First Name"
-							className="border border-[#3F4040] rounded-lg bg-none p-2 w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
-						/>
-						<input
-							type="text"
-							placeholder="Last Name"
-							className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
-						/>
+			<div className="flex  items-center justify-between h-screen bg-gradient-to-b  from-white to-blue-100">
+				<div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
+					<img src={signupimg} alt="" width={400} />
+				</div>
 
-						<input
-							type="email"
-							placeholder="Email"
-							className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
-						/>
-
-						<input
-							type="password"
-							placeholder="Password"
-							className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
-						/>
-
-						<input
-							type="password"
-							placeholder="Confirm Password"
-							className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
-						/>
-						<Link
-							to="/dashboard"
-							className="bg-green-600 text-white font-figtree flex justify-center items-center py-2 rounded-lg w-[500px] h-[52px]"
+				<div className=" flex justify-center items-center h-full w-[50%] bg-blue-100 rounded-tl-[140px]">
+					<div>
+						<h1 className=" font-medium font-figtree text-4xl">
+							Welcome Back!
+						</h1>
+						<form
+							className="flex flex-col gap-4 mt-4"
+							onSubmit={handleSubmit(onSubmit)}
 						>
-							<h1>Sign Up</h1>
-						</Link>
-					</form>
+							<input
+								type="email"
+								placeholder="Email"
+								{...register("email", {
+									required: "email is required",
+									pattern: {
+										value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+										message: "Invalid email address",
+									},
+								})}
+								className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
+							/>
 
-					<div className=" justify-center flex py-4">
-						<p>or</p>
+							{errors.email && (
+								<span className="text-red-500 block">
+									{errors.email.message}
+								</span>
+							)}
+
+							<div className="  flex relative  ">
+								<input
+									type={showPassword ? "text" : "password"}
+									placeholder="Password"
+									{...register("password", {
+										required: "Password is required",
+									})}
+									className="w-[500px]   mt-1  border  border-[#3F4040] rounded-lg p-2 h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040] "
+								/>
+								<div
+									className="absolute right-0 inset-y-0 pr-3 flex items-center cursor-pointer"
+									onClick={passwordVisibility}
+								>
+									<span>
+										<HiEye />
+									</span>
+								</div>
+							</div>
+							{errors.password && (
+								<span className="text-red-500 block">
+									{errors.password.message}
+								</span>
+							)}
+
+							<button
+								type="submit"
+								className="monserrat font-medium size1 formbutton mx-14 text-[#4D4D4D] py-2 px-4 rounded-md mt-10 bg-[#FED700]"
+								disabled={isPending}
+							>
+								{isPending ? "Logging In..." : "Login"}
+							</button>
+						</form>
+
+						<div className=" justify-center flex py-4">
+							<p>or</p>
+						</div>
+
+						<div className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
+							<img src={google} alt="" width={24} />
+							<input
+								type="password"
+								placeholder=" continue with google"
+								className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
+							/>
+						</div>
 					</div>
-
-					<form className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
-						{/* <div className=""> */}
-						<img src={google} alt="" width={24} />
-						<input
-							type="password"
-							placeholder="Sign up with google"
-							className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
-						/>
-						{/* </div> */}
-					</form>
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default Login;
+export default LoginPage;

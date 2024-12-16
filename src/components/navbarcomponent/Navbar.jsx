@@ -48,7 +48,7 @@ const Navbar = () => {
 						</nav>
 					))}
 
-					<Link to="/signin">
+					<Link to="/signup">
 						<button className=" h-9 w-[106px] rounded-lg bg-green-800 text-white font-figtree">
 							Sign up
 						</button>

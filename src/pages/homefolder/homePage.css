@@ -1,0 +1,10 @@
+/** @format */
+
+.homeimgbg {
+	background-image: linear-gradient(to right, #ffffff, #00000072, #0000003b),
+		url("../../assets/secondBgImage.png");
+	background-size: cover;
+	background-position: center;
+	/* height: "100vh";
+	width: "100%"; */
+}

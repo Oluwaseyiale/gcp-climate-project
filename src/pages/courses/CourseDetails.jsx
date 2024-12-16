@@ -22,7 +22,7 @@ const CourseDetails = ({ course }) => {
 					Back to courses
 				</button> */}
 
-					<Link to="/signin">
+					<Link to="/signup">
 						<div className="border mt-4  bg-[#008056] h-9 w-36 rounded-lg flex items-center justify-center gap-4 font-figtree">
 							<h1 className="text-white">Enroll Now</h1>
 							<FaArrowRightLong color="white" />

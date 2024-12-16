@@ -6,21 +6,22 @@ import OurCourses from "../../components/homepagecomponents/OurCourses";
 import OurImpacts from "../../components/homepagecomponents/OurImpacts";
 import OurPrograms from "../../components/homepagecomponents/OurPrograms";
 import Navbar from "../../components/navbarcomponent/Navbar";
+import "./homePage.css";
 
 const HomePage = () => {
 	return (
 		<div className="bg-[#F6FDFB]">
 			<Navbar />
 			<div
-				className="relative h-screen items-center flex w-full"
-				style={{
-					backgroundImage:
-						"linear-gradient(to right, #FFFFFF, #00000072, #0000003B), url('/images/bgimage.png')",
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-					height: "100vh",
-					width: "100%",
-				}}
+				className="relative h-screen items-center flex w-full homeimgbg"
+				// style={{
+				// 	backgroundImage:
+				// 		"linear-gradient(to right, #FFFFFF, #00000072, #0000003B), url('../../assets/secondBgImage.png')",
+				// 	backgroundSize: "cover",
+				// 	backgroundPosition: "center",
+				// 	height: "100vh",
+				// 	width: "100%",
+				// }}
 			>
 				<div
 					className={` font-figtree relative z-10  p-4 text-black w-[618px] `}
