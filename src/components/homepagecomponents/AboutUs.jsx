@@ -3,7 +3,7 @@ import aboutusimg from "../../assets/aboutusimg.png";
 
 const AboutUs = () => {
 	return (
-		<div className=" mx-8 mt-40">
+		<div className=" mt-12 mx-8 md:mt-32">
 			<h1 className={`font-figtree font-medium text-2xl  mt-4 `}>
 				About Us
 				<hr className="border border-gray-400 w-full " />
