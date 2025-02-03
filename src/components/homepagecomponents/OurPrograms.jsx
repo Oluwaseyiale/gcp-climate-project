@@ -13,9 +13,9 @@ const OurPrograms = () => {
 				Our Program
 				<hr className="border border-black w-full " />
 			</h1>
-			<div className="flex justify-center gap-4 mt-8">
+			<div className="grid md:grid-cols-2 lg:grid-cols-4 place-items-center  mt-8">
 				{images.map((image, index) => (
-					<div key={index}>
+					<div key={index} className="mt-4">
 						<img src={image} alt="" height={380} width={320} />
 					</div>
 				))}

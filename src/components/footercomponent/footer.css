@@ -103,7 +103,7 @@
 	display: flex;
 }
 
-@media (min-width: 320px) {
+/* @media (min-width: 320px) {
 	.mainContainer {
 		margin-top: 15rem;
 	}
@@ -122,9 +122,9 @@
 	}
 
 	.navcontent {
-		/* display: flex; */
+		
 		margin-top: 4rem;
-		/* margin-left: -2rem; */
+		
 	}
 
 	.emailInput {
@@ -169,10 +169,9 @@
 	}
 
 	.navcontent {
-		/* display: flex; */
 		margin-top: 0;
 		gap: 1rem;
-		/* margin-left: -2rem; */
+		
 	}
 
 	.liststyleContainerD {
@@ -192,4 +191,4 @@
 	.navcontent {
 		gap: 3rem;
 	}
-}
+} */

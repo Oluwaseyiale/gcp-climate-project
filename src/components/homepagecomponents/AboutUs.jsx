@@ -8,15 +8,15 @@ const AboutUs = () => {
 				About Us
 				<hr className="border border-gray-400 w-full " />
 			</h1>
-			<div className="mt-6 flex justify-center gap-20 items-center">
-				<div className=" rounded-tl-[121px] h-[308px] w-[480px] rounded-br-[4px]  bg-[#E8F5F7] relative">
-					<div className=" mt-[66px] left-[58px] rounded-tl-[40px] rounded-tr-[4px] rounded-bl-[4px] h-[308px] w-[480px] rounded-br-[121px] overflow-hidden bg-[#E8F5F7] absolute">
+			<div className="mt-6 grid grid-cols-1 lg:grid-cols-2   place-items-center gap-20 items-center">
+				<div className=" w-full md:rounded-tl-[121px] md:mb-2 md:h-[308px] md:w-[480px] md:rounded-br-[4px]  md:bg-[#E8F5F7] md:relative">
+					<div className=" mt-[66px] md:left-[58px] md:rounded-tl-[40px] md:rounded-tr-[4px] md:rounded-bl-[4px] md:h-[308px] md:w-[480px] md:rounded-br-[121px] md:overflow-hidden md:bg-[#E8F5F7] md:absolute">
 						<img src={aboutusimg} alt="image" />
 					</div>
 					{/* <img src="/path-to-image" alt="image" /> */}
 				</div>
 
-				<div className="w-[590px]">
+				<div className="md:w-[590px]">
 					<p className="font-figtree font-normal text-xl">
 						At the heart of the Good Climate Project is our unwavering
 						commitment to addressing the root causes of climate change. We focus

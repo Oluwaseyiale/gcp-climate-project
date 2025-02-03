@@ -1,47 +1,44 @@
 /** @format */
-import instagram from "../../assets/instagramicon.png"
-import linkedin from "../../assets/linkedinicon.png"
-import youtube from "../../assets/youtubeicon.png"
-import twitter from "../../assets/twittericon.png"
-import facebook from  "../../assets/facebookicon.png"
-import phone from "../../assets/phoneicon.png"
-import message from "../../assets/messageicon.png"
-import location from "../../assets/locationicon.png"
-import logo from "../../assets/GCPlogo.png"
-import "./footer.css"
-
+import instagram from "../../assets/instagramicon.png";
+import linkedin from "../../assets/linkedinicon.png";
+import youtube from "../../assets/youtubeicon.png";
+import twitter from "../../assets/twittericon.png";
+import facebook from "../../assets/facebookicon.png";
+import phone from "../../assets/phoneicon.png";
+import message from "../../assets/messageicon.png";
+import location from "../../assets/locationicon.png";
+import logo from "../../assets/GCPlogo.png";
+import "./footer.css";
 
 const Footer = () => {
 	return (
-		<div className="border mt-40 bg-[#2A6F59] pt-8">
-			<div className="flex mainContainerB">
+		<div className=" mt-20 md:mt-40 bg-[#2A6F59] pt-8">
+			<div className=" px-6  grid md:grid-cols-2 lg:grid-cols-3 place-content-between ">
 				<div className="">
-					<div className="imgcontainer">
+					<div className="imgcontainer ">
 						<img src={logo} width={165.62} height={87.89} alt="Logo" />
 						<div className="imgtextcontainer">
-							<h4 className={`font-figtree imgtext`}>
-								Good Climate Project
-							</h4>
+							<h4 className={`font-figtree imgtext`}>Good Climate Project</h4>
 						</div>
 					</div>
-					<div className="imgcontainerB">
-						<h1 className={` font-figtree imgcontainerBtextA`}>
+					<div className="mt-20 gap-2 md:gap-4 grid  ">
+						<h1 className={` font-figtree text-white font-normal text-sm`}>
 							Sign in to our newsletter today and be in the know
 						</h1>
 						<input
 							type="text"
 							className="emailInput"
-							placeholder="Enter your email"
+							placeholder="Enter your email "
 						/>
-						<h1 className={`font-figtreeimgcontainerBtextB text-white`}>
+						<h1 className={`font-figtree text-wrap   text-white`}>
 							By subscriibing to our newsletter, you agree to our terms and
 							provides rovide consent to receive updates from our company.
 						</h1>
 					</div>
 				</div>
-				<div className="navcontent">
+				<div className=" mt-20 md:mt-0 grid grid-cols-2   ">
 					<nav>
-						<ul className="liststyleContainer">
+						<ul className=" ">
 							<li className="text-white listStyleA">About us</li>
 							<li className="text-white listStyleB">Team</li>
 							<li className="text-white listStyleB">Our solution</li>
@@ -51,7 +48,7 @@ const Footer = () => {
 					</nav>
 
 					<nav>
-						<ul className="liststyleContainer ">
+						<ul className="  ">
 							<li className="text-white listStyleA">Lorem Ipsum</li>
 							<li className="text-white listStyleB">Lorem Ipsum</li>
 							<li className="text-white listStyleB">Lorem Ipsum</li>
@@ -61,12 +58,12 @@ const Footer = () => {
 					</nav>
 				</div>
 				{/* <nav> */}
-				<div className="liststyleContainerD">
+				<div className="mt-20 lg:mt-0 ">
 					<div>
-						<p className="text-white listStyleA">Contact us</p>
+						<p className="text-white text-base font-normal">Contact us</p>
 					</div>
 
-					<div className="contactus">
+					<div className="contactus ">
 						<img
 							alt="phone Icon"
 							src={phone}
@@ -107,9 +104,9 @@ const Footer = () => {
 				</div>
 				{/* </nav> */}
 			</div>
-			<div className="footer-socialMedia">
+			<div className="footer-socialMedia ">
 				{/* <hr className="border w-full hr" /> */}
-				<div className="footer-socialMediaContainer">
+				<div className="footer-socialMediaContainer ">
 					<img
 						alt="phone Icon"
 						src={instagram}

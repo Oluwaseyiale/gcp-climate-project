@@ -21,13 +21,19 @@ const OurImpacts = () => {
 				<hr className="border border-black w-full" />
 			</h1>
 			{/* <div className="our-impacts-container "> */}
-			<div className="flex justify-center mt-5 bg-[#DCEFE9] py-4">
+			<div className="grid gap-5 lg:grid-cols-5 justify-center mt-5 bg-[#DCEFE9] py-4">
 				{impacts.map((impact, index) => (
 					<div key={index} className=" w-[240px] flex-col">
-						<h2 className={` font-figtree text-5xl font-semibold flex justify-center`}>
+						<h2
+							className={`text-2xl font-figtree md:text-5xl font-semibold flex justify-center`}
+						>
 							<CountUp start={0} end={impact.number} duration={2.5} />+
 						</h2>
-						<p className={` font-figtree font-normal text-xl text-center text-[#3F4040]`}>{impact.label}</p>
+						<p
+							className={` font-figtree font-normal md:text-xl text-center text-[#3F4040]`}
+						>
+							{impact.label}
+						</p>
 					</div>
 				))}
 			</div>

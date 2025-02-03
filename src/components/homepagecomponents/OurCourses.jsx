@@ -46,16 +46,30 @@ const OurCourses = () => {
 				<Swiper
 					modules={[Pagination, Navigation, Autoplay]} // Add the Swiper modules here if needed
 					spaceBetween={10}
-					slidesPerView={3}
+					slidesPerView={1}
 					navigation
 					pagination={{ clickable: true }}
 					autoplay={{ delay: autoplayDelay, disableOnInteraction: true }}
 					onSlideChange={() => console.log("slide change")}
 					onSwiper={(swiper) => console.log(swiper)}
+					breakpoints={{
+						640: {
+							slidesPerView: 1.5, // Show more slides on small screens
+							spaceBetween: 10,
+						},
+						768: {
+							slidesPerView: 2, // Medium screens
+							spaceBetween: 20,
+						},
+						1024: {
+							slidesPerView: 3, // Larger screens
+							spaceBetween: 30,
+						},
+					}}
 				>
 					{slides.map((slide, index) => (
 						<SwiperSlide key={index}>
-							<div className="py-4 px-5  bg-[#FFFFFF]  h-[367px] w-[380px] rounded-[10px] flex flex-col shadow-custom relative mb-8">
+							<div className="py-4 px-5  bg-[#FFFFFF]  h-[367px] lg:w-[380px] rounded-[10px]  shadow-custom relative mb-8">
 								<img src={slide.img} alt="" />
 								<h1 className="font-figtree text-2xl font-medium mt-4">
 									{slide.header}
