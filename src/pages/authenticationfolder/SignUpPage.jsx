@@ -48,16 +48,18 @@ const Signup = () => {
 	};
 	return (
 		<div>
-			<div className="flex  items-center justify-between h-screen bg-gradient-to-b  from-white to-blue-100">
-				<div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
+			<div className="  lg:flex  lg:items-center border-4 justify-between h-screen bg-gradient-to-b  lg:from-white lg:to-blue-100">
+				<div className="hidden  w-[50%] h-full  lg:flex items-center justify-center bg-white   rounded-br-[140px]">
 					<img src={signupimg} alt="" width={400} />
 				</div>
 
-				<div className=" flex justify-center items-center h-full w-[50%] bg-blue-100 rounded-tl-[140px]">
+				<div className="px-4 lg:px-0 flex justify-center items-center h-full lg:w-[50%] bg-blue-100 lg:rounded-tl-[140px]">
 					<div>
-						<h1 className=" font-medium font-figtree text-4xl">Welcome</h1>
+						<h1 className="text-center lg:text-start font-medium font-figtree text-2xl md:text-4xl mb-10 lg:mb-0">
+							Welcome
+						</h1>
 						<form
-							className="flex flex-col gap-4 mt-4"
+							className="grid grid-cols-1 gap-4 mt-4"
 							onSubmit={handleSubmit(onSubmit)}
 						>
 							<input
@@ -66,7 +68,7 @@ const Signup = () => {
 								{...register("firstname", {
 									required: "First Name is required",
 								})}
-								className="border border-[#3F4040] rounded-lg bg-none p-2 w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
+								className="border border-[#3F4040] rounded-lg bg-none p-2 lg:w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
 							/>
 
 							{errors.firstname && (
@@ -80,7 +82,7 @@ const Signup = () => {
 								{...register("lastname", {
 									required: "Last Name is required",
 								})}
-								className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
+								className="border border-[#3F4040] rounded-lg p-2 lg:w-[500px] h-[52px] bg-blue-100 placeholder:font-figtree placeholder:text-base placeholder:text-[#3F4040]"
 							/>
 
 							{errors.lastname && (
@@ -99,7 +101,7 @@ const Signup = () => {
 										message: "Invalid email address",
 									},
 								})}
-								className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
+								className="border border-[#3F4040] rounded-lg p-2 lg:w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
 							/>
 
 							{errors.email && (
@@ -178,7 +180,7 @@ const Signup = () => {
 							<p>or</p>
 						</div>
 
-						<div className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
+						<div className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 lg:w-[500px] h-[52px] rounded-lg">
 							{/* <div className=""> */}
 							<img src={google} alt="" width={24} />
 							<input

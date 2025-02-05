@@ -7,11 +7,13 @@ const BeliefsAndObjectives = () => {
 				Our Beliefs and Objectives
 				<hr className="border border-black w-full" />
 			</h1>
-			<div className="mt-8 flex justify-center gap-8">
-				<div className=" bg-[#EEFBF7] w-[659px] px-[52px] pt-8 pb-[52px]">
-					<h1 className=" font-figtree font-medium text-2xl mb-5">Our Belief</h1>
-					<div className="">
-						<p className="font-figtree text-xl font-normal">
+			<div className="mt-8 grid lg:grid-cols-2 place-items-center gap-8  ">
+				<div className="   bg-[#EEFBF7]  lg:px-[52px] p-4 lg:p-0 lg:pt-8 lg:pb-[52px]">
+					<h1 className=" text-center lg:text-start font-figtree font-medium text-2xl mb-5">
+						Our Belief
+					</h1>
+					<div className=" ">
+						<p className="font-figtree text-sm lg:text-xl font-normal">
 							We firmly believe that educating African youths on sustainability
 							and climate change is a pivotal step in tackling the core issues
 							of climate change. By making climate education accessible and
@@ -23,10 +25,10 @@ const BeliefsAndObjectives = () => {
 						</p>
 					</div>
 				</div>
-				<div className=" bg-[#EEFBF7] w-[659px] px-[52px] pt-8 pb-[52px]">
+				<div className=" bg-[#EEFBF7] px-[52px] pt-8 pb-[52px] lg:h-full">
 					<h1 className=" font-figtree font-medium text-2xl">Our Objective</h1>
-					<div>
-						<ul className="list-disc list-inside font-figtree leading-8">
+					<div className="gap-10 ">
+						<ul className="list-disc  list-inside font-figtree leading-8  lg:text-xl">
 							<li>
 								To raise a community of sustainable and climate conscious youths
 							</li>

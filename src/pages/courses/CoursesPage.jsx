@@ -69,7 +69,7 @@ const CoursesPage = () => {
 				</nav>
 
 				{!selectedCourse && (
-					<div className="w-[626px] flex items-center px-4 py-2 mb-8 rounded-lg mx-auto mt-6 bg-[#FBFEFD] shadow-[#00986740] shadow-sm">
+					<div className=" mx-10  lg:w-[626px] flex items-center px-4 py-2 mb-8 rounded-lg md:mx-auto mt-6 bg-[#FBFEFD] shadow-[#00986740] shadow-sm">
 						<input
 							type="text"
 							placeholder="Search Course"

@@ -9,15 +9,19 @@ const MissionAndVision = () => {
 				<hr className="border border-black w-full" />
 			</h1>
 
-			<div className=" flex justify-center gap-20 items-center mt-8">
-				<div className=" rounded-tl-[121px] h-[308px] w-[500px] rounded-br-[4px]  bg-[#E8F5F7] relative">
-					<div className=" mt-[66px] left-[48px] rounded-tl-[40px] rounded-tr-[4px] rounded-bl-[4px] h-[308px] w-[500px] rounded-br-[121px] overflow-hidden  absolute">
+			<div className=" grid lg:grid-cols-2 place-items-center gap-20 items-center mt-8">
+				<div className="hidden md:block rounded-tl-[121px] h-[308px] md:w-[500px] rounded-br-[4px]  bg-[#E8F5F7] relative">
+					<div className="w-[25rem] h-80 mt-[66px] left-[48px] rounded-tl-[40px] rounded-tr-[4px] rounded-bl-[4px] md:h-[308px] md:w-[500px] rounded-br-[121px] overflow-hidden  absolute">
 						<img src={missionimg} alt="image" />
 					</div>
 					{/* <img src="/path-to-image" alt="image" /> */}
 				</div>
 
-				<div className="w-[590px]">
+				<div className="block md:hidden w-80">
+					<img src={missionimg} alt="image" />
+				</div>
+
+				<div className=" md:w-[590px]">
 					<p className="font-figtree font-normal text-xl">
 						<span className=" font-figtree font-medium text-2xl">
 							Our Mission
