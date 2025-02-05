@@ -15,8 +15,9 @@ const OurPrograms = () => {
 			</h1>
 			<div className="grid md:grid-cols-2 lg:grid-cols-4 place-items-center  mt-8">
 				{images.map((image, index) => (
-					<div key={index} className="mt-4">
-						<img src={image} alt="" height={380} width={320} />
+					<div key={index} className="mt-4 border">
+						<img src={image} alt="" className=" w-screen h-64  md:h-[380px] " />
+						{/* height={380} width={320} */}
 					</div>
 				))}
 			</div>

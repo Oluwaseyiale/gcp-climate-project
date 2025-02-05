@@ -25,7 +25,7 @@ const BeliefsAndObjectives = () => {
 						</p>
 					</div>
 				</div>
-				<div className=" bg-[#EEFBF7] px-[52px] pt-8 pb-[52px] lg:h-full">
+				<div className=" bg-[#EEFBF7]  lg:px-[52px] p-4   w-full  lg:pt-8 lg:pb-[52px]">
 					<h1 className=" font-figtree font-medium text-2xl">Our Objective</h1>
 					<div className="gap-10 ">
 						<ul className="list-disc  list-inside font-figtree leading-8  lg:text-xl">

@@ -22,8 +22,8 @@ const MissionAndVision = () => {
 				</div>
 
 				<div className=" md:w-[590px]">
-					<p className="font-figtree font-normal text-xl">
-						<span className=" font-figtree font-medium text-2xl">
+					<p className="font-figtree font-normal md:text-xl">
+						<span className=" font-figtree font-medium text-xl md:text-2xl">
 							Our Mission
 						</span>
 						: To make climate change education accessible to African youths,
@@ -33,8 +33,8 @@ const MissionAndVision = () => {
 						community engagement.
 					</p>
 
-					<p className="font-figtree font-normal text-xl mt-8">
-						<span className=" font-figtree font-medium text-2xl">
+					<p className="font-figtree font-normal md:text-xl mt-8">
+						<span className=" font-figtree font-medium text-xl md:text-2xl">
 							Our Vision
 						</span>
 						: To foster a new generation of African leaders who are empowered to
