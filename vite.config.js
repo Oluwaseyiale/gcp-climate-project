@@ -14,4 +14,11 @@ export default defineConfig({
 			},
 		},
 	},
+	build: {
+		rollupOptions: {
+			external: [
+				"@material-tailwind/html/utils/withMT", // Prevent bundling of this module
+			],
+		},
+	},
 });
