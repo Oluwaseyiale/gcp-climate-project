@@ -21,5 +21,6 @@ export default defineConfig({
 				"@material-tailwind/html/utils/withMT", // Prevent bundling of this module
 			],
 		},
+		outDir: "dist",
 	},
 });
