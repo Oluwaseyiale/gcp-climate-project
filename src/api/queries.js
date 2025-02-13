@@ -1,7 +1,14 @@
 /** @format */
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { allCourses, login, resendOtp, signup, verifyOtp } from "./api";
+import {
+	allCourses,
+	courseId,
+	login,
+	resendOtp,
+	signup,
+	verifyOtp,
+} from "./api";
 // import { courses } from "../pages/courses/courses";
 
 export const useSignUp = () => {
@@ -22,6 +29,14 @@ export const useResendOtp = () => {
 
 export const useAllCourses = () => {
 	return useQuery({ queryKey: ["courses"], queryFn: allCourses });
+};
+
+export const useCourseId = (id) => {
+	return useQuery({
+		queryKey: ["courseId", id],
+		queryFn: () => courseId(id),
+		enabled: !!id,
+	});
 };
 
 // export const useAllCourses = (page) => {

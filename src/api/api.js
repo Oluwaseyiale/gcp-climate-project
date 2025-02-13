@@ -10,6 +10,8 @@ export const login = (payload) => {
 	return axios.post("/api/v1/accounts/token/", payload);
 };
 
+console.log("login", login);
+
 export const verifyOtp = (payload) => {
 	return axios.post("/api/v1/accounts/verify-email/", payload);
 };
@@ -27,6 +29,10 @@ export const allCourses = async (page = 1, pageSize = 10) => {
 		params: { page, pageSize },
 	});
 	return response.data; // Assuming the API response includes pagination info
+};
+
+export const courseId = (id) => {
+	return axios.get(`/api/v1/courses/course-description/${id}`);
 };
 
 // export const useActiveServices = () => {

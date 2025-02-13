@@ -21,6 +21,7 @@ import Profile from "./pages/Dashboard/dashboardComponents/Profile";
 import Signup from "./pages/authenticationfolder/SignUpPage";
 import LoginPage from "./pages/authenticationfolder/LoginPage";
 import OtpPage from "./pages/authenticationfolder/otp/OtpVerification";
+import CourseDetails from "./pages/courses/CourseDetails";
 
 // This component will have the routing logic
 const AppContent = () => {
@@ -37,6 +38,7 @@ const AppContent = () => {
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/otp" element={<OtpPage />} />
+				<Route path="/courses/:id" element={<CourseDetails />} />
 
 				{/* Ensure this login route exists */}
 				<Route path="/dashboard" element={<Dashboard />}>
