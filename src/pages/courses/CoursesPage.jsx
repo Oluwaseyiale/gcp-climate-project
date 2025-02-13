@@ -8,11 +8,15 @@ import CourseDetails from "./CourseDetails";
 import TabsComponent from "./TabsComponent";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import { useAllCourses } from "../../api/queries";
+// import imgA from "../../assets/imgA.png";
+import desktopImg from "../../assets/imgA.png";
+import { useNavigate } from "react-router-dom";
 
 const CoursesPage = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [selectedCourse, setSelectedCourse] = useState(null);
 	const [searchQuery, setSearchQuery] = useState("");
+	const navigation = useNavigate();
 
 	const { data, isLoading, isError } = useAllCourses(currentPage);
 	console.log("error data", data);
@@ -30,8 +34,8 @@ const CoursesPage = () => {
 	};
 
 	// Handle course selection
-	const handleCourseClick = (item) => {
-		setSelectedCourse(item);
+	const handleCourseClick = (course) => {
+		navigation(`/courses/${course.id}`);
 	};
 
 	// Handle back button click
@@ -42,9 +46,15 @@ const CoursesPage = () => {
 	if (isLoading) return <p>Loading...</p>;
 	if (isError) return <p>Error loading data</p>;
 
+	// const filteredItems = data?.results?.filter((item) =>
+	// 	item.title.toLowerCase().includes(searchQuery.toLowerCase())
+	// );
+
 	const filteredItems = data?.results?.filter((item) =>
-		item.title.toLowerCase().includes(searchQuery.toLowerCase())
+		item.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
 	);
+
+	console.log("mycourses", filteredItems);
 
 	return (
 		<div className="bg-[#FFFFF]">
@@ -82,28 +92,31 @@ const CoursesPage = () => {
 
 				<div className="flex-wrap flex justify-center gap-6">
 					{selectedCourse ? (
-						<CourseDetails course={selectedCourse} />
+						<CourseDetails
+							// course={selectedCourse}
+							filteredItems={filteredItems}
+						/>
 					) : filteredItems?.length === 0 ? (
 						<p>
 							No courses found. Please adjust your search or try again later.
 						</p>
 					) : (
-						filteredItems?.map((item, index) => (
+						filteredItems?.map((item) => (
 							<div
-								key={index}
+								key={item.id}
 								className="py-4 px-5 bg-[#FFFFFF] h-[367px] w-[300px] rounded-[10px] flex flex-col shadow-custom relative mb-8"
 								onClick={() => handleCourseClick(item)}
 							>
 								{/* Display image or fallback */}
 								<img
-									src={item.intro_video || "/path/to/fallback-image.png"} // Fallback image
+									src={item.imgUrl || desktopImg}
 									alt={item.title}
 									className="w-full h-40 object-cover rounded-md"
 								/>
 								<h1 className="font-figtree text-2xl font-medium mt-4">
 									{item.title}
 								</h1>
-								<p className="font-normal text-base font-figtree leading-6">
+								<p className="font-normal text-base font-figtree leading-6 truncate">
 									{item.description}
 								</p>
 								<div className="button-container mx-4 absolute bottom-4">
