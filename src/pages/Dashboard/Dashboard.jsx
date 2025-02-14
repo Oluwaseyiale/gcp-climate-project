@@ -7,6 +7,10 @@ import SideBarButton from "./SideBarButton";
 import logo from "../../assets/GCPlogo.png";
 
 const Dashboard = () => {
+	const handleLogout = () => {
+		localStorage.removeItem("token"); // Remove token from local storage
+		window.location.href = "/login"; // Redirect to login page or any other page
+	};
 	return (
 		<div className="h-screen flex flex-col">
 			{/* Header with fixed height */}
@@ -31,15 +35,20 @@ const Dashboard = () => {
 			<div className="flex flex-1">
 				{/* Sidebar with fixed width */}
 				<div className="w-80 border-r pt-10">
-					{data.map((link) => (
-						<div key={link.label}>
-							<SideBarButton
-								label={link.label}
-								route={link.route}
-								icon={link.icon}
-							/>
-						</div>
-					))}
+					<div>
+						{data.map((link) => (
+							<div key={link.label}>
+								<SideBarButton
+									label={link.label}
+									route={link.route}
+									icon={link.icon}
+								/>
+							</div>
+						))}
+					</div>
+					<div className="border mx-10 mt-12">
+						<button onClick={handleLogout}>Logout</button>
+					</div>
 				</div>
 				{/* Outlet fills the remaining space */}
 				<div className="flex-1 overflow-y-auto">
