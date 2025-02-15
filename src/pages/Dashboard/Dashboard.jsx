@@ -46,7 +46,7 @@ const Dashboard = () => {
 							</div>
 						))}
 					</div>
-					<div className="border mx-10 mt-12">
+					<div className=" mx-10 mt-12">
 						<button onClick={handleLogout}>Logout</button>
 					</div>
 				</div>
