@@ -7,6 +7,7 @@ import {
 	login,
 	resendOtp,
 	signup,
+	userinfo,
 	verifyOtp,
 } from "./api";
 // import { courses } from "../pages/courses/courses";
@@ -39,6 +40,9 @@ export const useCourseId = (id) => {
 	});
 };
 
+export const useUserInfo = () => {
+	return useQuery({ queryKey: ["userInfo"], queryFn: userinfo });
+};
 // export const useAllCourses = (page) => {
 // 	return useQuery(["courses", page], () => allCourses(page), {
 // 		keepPreviousData: true, // Retain previous data during fetch

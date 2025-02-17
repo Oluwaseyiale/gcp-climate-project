@@ -35,6 +35,10 @@ export const courseId = (id) => {
 	return axios.get(`/api/v1/courses/course-description/${id}`);
 };
 
+export const userinfo = (payload) => {
+	return axios.get("/api/v1/accounts/user-profile", payload);
+};
+
 // export const useActiveServices = () => {
 // 	return useQuery({ queryKey: ["services"], queryFn: activeServices });
 //   };
