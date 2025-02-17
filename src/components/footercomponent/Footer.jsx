@@ -13,7 +13,7 @@ import "./footer.css";
 const Footer = () => {
 	return (
 		<div className=" mt-20 md:mt-40 bg-[#2A6F59] pt-8">
-			<div className=" px-6  grid md:grid-cols-2 lg:grid-cols-3 place-content-between ">
+			<dibv className=" px-6  grid md:grid-cols-2 lg:grid-cols-3 place-content-between ">
 				<div className="">
 					<div className="imgcontainer ">
 						<img src={logo} width={165.62} height={87.89} alt="Logo" />
@@ -36,9 +36,9 @@ const Footer = () => {
 						</h1>
 					</div>
 				</div>
-				<div className=" mt-20 md:mt-0 grid grid-cols-2   ">
-					<nav>
-						<ul className=" ">
+				<div className=" mt-20 md:mt-0 grid    ">
+					<nav className=" lg:place-items-center">
+						<ul className="  ">
 							<li className="text-white listStyleA">About us</li>
 							<li className="text-white listStyleB">Team</li>
 							<li className="text-white listStyleB">Our solution</li>
@@ -46,64 +46,55 @@ const Footer = () => {
 							<li className="text-white listStyleB">Blog</li>
 						</ul>
 					</nav>
-
-					<nav>
-						<ul className="  ">
-							<li className="text-white listStyleA">Lorem Ipsum</li>
-							<li className="text-white listStyleB">Lorem Ipsum</li>
-							<li className="text-white listStyleB">Lorem Ipsum</li>
-							<li className="text-white listStyleB">Lorem Ipsum</li>
-							<li className="text-white listStyleB">Lorem Ipsum</li>
-						</ul>
-					</nav>
 				</div>
 				{/* <nav> */}
-				<div className="mt-20 lg:mt-0 ">
+				<div className="mt-20 lg:mt-0  lg:place-items-center">
 					<div>
-						<p className="text-white text-base font-normal">Contact us</p>
-					</div>
+						<div>
+							<p className="text-white text-base font-normal">Contact us</p>
+						</div>
 
-					<div className="contactus ">
-						<img
-							alt="phone Icon"
-							src={phone}
-							width={20} // Desired width
-							height={20} // Desired height
-							// quality={75}
-						/>
-						<h4 className="text-white listStyleB">+234 701 2342567</h4>
-					</div>
+						<div className="contactus ">
+							<img
+								alt="phone Icon"
+								src={phone}
+								width={20} // Desired width
+								height={20} // Desired height
+								// quality={75}
+							/>
+							<h4 className="text-white listStyleB">+234 904 864 9287</h4>
+						</div>
 
-					<div className="contactus">
-						<img
-							alt="phone Icon"
-							src={message}
-							width={20} // Desired width
-							height={20} // Desired height
-							// quality={75}
-						/>
-						<h4 className="text-white listStyleB">
-							goodclimateproject@gmail.com
-						</h4>
-					</div>
+						<div className="contactus">
+							<img
+								alt="phone Icon"
+								src={message}
+								width={20} // Desired width
+								height={20} // Desired height
+								// quality={75}
+							/>
+							<h4 className="text-white listStyleB">
+								contactus@goodclimateproject.org
+							</h4>
+						</div>
 
-					<div className="contactus">
-						<img
-							alt="phone Icon"
-							src={location}
-							width={20} // Desired width
-							height={20} // Desired height
-							// quality={75}
-						/>
+						<div className="contactus">
+							<img
+								alt="phone Icon"
+								src={location}
+								width={20} // Desired width
+								height={20} // Desired height
+								// quality={75}
+							/>
 
-						<h4 className="text-white listStyleB">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Praesentium nesciunt quos autem!
-						</h4>
+							<h4 className="text-white listStyleB">
+								1A Hughes Avenue Yaba, Lagos
+							</h4>
+						</div>
 					</div>
 				</div>
 				{/* </nav> */}
-			</div>
+			</dibv>
 			<div className="footer-socialMedia ">
 				{/* <hr className="border w-full hr" /> */}
 				<div className="footer-socialMediaContainer ">
