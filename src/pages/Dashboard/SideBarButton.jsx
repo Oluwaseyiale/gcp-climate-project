@@ -30,7 +30,7 @@ const SideBarButton = ({ label, route, icon }) => {
 SideBarButton.propTypes = {
 	label: PropTypes.string, // Expecting 'icon1' to be a React element
 	route: PropTypes.string,
-	icon: PropTypes.string,
+	icon: PropTypes.object,
 };
 
 export default SideBarButton;
