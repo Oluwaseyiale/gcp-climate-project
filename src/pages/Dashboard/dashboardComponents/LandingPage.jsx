@@ -23,6 +23,10 @@ const LandingPage = () => {
 					{/* <UserProfile /> */}
 				</div>
 			</div>
+
+			<div className="border w-full flex justify-center items-center">
+				<div className="border border-red-500 mt-20 w-[80%]"></div>
+			</div>
 		</div>
 	);
 };
