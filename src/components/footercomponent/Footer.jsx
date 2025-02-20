@@ -74,7 +74,7 @@ const Footer = () => {
 								// quality={75}
 							/>
 							<h4 className="text-white listStyleB">
-								contactus@goodclimateproject.org
+								admin@goodclimateproject.org
 							</h4>
 						</div>
 

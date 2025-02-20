@@ -3,6 +3,7 @@
 // import React from 'react'
 import "./dashboard.css";
 import books from "../../../assets/books.png";
+import EnrolledCourses from "../../../components/dashboardcomponents/dashboardLandingPage/EnrolledCourses";
 // import UserProfile from "../../../components/dashboardcomponents/userProfile/userProfile";
 // import { useUserInfo } from "../../../api/queries";
 
@@ -25,7 +26,7 @@ const LandingPage = () => {
 			</div>
 
 			<div className="border w-full flex justify-center items-center">
-				<div className="border border-red-500 mt-20 w-[80%]"></div>
+				<EnrolledCourses />
 			</div>
 		</div>
 	);

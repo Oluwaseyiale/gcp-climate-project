@@ -1,9 +1,11 @@
 /** @format */
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import {
 	allCourses,
 	courseId,
+	enroll,
+	enrolledCourses,
 	login,
 	resendOtp,
 	signup,
@@ -37,6 +39,19 @@ export const useCourseId = (id) => {
 		queryKey: ["courseId", id],
 		queryFn: () => courseId(id),
 		enabled: !!id,
+	});
+};
+
+export const useEnroll = () => {
+	return useMutation({ mutationFn: enroll });
+};
+
+export const useEnrolledCourses = (id) => {
+	return useInfiniteQuery({
+		queryKey: ["enrolledCourses", id], // Include id in the query key
+		queryFn: ({ pageParam = 1 }) => enrolledCourses({ pageParam, id }),
+		getNextPageParam: (lastPage) => lastPage?.nextPage ?? null, // Adjust based on your API
+		enabled: !!id, // Only run query if id is provided
 	});
 };
 
