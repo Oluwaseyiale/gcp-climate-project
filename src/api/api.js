@@ -35,6 +35,17 @@ export const courseId = (id) => {
 	return axios.get(`/api/v1/courses/course-description/${id}`);
 };
 
+export const enrolledCourses = async ({ pageParam = 1 }) => {
+	const response = await axios.get(`/api/v1/courses/enrolled-courses`, {
+		params: { page: pageParam, limit: 10 },
+	});
+	return response.data;
+};
+
+export const enroll = (payload) => {
+	return axios.post("/api/v1/courses/enroll/", payload);
+};
+
 // export const userinfo = (payload) => {
 // 	return axios.get("/api/v1/accounts/user-profile", payload);
 // };

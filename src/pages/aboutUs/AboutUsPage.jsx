@@ -12,10 +12,12 @@ const AboutUsPage = () => {
 			<Navbar />
 			<div className="imgbackground  md:h-[20rem] lg:px-52">
 				<div className="">
-					<h1 className=" font-semibold text-lg text-white text-center md:aboutheader ">
+					<h1 className=" font-semibold text-lg font-figtree lg:text-4xl lg:font-semibold  text-white text-center md:aboutheader ">
 						About Us
 					</h1>
-					<p className={`font-figtree  text-white text-sm md:aboutText`}>
+					<p
+						className={`font-figtree text-center lg:text-2xl font-normal  text-white text-sm md:aboutText`}
+					>
 						At the heart of the Good Climate Project is our unwavering
 						commitment to addressing the root causes of climate change. We focus
 						on raising a new generation of sustainable and climate-conscious
