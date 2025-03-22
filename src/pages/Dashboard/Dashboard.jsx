@@ -1,60 +1,29 @@
 /** @format */
 
 // Dashboard.js
-import { Link, Outlet } from "react-router-dom";
-import { data } from "./data";
-import SideBarButton from "./SideBarButton";
-import logo from "../../assets/GCPlogo.png";
+import { Outlet } from "react-router-dom";
+
+import { SideBar } from "./SideBar";
+import { NavBar } from "./NavBar";
 
 const Dashboard = () => {
-	const handleLogout = () => {
-		localStorage.removeItem("token"); // Remove token from local storage
-		window.location.href = "/login"; // Redirect to login page or any other page
-	};
 	return (
-		<div className="h-screen flex flex-col">
+		<div className="h-screen overflow-hidden ">
 			{/* Header with fixed height */}
-			<div className="h-[10%] flex items-center justify-between border-b  shadow-md px-10">
-				<img src={logo} alt="logo" width={80} />
-				<div className=" flex gap-8 ">
-					<Link className=" font-figtree text-base font-normal text-[#000000]">
-						Notification
-					</Link>
-					<Link className=" font-figtree text-base font-normal text-[#000000]">
-						Support
-					</Link>
-					<Link className=" font-figtree text-base font-normal text-[#000000]">
-						Courses
-					</Link>
-					<Link className=" font-figtree text-base font-normal text-[#000000]">
-						Donate
-					</Link>
-				</div>
-			</div>
+			{/* <div className="border"> */}
+			<NavBar />
+
 			{/* Main content area */}
-			<div className="flex flex-1">
+			<div className=" flex h-[80%] ">
+				<SideBar />
 				{/* Sidebar with fixed width */}
-				<div className="w-80 border-r pt-10">
-					<div>
-						{data.map((link) => (
-							<div key={link.label}>
-								<SideBarButton
-									label={link.label}
-									route={link.route}
-									icon={link.icon}
-								/>
-							</div>
-						))}
-					</div>
-					<div className=" mx-10 mt-12">
-						<button onClick={handleLogout}>Logout</button>
-					</div>
-				</div>
+
 				{/* Outlet fills the remaining space */}
-				<div className="flex-1 overflow-y-auto">
+				<div className="flex-1 overflow-y-scroll">
 					<Outlet />
 				</div>
 			</div>
+			{/* </div> */}
 		</div>
 	);
 };

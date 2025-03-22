@@ -17,7 +17,7 @@ const SideBarButton = ({ label, route, icon }) => {
 	return (
 		<div
 			onClick={handleNavigation}
-			className={`cursor-pointer p-4 mx-10 mt-6 hover:bg-gray-200 rounded-md flex items-center gap-2 ${
+			className={`cursor-pointer p-4 mx-5  mt-6 hover:bg-gray-200 rounded-md flex items-center gap-2 ${
 				active ? "bg-[#00986712] text-[#2A6F59]" : ""
 			}`}
 		>

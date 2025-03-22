@@ -1,14 +1,16 @@
 /** @format */
 
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
 	allCourses,
 	courseId,
 	enroll,
 	enrolledCourses,
+	getCourses,
 	login,
 	resendOtp,
 	signup,
+	userProfile,
 	// userinfo,
 	verifyOtp,
 } from "./api";
@@ -46,18 +48,21 @@ export const useEnroll = () => {
 	return useMutation({ mutationFn: enroll });
 };
 
-export const useEnrolledCourses = (id) => {
-	return useInfiniteQuery({
-		queryKey: ["enrolledCourses", id], // Include id in the query key
-		queryFn: ({ pageParam = 1 }) => enrolledCourses({ pageParam, id }),
-		getNextPageParam: (lastPage) => lastPage?.nextPage ?? null, // Adjust based on your API
-		enabled: !!id, // Only run query if id is provided
+export const useEnrolledCourses = () => {
+	return useQuery({ queryKey: ["enrolledCourses"], queryFn: enrolledCourses });
+};
+
+export const useGetCourses = (id) => {
+	return useQuery({
+		queryKey: ["courseDetails", id],
+		queryFn: () => getCourses(id),
+		enabled: !!id,
 	});
 };
 
-// export const useUserInfo = () => {
-// 	return useQuery({ queryKey: ["userInfo"], queryFn: userinfo });
-// };
+export const useUserProfile = () => {
+	return useQuery({ queryKey: ["userInfo"], queryFn: userProfile });
+};
 // export const useAllCourses = (page) => {
 // 	return useQuery(["courses", page], () => allCourses(page), {
 // 		keepPreviousData: true, // Retain previous data during fetch
