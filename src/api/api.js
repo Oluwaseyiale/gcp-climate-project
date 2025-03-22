@@ -35,20 +35,48 @@ export const courseId = (id) => {
 	return axios.get(`/api/v1/courses/course-description/${id}`);
 };
 
-export const enrolledCourses = async ({ pageParam = 1 }) => {
-	const response = await axios.get(`/api/v1/courses/enrolled-courses`, {
-		params: { page: pageParam, limit: 10 },
-	});
-	return response.data;
+export const enrolledCourses = () => {
+	return axios.get(`/api/v1/courses/enrolled-courses/`);
 };
 
-export const enroll = (payload) => {
-	return axios.post("/api/v1/courses/enroll/", payload);
+export const getCourses = (id) => {
+	return axios.get(`/api/v1/courses/${id}`);
 };
 
-// export const userinfo = (payload) => {
-// 	return axios.get("/api/v1/accounts/user-profile", payload);
-// };
+// ✅ Helper function to get the auth token safely
+const getAuthHeader = () => {
+	const token = localStorage.getItem("access_token");
+	return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
+// ✅ Function to enroll in a course
+export const enroll = async (payload) => {
+	try {
+		const response = await axios.post("/api/v1/courses/enroll", payload, {
+			headers: getAuthHeader(),
+		});
+		return response.data;
+	} catch (error) {
+		console.error("Enrollment failed:", error.response?.data || error.message);
+		throw error;
+	}
+};
+
+// ✅ Function to get the user profile
+export const userProfile = async () => {
+	try {
+		const response = await axios.get("/api/v1/accounts/user-profile/", {
+			headers: getAuthHeader(),
+		});
+		return response.data;
+	} catch (error) {
+		console.error(
+			"Failed to fetch user profile:",
+			error.response?.data || error.message
+		);
+		throw error;
+	}
+};
 
 // export const useActiveServices = () => {
 // 	return useQuery({ queryKey: ["services"], queryFn: activeServices });

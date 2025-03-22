@@ -1,70 +1,85 @@
 /** @format */
 
-import { useEffect, useRef } from "react";
-import { useEnrolledCourses } from "../../../api/queries";
-// import { useParams } from "react-router-dom";
-
+import PropTypes from "prop-types";
+import { useEnrolledCourses, useGetCourses } from "../../../api/queries";
+import imgA from "../../../assets/imgA.png";
 const EnrolledCourses = () => {
-	// const { id } = useParams();
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-		useEnrolledCourses();
+	const { data, isLoading, isError, error } = useEnrolledCourses();
 
-	const loadMoreRef = useRef(null);
+	console.log("data", data);
 
-	useEffect(() => {
-		if (!loadMoreRef.current || !hasNextPage) return;
-
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					fetchNextPage();
-				}
-			},
-			{ threshold: 1.0 }
-		);
-
-		observer.observe(loadMoreRef.current);
-
-		return () => observer.disconnect();
-	}, [fetchNextPage, hasNextPage]);
-
-	if (status === "loading") return <p>Loading items...</p>;
-	if (status === "error") return <p>Failed to load items.</p>;
-
-	// Check if there are any courses available
-	const courses = data?.pages.flatMap((page) => page.results) || [];
-	console.log("courses", courses);
-	console.log("course", data?.pages);
-
-	const noCoursesAvailable = courses.length === 0;
+	// Handle loading and error states
+	if (isLoading) return <p>Loading...</p>;
+	if (isError) return <p>Error: {error.message}</p>;
 
 	return (
-		<div className="p-4">
-			{noCoursesAvailable ? (
-				<p className="text-center text-gray-500">No courses available.</p>
-			) : (
-				<>
-					<ul>
-						{courses.map((course) => (
-							<li key={course.id} className="border p-2 mb-2">
-								{course.title} - {course.description}
-							</li>
-						))}
-						hello
-					</ul>
+		<div className="p-16 w-full">
+			<h2>Total Courses Enrolled: {data?.count}</h2>
 
-					{/* Infinite Scroll Trigger */}
-					<div ref={loadMoreRef} className="text-center my-4">
-						{isFetchingNextPage ? (
-							<p>Loading more items...</p>
-						) : (
-							<p>Scroll down to load more...</p>
-						)}
-					</div>
-				</>
+			{/* Pagination Links */}
+			{data?.data?.previous && (
+				<p>
+					Previous: <a href={data.data.previous}>{data.data.previous}</a>
+				</p>
 			)}
+			{data?.data?.next && (
+				<p>
+					Next: <a href={data.data.next}>{data.data.next}</a>
+				</p>
+			)}
+
+			{data?.data?.results.map((courseItem) => (
+				<CourseItem key={courseItem.course} id={courseItem.course} />
+			))}
 		</div>
 	);
+};
+
+const CourseItem = ({ id }) => {
+	const { data: courseDetails, isLoading, isError, error } = useGetCourses(id);
+
+	// console.log("courseDescription", courseDetails.data.description);
+	// console.log("courseDetails", courseDetails);
+	console.log("courseTitless", courseDetails);
+	console.log("Image URL:", courseDetails?.data?.image);
+
+	// const courseDescription = courseDetails.data.description;
+	// const title = courseDetails.data.title;
+
+	// const courses = courseDetails.data;
+
+	if (isLoading) return <p>Loading course details...</p>;
+	if (isError) return <p>Error: {error.message}</p>;
+
+	return (
+		<div className="w-full grid grid-cols-1">
+			{[courseDetails?.data].flat().map((course) => (
+				<div
+					key={course.id}
+					className=" flex justify-between px-4 items-center  rounded-xl shadow py-6 my-4"
+				>
+					<div className="flex  w-[80%] gap-5 items-center">
+						<img src={imgA} alt="" className="h-[104px] w-[146px]" />
+						<div className=" ">
+							<h1 className="font-figtree text-2xl font-medium">
+								{course.title}
+							</h1>
+							<p className="font-figtree text-base font-normal">
+								{course.description}
+							</p>
+						</div>
+					</div>
+					<button className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg">
+						Go to Course
+					</button>
+				</div>
+			))}
+		</div>
+	);
+};
+
+CourseItem.propTypes = {
+	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Validate courseId as a string or number
 };
 
 export default EnrolledCourses;

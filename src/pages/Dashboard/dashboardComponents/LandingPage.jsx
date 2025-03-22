@@ -5,11 +5,15 @@ import "./dashboard.css";
 import books from "../../../assets/books.png";
 import EnrolledCourses from "../../../components/dashboardcomponents/dashboardLandingPage/EnrolledCourses";
 // import UserProfile from "../../../components/dashboardcomponents/userProfile/userProfile";
-// import { useUserInfo } from "../../../api/queries";
+import { useUserProfile } from "../../../api/queries";
 
 const LandingPage = () => {
-	// const { data } = useUserInfo();
-	// console.log("user", data);
+	const { data } = useUserProfile();
+	console.log("user", data?.data?.data);
+	// console.log("1" - 1);
+	// console.log("1" + 1);
+
+	// const name = data?.data?.data.user
 
 	return (
 		<div>

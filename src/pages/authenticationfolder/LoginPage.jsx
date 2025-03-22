@@ -29,17 +29,23 @@ const LoginPage = () => {
 	const onSubmit = async (data) => {
 		mutate(data, {
 			onSuccess(data) {
-				console.log(data, "this login data");
-				toast.success("Login successful");
+				console.log("Login successful:", data.data.access);
+				if (data?.data?.access) {
+					localStorage.setItem("access_token", data.data.access);
+					// console.log(
+					// 	"Token stored in localStorage:",
+					// 	localStorage.getItem("access_token")
+					// );
 
-				// Add a delay before navigation
-				setTimeout(() => {
-					navigate("/dashboard");
-				}, 2000); // Adjust the delay time as needed (e.g., 2000ms = 2 seconds)
-			},
-			onError(err) {
-				console.error(err);
-				toast.error(err.response?.data?.message || "Something went wrong");
+					toast.success("Login successful");
+					setTimeout(() => {
+						navigate("/dashboard");
+					}, 2000);
+				} else {
+					toast.error("Login error");
+
+					console.error("No access token received from backend.");
+				}
 			},
 		});
 	};

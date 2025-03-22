@@ -1,80 +1,88 @@
 /** @format */
 
-// src/components/CourseDetails.jsx
 import { FaArrowRightLong } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import desktopImg from "../../assets/imgA.png";
-
 import { Link, useParams } from "react-router-dom";
-import { useCourseId } from "../../api/queries";
+import { useCourseId, useEnroll, useUserProfile } from "../../api/queries";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import Footer from "../../components/footercomponent/Footer";
+
 const CourseDetails = () => {
-	const { id } = useParams();
+	const { id } = useParams(); // Get course ID from URL
+	const { data: courseData } = useCourseId(id); // Fetch course details
+	const { data: userData, isLoading: userLoading } = useUserProfile(); // Fetch user profile
+	const { mutate: enroll, isPending } = useEnroll();
 
-	const { data } = useCourseId(id);
-	console.log("img", id);
-	console.log("filtered", data);
-	console.log("filtered", data?.data.intro_video);
+	// Extract course details
+	const course = courseData?.data?.id;
+	const price = courseData?.data?.price;
+	const experienceLevel = courseData?.data?.experience_level;
+	const schedule = courseData?.data?.schedule;
 
-	const price = data?.data.price;
-	const experienceLevel = data?.data.experience_level;
-	const schedule = data?.data.schedule;
+	// Extract user ID from profile
+	const user = userData?.data?.user;
+
+	// console.log("userData", user);
+
+	// Check if user is logged in
+	const isUserLoggedIn = Boolean(user);
+
+	const handleEnroll = () => {
+		if (!isUserLoggedIn) {
+			alert("You must be logged in to enroll.");
+			return;
+		}
+
+		enroll(
+			{ user, course },
+
+			{
+				onSuccess: () => alert("Enrollment Successful!"),
+				onError: (error) => console.error("Enrollment failed:", error),
+			}
+		);
+	};
 
 	const desc = [
-		{
-			title: "Duration: 16hrs a week",
-			description: "4 Weeks",
-		},
-
-		{
-			title: "Cost",
-			description: price,
-		},
-		{
-			title: "Experience level",
-			description: experienceLevel,
-		},
-		{
-			title: "Schedule ",
-			description: schedule,
-		},
-		{
-			title: "Ratings",
-			description: "5",
-		},
+		{ title: "Duration: 16hrs a week", description: "4 Weeks" },
+		{ title: "Cost", description: price },
+		{ title: "Experience level", description: experienceLevel },
+		{ title: "Schedule", description: schedule },
+		{ title: "Ratings", description: "5" },
 	];
 
 	return (
 		<div className="relative">
 			<Navbar />
-			<div className="py-4 px-5  pb-40 lg:pt-20 grid place-items-center  h-auto  rounded-[10px]   relative mb-8 bg-[#F6FDFB]">
-				<div className="flex justify-center gap-8 ">
-					<div className="mt-20 lg:w-[660px]  w-full pr-10">
+			<div className="py-4 px-5 pb-40 lg:pt-20 grid place-items-center h-auto rounded-[10px] relative mb-8 bg-[#F6FDFB]">
+				<div className="flex justify-center gap-8">
+					<div className="mt-20 lg:w-[660px] w-full pr-10">
 						<h1 className="font-figtree text-3xl lg:text-5xl font-semibold mt-4">
-							{data?.data?.title}
+							{courseData?.data?.title}
 						</h1>
-						<p className="font-normal text-wrap  text-lg font-figtree leading-6 mt-2 ">
-							{data?.data?.description}
+						<p className="font-normal text-lg font-figtree leading-6 mt-2">
+							{courseData?.data?.description}
 						</p>
 
-						<Link to="/signup">
-							<div className="border mt-4  bg-[#008056] h-9 w-36 rounded-lg flex items-center justify-center gap-4 font-figtree">
-								<h1 className="text-white">Enroll Now</h1>
+						<Link onClick={handleEnroll}>
+							<div className="border mt-4 bg-[#008056] h-9 w-36 rounded-lg flex items-center justify-center gap-4 font-figtree">
+								<h1 className="text-white">
+									{isPending ? "Enrolling..." : "Enroll Now"}
+								</h1>
 								<FaArrowRightLong color="white" />
 							</div>
 						</Link>
 					</div>
-					<div className="rounded-full md:h-[270px] md:w-[270px] lg:h-[270px] lg:w-[270px] bg-[#008056] relative ">
+					<div className="rounded-full md:h-[270px] md:w-[270px] lg:h-[270px] lg:w-[270px] bg-[#008056] relative">
 						<img
-							// src={data?.data?.intro_video || desktopImg}
 							src={desktopImg}
-							alt={data?.data?.title}
+							alt={courseData?.data?.title}
 							className="rounded-full md:h-[270px] md:w-[270px] lg:h-[270px] lg:w-[270px] absolute top-10 right-10"
 						/>
 					</div>
 				</div>
-				<div className=" h-10 lg:w-[80%] absolute bottom-[-2.5rem] bg-white flex items-center py-10  shadow-[0_4px_6px_rgba(0,0,0,0.15)] rounded-md">
+				<div className="h-10 lg:w-[80%] absolute bottom-[-2.5rem] bg-white flex items-center py-10 shadow-[0_4px_6px_rgba(0,0,0,0.15)] rounded-md">
 					{desc.map((items, index) => (
 						<div
 							key={index}
@@ -97,12 +105,6 @@ const CourseDetails = () => {
 };
 
 CourseDetails.propTypes = {
-	// course: PropTypes.shape({
-	// 	header: PropTypes.string.isRequired,
-	// 	text: PropTypes.string.isRequired,
-	// 	img: PropTypes.string.isRequired,
-	// }).isRequired,
-	// onBackClick: PropTypes.func.isRequired,
 	filteredItems: PropTypes.array,
 };
 
