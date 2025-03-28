@@ -60,7 +60,7 @@ axiosInstance.interceptors.response.use(
 				if (!refreshToken) {
 					console.error("No refresh token found, redirecting to login...");
 					sessionStorage.clear();
-					window.location.replace(`${window.location.origin}/login`);
+					// window.location.replace(`${window.location.origin}/login`);
 					return Promise.reject(error);
 				}
 
@@ -78,7 +78,7 @@ axiosInstance.interceptors.response.use(
 			} catch (refreshError) {
 				console.error("Token refresh failed:", refreshError);
 				sessionStorage.clear();
-				window.location.replace(`${window.location.origin}/login`);
+				// window.location.replace(`${window.location.origin}/login`);
 				return Promise.reject(refreshError);
 			}
 		}

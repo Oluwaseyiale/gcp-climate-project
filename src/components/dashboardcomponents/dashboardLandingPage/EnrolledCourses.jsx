@@ -2,7 +2,8 @@
 
 import PropTypes from "prop-types";
 import { useEnrolledCourses, useGetCourses } from "../../../api/queries";
-import imgA from "../../../assets/imgA.png";
+import { Link } from "react-router-dom";
+// import imgA from "../../../assets/imgA.png";
 const EnrolledCourses = () => {
 	const { data, isLoading, isError, error } = useEnrolledCourses();
 
@@ -14,7 +15,7 @@ const EnrolledCourses = () => {
 
 	return (
 		<div className="p-16 w-full">
-			<h2>Total Courses Enrolled: {data?.count}</h2>
+			{/* <h2>Total Courses Enrolled: {data?.count}</h2> */}
 
 			{/* Pagination Links */}
 			{data?.data?.previous && (
@@ -41,7 +42,7 @@ const CourseItem = ({ id }) => {
 	// console.log("courseDescription", courseDetails.data.description);
 	// console.log("courseDetails", courseDetails);
 	console.log("courseTitless", courseDetails);
-	console.log("Image URL:", courseDetails?.data?.image);
+	console.log("Image URL:", courseDetails?.data?.cover_image);
 
 	// const courseDescription = courseDetails.data.description;
 	// const title = courseDetails.data.title;
@@ -50,6 +51,14 @@ const CourseItem = ({ id }) => {
 
 	if (isLoading) return <p>Loading course details...</p>;
 	if (isError) return <p>Error: {error.message}</p>;
+	// const navigation = useNavigate;
+	// const handleCourseClick = (course) => {
+	// 	navigation(`/courses/${course.id}`);
+	// };
+
+	// const handleCourseClick = () => {
+	// 	navigation(`/modules`);
+	// };
 
 	return (
 		<div className="w-full grid grid-cols-1">
@@ -59,7 +68,12 @@ const CourseItem = ({ id }) => {
 					className=" flex justify-between px-4 items-center  rounded-xl shadow py-6 my-4"
 				>
 					<div className="flex  w-[80%] gap-5 items-center">
-						<img src={imgA} alt="" className="h-[104px] w-[146px]" />
+						<img
+							src={course.cover_image}
+							alt="NO IMAGE"
+							className="h-[104px] w-[146px]"
+						/>
+
 						<div className=" ">
 							<h1 className="font-figtree text-2xl font-medium">
 								{course.title}
@@ -69,9 +83,14 @@ const CourseItem = ({ id }) => {
 							</p>
 						</div>
 					</div>
-					<button className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg">
-						Go to Course
-					</button>
+					<Link to={`modules/${course.id}`} state={{ modules: course.modules }}>
+						<button
+							className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg"
+							// onClick={handleCourseClick}
+						>
+							Go to Course
+						</button>
+					</Link>
 				</div>
 			))}
 		</div>

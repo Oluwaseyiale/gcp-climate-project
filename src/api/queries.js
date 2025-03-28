@@ -7,7 +7,9 @@ import {
 	enroll,
 	enrolledCourses,
 	getCourses,
+	getModules,
 	login,
+	// modules,
 	resendOtp,
 	signup,
 	userProfile,
@@ -63,6 +65,18 @@ export const useGetCourses = (id) => {
 export const useUserProfile = () => {
 	return useQuery({ queryKey: ["userInfo"], queryFn: userProfile });
 };
+
+export const useGetModules = (id) => {
+	return useQuery({
+		queryKey: ["modules", id],
+		queryFn: () => getModules(id),
+		enabled: !!id,
+	});
+};
+
+// export const useModules = () => {
+// 	return useQuery({ queryKey: ["modules"], queryFn: modules });
+// };
 // export const useAllCourses = (page) => {
 // 	return useQuery(["courses", page], () => allCourses(page), {
 // 		keepPreviousData: true, // Retain previous data during fetch
