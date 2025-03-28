@@ -1,11 +1,11 @@
 /** @format */
 
 // import React from 'react'
-import "./dashboard.css";
-import books from "../../../assets/books.png";
-import EnrolledCourses from "../../../components/dashboardcomponents/dashboardLandingPage/EnrolledCourses";
+import "../dashboard.css";
+import books from "../../../../assets/books.png";
+import EnrolledCourses from "../../../../components/dashboardcomponents/dashboardLandingPage/EnrolledCourses";
 // import UserProfile from "../../../components/dashboardcomponents/userProfile/userProfile";
-import { useUserProfile } from "../../../api/queries";
+import { useUserProfile } from "../../../../api/queries";
 
 const LandingPage = () => {
 	const { data } = useUserProfile();
@@ -29,9 +29,9 @@ const LandingPage = () => {
 				</div>
 			</div>
 
-			<div className="border w-full flex justify-center items-center">
-				<EnrolledCourses />
-			</div>
+			{/* <div className=" w-full flex justify-center items-center"> */}
+			<EnrolledCourses />
+			{/* </div> */}
 		</div>
 	);
 };

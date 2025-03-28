@@ -78,6 +78,16 @@ export const userProfile = async () => {
 	}
 };
 
+export const getModules = async (id) => {
+	const response = await axios.get(`/api/v1/courses/modules/${id}`);
+	console.log("response", response);
+	return response.data;
+};
+
+// export const modules = () => {
+// 	return axios.get(`/api/v1/courses/modules/`);
+// };
+
 // export const useActiveServices = () => {
 // 	return useQuery({ queryKey: ["services"], queryFn: activeServices });
 //   };
