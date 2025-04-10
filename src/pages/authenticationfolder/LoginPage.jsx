@@ -44,7 +44,7 @@ const LoginPage = () => {
 				} else {
 					toast.error("Login error");
 
-					console.error("No access token received from backend.");
+					console.error("Login failed");
 				}
 			},
 		});
