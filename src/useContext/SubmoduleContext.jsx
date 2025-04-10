@@ -40,7 +40,7 @@ export const SubmoduleProvider = ({ children }) => {
 export const useSubmodules = () => {
 	const context = useContext(SubmoduleContext);
 	if (!context) {
-		throw new Error("useSubmodules must be used within a SubmoduleProvider");
+		throw new Error("useSubmodules must be used within a SubmoduleProvider ");
 	}
 	return context;
 };
