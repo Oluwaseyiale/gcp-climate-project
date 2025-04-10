@@ -2,17 +2,26 @@
 
 import { FaArrowRightLong } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import desktopImg from "../../assets/imgA.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCourseId, useEnroll, useUserProfile } from "../../api/queries";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import Footer from "../../components/footercomponent/Footer";
+import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 
 const CourseDetails = () => {
 	const { id } = useParams(); // Get course ID from URL
 	const { data: courseData } = useCourseId(id); // Fetch course details
-	const { data: userData, isLoading: userLoading } = useUserProfile(); // Fetch user profile
+	const { data: userData } = useUserProfile(); // Fetch user profile
 	const { mutate: enroll, isPending } = useEnroll();
+	const [modal, setModal] = useState({
+		open: false,
+		message: "",
+		success: false,
+	});
+
+	const navigate = useNavigate();
 
 	// Extract course details
 	const course = courseData?.data?.id;
@@ -23,23 +32,33 @@ const CourseDetails = () => {
 	// Extract user ID from profile
 	const user = userData?.data?.user;
 
-	// console.log("userData", user);
-
-	// Check if user is logged in
 	const isUserLoggedIn = Boolean(user);
 
 	const handleEnroll = () => {
 		if (!isUserLoggedIn) {
-			alert("You must be logged in to enroll.");
+			setModal({
+				open: true,
+				message: "You must be logged in to enroll.",
+				success: false,
+			});
 			return;
 		}
 
 		enroll(
 			{ user, course },
-
 			{
-				onSuccess: () => alert("Enrollment Successful!"),
-				onError: (error) => console.error("Enrollment failed:", error),
+				onSuccess: () =>
+					setModal({
+						open: true,
+						message: "Enrollment Successful!",
+						success: true,
+					}),
+				onError: () =>
+					setModal({
+						open: true,
+						message: "Enrollment failed. Please try again.",
+						success: false,
+					}),
 			}
 		);
 	};
@@ -98,6 +117,51 @@ const CourseDetails = () => {
 					))}
 				</div>
 			</div>
+
+			{/* Modal */}
+			<Dialog
+				open={modal.open}
+				handler={() => setModal({ open: false, message: "", success: false })}
+				size="xs"
+				className="p-4 w-[40%]"
+			>
+				<DialogBody>
+					<h2
+						className={`text-lg font-bold ${
+							modal.success ? "text-green-600" : "text-red-600"
+						}`}
+					>
+						{modal.success ? "Success" : "Error"}
+					</h2>
+					<p>{modal.message}</p>
+				</DialogBody>
+				<DialogFooter>
+					{/* <button
+						onClick={() =>
+							setModal({ open: false, message: "", success: false })
+						}
+						className="mt-3 bg-[#008056] text-white px-4 py-2 rounded"
+					>
+						Close
+					</button> */}
+
+					{modal.success ? (
+						<button
+							onClick={() => {
+								navigate("/login");
+							}}
+							className="mt-3 bg-[#008056] text-white px-4 py-2 rounded"
+						></button>
+					) : (
+						<button
+							onClick={() => {
+								navigate("/Signup");
+							}}
+							className="mt-3 bg-[#008056] text-white px-4 py-2 rounded"
+						></button>
+					)}
+				</DialogFooter>
+			</Dialog>
 
 			<Footer />
 		</div>
