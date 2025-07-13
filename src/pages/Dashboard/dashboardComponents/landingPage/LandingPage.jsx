@@ -9,7 +9,7 @@ import { useUserProfile } from "../../../../api/queries";
 
 const LandingPage = () => {
 	const { data } = useUserProfile();
-	console.log("user", data?.data?.data);
+	console.log("user", data);
 	// console.log("1" - 1);
 	// console.log("1" + 1);
 

@@ -24,7 +24,9 @@ import OtpPage from "./pages/authenticationfolder/otp/OtpVerification";
 import CourseDetails from "./pages/courses/CourseDetails";
 import { Modules } from "./pages/Dashboard/dashboardComponents/landingPage/Modules";
 import ModulesContent from "./pages/Dashboard/dashboardComponents/landingPage/ModulesContent";
-import { SubmoduleProvider } from "./useContext/SubmoduleContext";
+// import { SubmoduleProvider } from "./useContext/SubmoduleContext";
+import {Provider} from "react-redux";
+import store from "./store/store";
 
 // This component will have the routing logic
 const AppContent = () => {
@@ -66,11 +68,11 @@ const AppContent = () => {
 
 function App() {
 	return (
-		<SubmoduleProvider>
+		<Provider store={store}>
 			<Router>
 				<AppContent />
 			</Router>
-		</SubmoduleProvider>
+		</Provider>
 	);
 }
 
