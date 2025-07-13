@@ -1,16 +1,27 @@
 /** @format */
 
-import PropTypes from "prop-types";
-import { useEnrolledCourses, useGetCourses } from "../../../api/queries";
-import { Link } from "react-router-dom";
+
+import { useEnrolledCourses, } from "../../../api/queries";
 import {AllEnrolledCourses} from "./AllEnrolledCourses.jsx";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {setCourseId} from "../../../slice/courseIdSlice.js";
 // import imgA from "../../../assets/imgA.png";
 const EnrolledCourses = () => {
-	const { data, isLoading, isError, error } = useEnrolledCourses();
-
+	const { data, isLoading, isError, isSuccess,error } = useEnrolledCourses();
+const dispatch = useDispatch();
 	console.log("dataresults", data?.data?.results);
 
 	const allenrolledcourses = data?.data?.results;
+
+	useEffect(() => {
+		if (isSuccess && data?.data?.results?.length > 0) {
+			// ✅ Extract all course_data.id values
+			const courseIds = data.data.results.map((course) => course.course_data.id);
+			console.log('courseIds', courseIds)
+			dispatch(setCourseId(courseIds));
+		}
+	}, [isSuccess, data, dispatch]);
 
 	// Handle loading and error states
 	if (isLoading) return <p>Loading...</p>;
