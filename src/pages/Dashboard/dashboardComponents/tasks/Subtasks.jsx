@@ -9,7 +9,6 @@ const Subtasks = () => {
   const { data: retrievedCourses, isLoading, isError } = useGetCourses(id);
   const { data: profile } = useUserProfile();
   const [answers, setAnswers] = useState({});
-  // const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const { mutate, isPending } = useSubmitQuiz();
