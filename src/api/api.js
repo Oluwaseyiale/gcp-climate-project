@@ -43,6 +43,24 @@ export const getCourses = (id) => {
 	return axios.get(`/api/v1/courses/${id}`);
 };
 
+
+export const submitQuiz = (quizData) => {
+	return axios.post(`/api/v1/courses/quiz-submissions/`, quizData)
+}
+
+// Function to get quiz
+export const getQuiz = (id) => {
+	return axios.get(`/api/v1/courses/quizzes/${id}`)
+}
+
+export const retrieveCourse = (id) => {
+	return axios.get(`/api/v1/courses/${id}`)
+}
+
+export const getQuizz = () => {
+	return axios.get(``);
+}
+
 // ✅ Helper function to get the auth token safely
 const getAuthHeader = () => {
 	const token = localStorage.getItem("access_token");

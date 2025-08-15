@@ -14,7 +14,7 @@ import CoursesPage from "./pages/courses/CoursesPage";
 // import Login from "./pages/authenticationfolder/SignUpPage";
 import LandingPage from "./pages/Dashboard/dashboardComponents/landingPage/LandingPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import SecondPage from "./pages/Dashboard/dashboardComponents/Tasks";
+import SecondPage from "./pages/Dashboard/dashboardComponents/tasks/Tasks";
 import Certificates from "./pages/Dashboard/dashboardComponents/Certificates";
 import Payment from "./pages/Dashboard/dashboardComponents/Payment";
 import Profile from "./pages/Dashboard/dashboardComponents/Profile";
@@ -27,6 +27,7 @@ import ModulesContent from "./pages/Dashboard/dashboardComponents/landingPage/Mo
 // import { SubmoduleProvider } from "./useContext/SubmoduleContext";
 import {Provider} from "react-redux";
 import store from "./store/store";
+import Subtasks from "./pages/Dashboard/dashboardComponents/tasks/Subtasks";
 
 // This component will have the routing logic
 const AppContent = () => {
@@ -56,7 +57,11 @@ const AppContent = () => {
 							element={<ModulesContent />}
 						></Route>
 					</Route>
-					<Route path="tasks/*" element={<SecondPage />}></Route>
+					<Route path="tasks/*" element={<SecondPage />}>
+						{/* <Route path="subtasks/:id/*" element={<Subtasks/>}></Route> */}
+					</Route>
+					<Route path="subtasks/:id" element={<Subtasks />} />
+
 					<Route path="certificates/*" element={<Certificates />}></Route>
 					<Route path="payment/*" element={<Payment />}></Route>
 					<Route path="profile/*" element={<Profile />}></Route>
