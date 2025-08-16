@@ -5,9 +5,7 @@ import {
 	allCourses,
 	courseId,
 	enroll,
-	enrolledCourses,
-	getCourses,
-	getModules,
+	enrolledCourses, getCourses, getSubModule,
 	login,
 	// modules,
 	resendOtp,
@@ -54,6 +52,10 @@ export const useEnrolledCourses = () => {
 	return useQuery({ queryKey: ["enrolledCourses"], queryFn: enrolledCourses });
 };
 
+export const useGetSubModules = (id) => {
+	return useQuery({ queryKey: ["subModules", id], queryFn:() => getSubModule(id) });
+};
+
 export const useGetCourses = (id) => {
 	return useQuery({
 		queryKey: ["courseDetails", id],
@@ -62,15 +64,24 @@ export const useGetCourses = (id) => {
 	});
 };
 
+// export const useCourseModules = (id) => {
+// 	return useQuery({
+// 		queryKey: ['courseModules', id],
+// 		queryFn: ({ queryKey }) => courseModules(queryKey[1]),
+// 		enabled: true,
+// 	});
+// };
+
+
 export const useUserProfile = () => {
 	return useQuery({ queryKey: ["userInfo"], queryFn: userProfile });
 };
 
-export const useGetModules = (id) => {
+export const useGetModules = () => {
 	return useQuery({
-		queryKey: ["modules", id],
-		queryFn: () => getModules(id),
-		enabled: !!id,
+		queryKey: ["modules"],
+		queryFn: getModules,
+
 	});
 };
 

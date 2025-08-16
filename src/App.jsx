@@ -22,7 +22,7 @@ import Signup from "./pages/authenticationfolder/SignUpPage";
 import LoginPage from "./pages/authenticationfolder/LoginPage";
 import OtpPage from "./pages/authenticationfolder/otp/OtpVerification";
 import CourseDetails from "./pages/courses/CourseDetails";
-import { Modules } from "./pages/Dashboard/dashboardComponents/landingPage/Modules";
+import  Modules  from "./pages/Dashboard/dashboardComponents/landingPage/Modules";
 import ModulesContent from "./pages/Dashboard/dashboardComponents/landingPage/ModulesContent";
 // import { SubmoduleProvider } from "./useContext/SubmoduleContext";
 import {Provider} from "react-redux";
@@ -52,7 +52,7 @@ const AppContent = () => {
 					<Route path="modules/:id/*">
 						<Route index element={<Modules />}></Route>
 						<Route
-							path="modulescontent/:id*"
+							path="modulescontent/:id/*"
 							element={<ModulesContent />}
 						></Route>
 					</Route>

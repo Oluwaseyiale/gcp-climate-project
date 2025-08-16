@@ -1,36 +1,50 @@
-import {Link} from "react-router-dom";
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
-export const AllEnrolledCourses = (enrolledcourses) => {
-    console.log('enrolled here', enrolledcourses)
-    return(
+export const AllEnrolledCourses = ({ enrolledcourses }) => {
+    console.log('enrolled here', enrolledcourses);
+    const id = enrolledcourses.course_data.id;
+    console.log('ID here', id);
+
+
+    return (
         <div>
-
-            <div className=" flex justify-between px-4 items-center  rounded-xl shadow py-6 my-4">
-                <div className="flex  w-[80%] gap-5 items-center">
+            <div className="flex justify-between px-4 items-center rounded-xl shadow py-6 my-4">
+                <div className="flex w-[80%] gap-5 items-center">
                     <img
-                        src={enrolledcourses.enrolledcourses.course_data.cover_image}
+                        src={enrolledcourses.course_data.cover_image}
                         alt="NO IMAGE"
                         className="h-[104px] w-[146px] border-blue-300 border-2"
                     />
 
-                    <div className=" ">
+                    <div>
                         <h1 className="font-figtree text-2xl font-medium">
-                            {enrolledcourses.enrolledcourses.course_data.title}
+                            {enrolledcourses.course_data.title}
                         </h1>
-                        <p className="font-figtree text-base text-wrap font-normal">
-                            {enrolledcourses.enrolledcourses.course_data.description}
+                        <p className="font-figtree text-base font-normal">
+                            {enrolledcourses.course_data.description}
                         </p>
                     </div>
                 </div>
-                <Link to=''>
-                    <button
-                        className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg"
-                    >
+                <Link to={`modules/${id}`}>
+                    <button className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg">
                         Go to Course
                     </button>
                 </Link>
             </div>
-
         </div>
-    )
-}
+    );
+};
+
+AllEnrolledCourses.propTypes = {
+    // enrolledcourses: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        enrolledcourses: PropTypes.shape({
+            course_data: PropTypes.shape({
+                cover_image: PropTypes.string,
+                title: PropTypes.string,
+                description: PropTypes.string,
+            }).isRequired,
+        }).isRequired,
+    // }).isRequired,
+};
