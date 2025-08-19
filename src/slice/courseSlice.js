@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    enrolledCourseIds: null,  // ✅ store all enrolled course IDs
+    enrolledCourseIds: null,  
 };
 
 const courseSlice = createSlice({
@@ -10,7 +10,7 @@ const courseSlice = createSlice({
     initialState,
     reducers: {
         setCourseId: (state, action) => {
-            state.enrolledCourseIds = action.payload; // ✅ replace with fetched IDs
+            state.enrolledCourseIds = action.payload;
         },
         clearCourses: (state) => {
             state.courseId = null;
