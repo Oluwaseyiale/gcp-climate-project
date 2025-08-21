@@ -35,13 +35,17 @@ export const courseId = (id) => {
 	return axios.get(`/api/v1/courses/course-description/${id}`);
 };
 
+
+//  this is going to be save in a global state so that the Id can be fetched in a state to pass in the subcontent
 export const enrolledCourses = () => {
 	return axios.get(`/api/v1/courses/enrolled-courses/`);
 };
 
+
 export const getCourses = (id) => {
 	return axios.get(`/api/v1/courses/${id}`);
 };
+
 
 
 export const submitQuiz = (quizData) => {
@@ -60,6 +64,17 @@ export const retrieveCourse = (id) => {
 export const getQuizz = () => {
 	return axios.get(``);
 }
+
+export const getSubModule = (id) => {
+	return axios.get(`/api/v1/courses/submodules/${id}`);
+}
+
+// export const courseModules = (id) => {
+// 	console.log("Incoming id to query:", id);
+// 	return axios.get(`/api/v1/courses/modules/${id}/`);
+// }
+
+
 
 // ✅ Helper function to get the auth token safely
 const getAuthHeader = () => {
@@ -96,11 +111,11 @@ export const userProfile = async () => {
 	}
 };
 
-export const getModules = async (id) => {
-	const response = await axios.get(`/api/v1/courses/modules/${id}`);
-	console.log("response", response);
-	return response.data;
-};
+// export const getModules = async () => {
+// 	const response = await axios.get(`/api/v1/courses/modules/`);
+// 	console.log("response", response);
+// 	return response.data;
+// };
 
 // export const modules = () => {
 // 	return axios.get(`/api/v1/courses/modules/`);

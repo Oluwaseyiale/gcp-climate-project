@@ -5,7 +5,7 @@ import { useEnrolledCourses, } from "../../../api/queries";
 import {AllEnrolledCourses} from "./AllEnrolledCourses.jsx";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {setCourseId} from "../../../slice/courseIdSlice.js";
+import {setCourseId} from "../../../slice/courseSlice.js";
 // import imgA from "../../../assets/imgA.png";
 const EnrolledCourses = () => {
 	const { data, isLoading, isError, isSuccess,error } = useEnrolledCourses();
