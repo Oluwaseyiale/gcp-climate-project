@@ -19,6 +19,13 @@ const ModulesContent = () => {
     currentIndex = 0,
     moduleIdHere,
   } = location.state || {};
+  console.log("moduleId", moduleIdHere);
+  // 👇 these come from navigate(..., { state: { submodules, currentIndex } })
+  const {
+    submodules = [],
+    currentIndex = 0,
+    moduleIdHere,
+  } = location.state || {};
 
   // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
@@ -38,8 +45,6 @@ const ModulesContent = () => {
     );
 
   const submodule = data?.data;
-  console.log("submodule", submodule);
-
   if (!submodule) return <p>No submodule found</p>;
 
   const isLast = currentIndex === submodules.length - 1;
