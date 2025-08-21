@@ -66,14 +66,14 @@ const LoginPage = () => {
 				transition={Slide}
 			/>
 
-			<div className="flex  items-center justify-between h-screen bg-gradient-to-b  from-white to-blue-100">
+			<div className="flex items-center justify-between h-screen bg-gradient-to-b from-white to-blue-100">
 				<div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
 					<img src={signupimg} alt="" width={400} />
 				</div>
 
 				<div className=" flex justify-center items-center h-full w-[50%] bg-blue-100 rounded-tl-[140px]">
 					<div>
-						<h1 className=" font-medium font-figtree text-4xl">
+						<h1 className="text-4xl font-medium font-figtree">
 							Welcome Back!
 						</h1>
 						<form
@@ -94,12 +94,12 @@ const LoginPage = () => {
 							/>
 
 							{errors.email && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.email.message}
 								</span>
 							)}
 
-							<div className="  flex relative  ">
+							<div className="relative flex ">
 								<input
 									type={showPassword ? "text" : "password"}
 									placeholder="Password"
@@ -109,7 +109,7 @@ const LoginPage = () => {
 									className="w-[500px]   mt-1  border  border-[#3F4040] rounded-lg p-2 h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040] "
 								/>
 								<div
-									className="absolute right-0 inset-y-0 pr-3 flex items-center cursor-pointer"
+									className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
 									onClick={passwordVisibility}
 								>
 									<span>
@@ -118,7 +118,7 @@ const LoginPage = () => {
 								</div>
 							</div>
 							{errors.password && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.password.message}
 								</span>
 							)}
@@ -132,17 +132,18 @@ const LoginPage = () => {
 							</button>
 						</form>
 
-						<div className=" justify-center flex py-4">
+						<div className="flex justify-center py-4 ">
 							<p>or</p>
 						</div>
 
-						<div className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
+						<div className="bg-[#FFFFFF] shadow-[#00000026] gap-3 flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
 							<img src={google} alt="" width={24} />
-							<input
+							<p>Signup with google</p>
+							{/* <input
 								type="password"
 								placeholder=" continue with google"
 								className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
-							/>
+							/> */}
 						</div>
 					</div>
 				</div>
