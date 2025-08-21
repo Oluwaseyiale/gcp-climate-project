@@ -19,13 +19,8 @@ const ModulesContent = () => {
     currentIndex = 0,
     moduleIdHere,
   } = location.state || {};
+
   console.log("moduleId", moduleIdHere);
-  // 👇 these come from navigate(..., { state: { submodules, currentIndex } })
-  const {
-    submodules = [],
-    currentIndex = 0,
-    moduleIdHere,
-  } = location.state || {};
 
   // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
@@ -45,6 +40,9 @@ const ModulesContent = () => {
     );
 
   const submodule = data?.data;
+
+  console.log("submodule", submodule);
+
   if (!submodule) return <p>No submodule found</p>;
 
   const isLast = currentIndex === submodules.length - 1;
@@ -122,17 +120,29 @@ const ModulesContent = () => {
 
         {/* Next / Finish button */}
         {
-          currentIndex === 0 ? (<button
+          currentIndex === 0 ? (
+            <button
               onClick={handleNext}
               className="px-4 py-1 rounded-lg border border-[#008056] font-figtree black text-sm "
-          >
-            {isLast ? "Finish" : "Next"}
-          </button>) : (<button
+            >
+              {isLast ? "Finish" : "Next"}
+            </button>
+          ) : (
+            <button
               onClick={handleNext}
-              className=" font-figtree text-black text-md "
-          >
-            {isLast ? (<span className='flex items-center '><p>Finish</p> <MdChevronRight className='text-lg'/></span>): (<span className='flex items-center '><p>Next</p> <MdChevronRight className='text-lg'/></span>)}
-          </button>)
+              className="font-figtree text-black text-md"
+            >
+              {isLast ? (
+                <span className="flex items-center">
+                  <p>Finish</p> <MdChevronRight className="text-lg" />
+                </span>
+              ) : (
+                <span className="flex items-center">
+                  <p>Next</p> <MdChevronRight className="text-lg" />
+                </span>
+              )}
+            </button>
+          )
         }
       </div>
     </div>

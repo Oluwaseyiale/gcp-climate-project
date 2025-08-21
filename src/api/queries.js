@@ -8,10 +8,10 @@ import {
 
 	enrolledCourses,
 	getCourses,
-	getModules,
+	// getModules,
 	getQuiz,
 
-	enrolledCourses, getCourses, getSubModule,
+	 getSubModule,
 
 	login,
 	// modules,

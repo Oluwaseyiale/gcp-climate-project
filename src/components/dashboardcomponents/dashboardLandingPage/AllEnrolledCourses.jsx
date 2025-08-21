@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCourseId } from "../../../slice/courseSlice";
-import { useDispatch } from "react-redux";
-import { setCourseId } from "../../../slice/courseSlice";
 
 export const AllEnrolledCourses = ({ enrolledcourses }) => {
   const dispatch = useDispatch();
