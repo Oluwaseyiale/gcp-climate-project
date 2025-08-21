@@ -46,6 +46,25 @@ export const getCourses = (id) => {
 	return axios.get(`/api/v1/courses/${id}`);
 };
 
+
+
+export const submitQuiz = (quizData) => {
+	return axios.post(`/api/v1/courses/quiz-submissions/`, quizData)
+}
+
+// Function to get quiz
+export const getQuiz = (id) => {
+	return axios.get(`/api/v1/courses/quizzes/${id}`)
+}
+
+export const retrieveCourse = (id) => {
+	return axios.get(`/api/v1/courses/${id}`)
+}
+
+export const getQuizz = () => {
+	return axios.get(``);
+}
+
 export const getSubModule = (id) => {
 	return axios.get(`/api/v1/courses/submodules/${id}`);
 }
@@ -54,6 +73,7 @@ export const getSubModule = (id) => {
 // 	console.log("Incoming id to query:", id);
 // 	return axios.get(`/api/v1/courses/modules/${id}/`);
 // }
+
 
 
 // ✅ Helper function to get the auth token safely

@@ -5,11 +5,19 @@ import {
 	allCourses,
 	courseId,
 	enroll,
+
+	enrolledCourses,
+	getCourses,
+	getModules,
+	getQuiz,
+
 	enrolledCourses, getCourses, getSubModule,
+
 	login,
 	// modules,
 	resendOtp,
 	signup,
+	submitQuiz,
 	userProfile,
 	// userinfo,
 	verifyOtp,
@@ -35,6 +43,10 @@ export const useResendOtp = () => {
 export const useAllCourses = () => {
 	return useQuery({ queryKey: ["courses"], queryFn: allCourses });
 };
+
+export const useSubmitQuiz = () => {
+	return useMutation({ mutationFn: submitQuiz });
+}
 
 export const useCourseId = (id) => {
 	return useQuery({
@@ -64,6 +76,15 @@ export const useGetCourses = (id) => {
 	});
 };
 
+
+export const useGetQuiz = (id) => {
+	return useQuery({
+		queryKey: ['Quiz', id],
+		queryFn: () => getQuiz(id),
+		enabled: !!id
+	})
+}
+
 // export const useCourseModules = (id) => {
 // 	return useQuery({
 // 		queryKey: ['courseModules', id],
@@ -71,6 +92,7 @@ export const useGetCourses = (id) => {
 // 		enabled: true,
 // 	});
 // };
+
 
 
 export const useUserProfile = () => {
@@ -84,6 +106,7 @@ export const useGetModules = () => {
 
 	});
 };
+
 
 // export const useModules = () => {
 // 	return useQuery({ queryKey: ["modules"], queryFn: modules });
