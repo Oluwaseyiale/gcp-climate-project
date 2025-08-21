@@ -1,50 +1,81 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCourseId } from "../../../slice/courseSlice";
+import courses from "../../../assets/courses.jpg"; // Default image
+import { useState } from "react";
 
 export const AllEnrolledCourses = ({ enrolledcourses }) => {
-    console.log('enrolled here', enrolledcourses);
-    const id = enrolledcourses.course_data.id;
-    console.log('ID here', id);
+  const dispatch = useDispatch();
+  const [imageError, setImageError] = useState(false);
+  
+  const id = enrolledcourses.course_data?.id;
+  
+  // Construct the full image URL if needed
+  const getImageUrl = () => {
+    if (!enrolledcourses.course_data.cover_image) {
+      return courses;
+    }
+    
+    // If the image is already a full URL, use it directly
+    if (enrolledcourses.course_data.cover_image.startsWith('http')) {
+      return enrolledcourses.course_data.cover_image;
+    }
+    
+    // If it's a relative path, construct the full URL
+    // Adjust this based on your API response structure
+    return `https://res.cloudinary.com/dxfq3iotg/${enrolledcourses.course_data.cover_image}`;
+  };
 
+  const handleGoToCourse = () => {
+    dispatch(setCourseId(id));
+  };
 
-    return (
-        <div>
-            <div className="flex justify-between px-4 items-center rounded-xl shadow py-6 my-4">
-                <div className="flex w-[80%] gap-5 items-center">
-                    <img
-                        src={enrolledcourses.course_data.cover_image}
-                        alt="NO IMAGE"
-                        className="h-[104px] w-[146px] border-blue-300 border-2"
-                    />
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
-                    <div>
-                        <h1 className="font-figtree text-2xl font-medium">
-                            {enrolledcourses.course_data.title}
-                        </h1>
-                        <p className="font-figtree text-base font-normal">
-                            {enrolledcourses.course_data.description}
-                        </p>
-                    </div>
-                </div>
-                <Link to={`modules/${id}`}>
-                    <button className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg">
-                        Go to Course
-                    </button>
-                </Link>
-            </div>
+  return (
+    <div>
+      <div className="flex items-center justify-between px-4 py-6 my-4 shadow rounded-xl">
+        <div className="flex w-[80%] gap-5 items-center">
+          <div className="h-[104px] w-[446px] ">
+            <img
+              src={imageError ? courses : getImageUrl()}
+              alt="course-img"
+              className="object-cover w-full h-full"
+              onError={handleImageError}
+              loading="lazy"
+            />
+          </div>
+
+          <div>
+            <h1 className="text-2xl font-medium font-figtree">
+              {enrolledcourses.course_data.title}
+            </h1>
+            <p className="text-base font-normal font-figtree line-clamp-2">
+              {enrolledcourses.course_data.description}
+            </p>
+          </div>
         </div>
-    );
+        <Link to={`modules/${id}`} onClick={handleGoToCourse}>
+          <button className="border font-semibold text-base font-figtree bg-[#008056] text-[#FFFFFF] px-8 h-[43px] rounded-lg hover:bg-[#006a48] transition-colors">
+            Go to Course
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 AllEnrolledCourses.propTypes = {
-    // enrolledcourses: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        enrolledcourses: PropTypes.shape({
-            course_data: PropTypes.shape({
-                cover_image: PropTypes.string,
-                title: PropTypes.string,
-                description: PropTypes.string,
-            }).isRequired,
-        }).isRequired,
-    // }).isRequired,
+  enrolledcourses: PropTypes.shape({
+    course_data: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      cover_image: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };

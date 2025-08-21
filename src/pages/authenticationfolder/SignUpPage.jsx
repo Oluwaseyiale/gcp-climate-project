@@ -48,14 +48,14 @@ const Signup = () => {
 	};
 	return (
 		<div>
-			<div className="  lg:flex  lg:items-center border-4 justify-between h-screen bg-gradient-to-b  lg:from-white lg:to-blue-100">
+			<div className="justify-between h-screen border-4 lg:flex lg:items-center bg-gradient-to-b lg:from-white lg:to-blue-100">
 				<div className="hidden  w-[50%] h-full  lg:flex items-center justify-center bg-white   rounded-br-[140px]">
 					<img src={signupimg} alt="" width={400} />
 				</div>
 
 				<div className="px-4 lg:px-0 flex justify-center items-center h-full lg:w-[50%] bg-blue-100 lg:rounded-tl-[140px]">
 					<div>
-						<h1 className="text-center lg:text-start font-medium font-figtree text-2xl md:text-4xl mb-10 lg:mb-0">
+						<h1 className="mb-10 text-2xl font-medium text-center lg:text-start font-figtree md:text-4xl lg:mb-0">
 							Welcome
 						</h1>
 						<form
@@ -72,7 +72,7 @@ const Signup = () => {
 							/>
 
 							{errors.firstname && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.firstname.message}
 								</span>
 							)}
@@ -86,7 +86,7 @@ const Signup = () => {
 							/>
 
 							{errors.lastname && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.lastname.message}
 								</span>
 							)}
@@ -105,12 +105,12 @@ const Signup = () => {
 							/>
 
 							{errors.email && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.email.message}
 								</span>
 							)}
 
-							<div className="  flex relative  ">
+							<div className="relative flex ">
 								<input
 									type={showPassword ? "text" : "password"}
 									placeholder="password"
@@ -120,7 +120,7 @@ const Signup = () => {
 									className="w-[500px]   mt-1  border  border-[#3F4040] rounded-lg p-2 h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040] "
 								/>
 								<div
-									className="absolute right-0 inset-y-0 pr-3 flex items-center cursor-pointer"
+									className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
 									onClick={passwordVisibility}
 								>
 									<span>
@@ -129,12 +129,12 @@ const Signup = () => {
 								</div>
 							</div>
 							{errors.password && (
-								<span className="text-red-500 block">
+								<span className="block text-red-500">
 									{errors.password.message}
 								</span>
 							)}
 
-							{/* <div className="  flex relative  ">
+							{/* <div className="relative flex ">
 							<input
 								type={showPassword ? "text" : "password"}
 								{...register("password", {
@@ -143,7 +143,7 @@ const Signup = () => {
 								className="w-[500px]   mt-1  border  border-[#3F4040] rounded-lg p-2 h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040] "
 							/>
 							<div
-								className="absolute right-0 inset-y-0 pr-3 flex items-center cursor-pointer"
+								className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
 								onClick={passwordVisibility}
 							>
 								<span>
@@ -167,27 +167,28 @@ const Signup = () => {
 							</button>
 						</form>
 
-						<div className="border flex mt-5 justify-center">
+						<div className="flex justify-center mt-5 ">
 							<h1>
 								Already have an account?{" "}
-								<span className=" font-bold">
+								<span className="font-bold ">
 									<Link to="/login">Login</Link>
 								</span>
 							</h1>
 						</div>
 
-						<div className=" justify-center flex py-4">
+						<div className="flex justify-center py-4 ">
 							<p>or</p>
 						</div>
 
-						<div className="bg-[#FFFFFF] shadow-[#00000026]  flex  items-center px-6 lg:w-[500px] h-[52px] rounded-lg">
+						<div className="bg-[#FFFFFF] shadow-[#00000026] gap-3 flex  items-center px-6 lg:w-[500px] h-[52px] rounded-lg">
 							{/* <div className=""> */}
 							<img src={google} alt="" width={24} />
-							<input
+							<p>Signup with google</p>
+							{/* <input
 								type="password"
 								placeholder="Sign up with google"
 								className=" rounded-lg p-2 placeholder:bg-[#FFFFFF]  placeholder:text-base placeholder:text-[#000000]"
-							/>
+							/> */}
 							{/* </div> */}
 						</div>
 					</div>
