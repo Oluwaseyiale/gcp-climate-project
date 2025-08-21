@@ -8,7 +8,10 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
   const dispatch = useDispatch();
   console.log("enrolled here", enrolledcourses);
   const id = enrolledcourses.course_data?.id;
-  console.log("ID here", id);
+  // console.log("ID here",<img src={enrolledcourses.course_data.cover_image} alt=""/> );
+  console.log("ID here",enrolledcourses.course_data.cover_image );
+  // const fullUrl = `https://res.cloudinary.com/dxfq3iotg/image/upload/v1637915500/courses/${enrolledcourses.course_data.cover_image.src}`;
+  // const fullUrl = `https://res.cloudinary.com/dxfq3iotg/${enrolledcourses.course_data.cover_image}`;
 
   const handleGoToCourse = () => {
     // Store the course ID in Redux
@@ -19,11 +22,13 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
     <div>
       <div className="flex justify-between px-4 items-center rounded-xl shadow py-6 my-4">
         <div className="flex w-[80%] gap-5 items-center">
-          <img
-            src={enrolledcourses.course_data.cover_image}
-            alt="NO IMAGE"
-            className="h-[104px] w-[146px] border-blue-300 border-2"
-          />
+         <div className='h-[104px] w-[246px] border-blue-300 border-2'>
+           <img
+               src={enrolledcourses && enrolledcourses.course_data.cover_image}
+               alt="course-img"
+               className="object-cover"
+           />
+         </div>
 
           <div>
             <h1 className="font-figtree text-2xl font-medium">
