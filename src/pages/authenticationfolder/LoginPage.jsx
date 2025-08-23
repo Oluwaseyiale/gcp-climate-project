@@ -66,12 +66,12 @@ const LoginPage = () => {
 				transition={Slide}
 			/>
 
-			<div className="flex items-center justify-between h-screen bg-gradient-to-b from-white to-blue-100">
+			<div className="flex items-center justify-between h-screen bg-gradient-to-b from-white to-[#F2FCF9]">
 				<div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
 					<img src={signupimg} alt="" width={400} />
 				</div>
 
-				<div className=" flex justify-center items-center h-full w-[50%] bg-blue-100 rounded-tl-[140px]">
+				<div className=" flex justify-center items-center h-full w-[50%] bg-[#F2FCF9] rounded-tl-[140px]">
 					<div>
 						<h1 className="text-4xl font-medium font-figtree">
 							Welcome Back!
@@ -125,10 +125,10 @@ const LoginPage = () => {
 
 							<button
 								type="submit"
-								className="monserrat font-medium size1 formbutton mx-14 text-[#4D4D4D] py-2 px-4 rounded-md mt-10 bg-[#FED700]"
+								className="monserrat font-medium size1 formbutton mx-14 flex items-center justify-center text-white py-2 px-4 rounded-md mt-10 bg-[#008056]"
 								disabled={isPending}
 							>
-								{isPending ? "Logging In..." : "Login"}
+								{isPending ? <div className="w-6 h-6 border-b-2 border-white rounded-full animate-spin"/> : <p>Login</p>}
 							</button>
 						</form>
 
@@ -136,7 +136,7 @@ const LoginPage = () => {
 							<p>or</p>
 						</div>
 
-						<div className="bg-[#FFFFFF] shadow-[#00000026] gap-3 flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
+						<div className="bg-[#FFFFFF] shadow-[#00000026] cursor-pointer gap-3 flex  items-center px-6 w-[500px] h-[52px] rounded-lg">
 							<img src={google} alt="" width={24} />
 							<p>Signup with google</p>
 							{/* <input

@@ -102,7 +102,7 @@ export const useUserProfile = () => {
 export const useGetModules = () => {
 	return useQuery({
 		queryKey: ["modules"],
-		queryFn: getModules,
+		// queryFn: getModules,
 
 	});
 };
