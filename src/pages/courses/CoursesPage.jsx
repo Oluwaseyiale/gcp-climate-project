@@ -34,8 +34,8 @@ const CoursesPage = () => {
 	};
 
 	// Handle course selection
-	const handleCourseClick = (course) => {
-		navigation(`/courses/${course.id}`);
+	const handleCourseClick = (courseId) => {
+		navigation(`/courses/${courseId}`);
 	};
 
 	// Handle back button click
@@ -64,7 +64,7 @@ const CoursesPage = () => {
 			<div
 				className={!selectedCourse ? `relative` : `bg-[#F6FDFB] pt-10 pb-28`}
 			>
-				<nav className="text-gray-500 text-sm px-20 mb-20">
+				<nav className="px-20 mb-20 text-sm text-gray-500">
 					{selectedCourse && (
 						<>
 							<span>Courses</span> &gt;{" "}
@@ -90,7 +90,7 @@ const CoursesPage = () => {
 					</div>
 				)}
 
-				<div className="flex-wrap flex justify-center gap-6">
+				<div className="flex flex-wrap justify-center gap-6">
 					{selectedCourse ? (
 						<CourseDetails
 							// course={selectedCourse}
@@ -105,22 +105,23 @@ const CoursesPage = () => {
 							<div
 								key={item.id}
 								className="py-4 px-5 bg-[#FFFFFF] h-[367px] w-[300px] rounded-[10px] flex flex-col shadow-custom relative mb-8"
-								onClick={() => handleCourseClick(item)}
 							>
 								{/* Display image or fallback */}
 								<img
-									src={item.imgUrl || desktopImg}
+									src={item.cover_image || desktopImg}
 									alt={item.title}
-									className="w-full h-40 object-cover rounded-md"
+									className="object-cover w-full h-40 rounded-md"
 								/>
-								<h1 className="font-figtree text-2xl font-medium mt-4">
+								<h1 className="mt-4 text-2xl font-medium font-figtree">
 									{item.title}
 								</h1>
-								<p className="font-normal text-base font-figtree leading-6 truncate">
+								<p className="text-base font-normal leading-6 truncate font-figtree">
 									{item.description}
 								</p>
-								<div className="button-container mx-4 absolute bottom-4">
-									<button className="border button bg-[#008056] h-9 w-36 rounded-lg text-white font-figtree">
+								<div className="absolute mx-4 button-container bottom-4">
+									<button 
+								onClick={() => handleCourseClick(item.id)}
+									 className="border button bg-[#008056] h-9 w-36 rounded-lg text-white font-figtree">
 										See more
 									</button>
 								</div>

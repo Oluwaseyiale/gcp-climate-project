@@ -32,7 +32,7 @@ export const allCourses = async (page = 1, pageSize = 10) => {
 };
 
 export const courseId = (id) => {
-	return axios.get(`/api/v1/courses/course-description/${id}`);
+	return axios.get(`/api/v1/courses/${id}`);
 };
 
 

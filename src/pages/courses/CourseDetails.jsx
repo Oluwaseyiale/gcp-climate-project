@@ -29,6 +29,8 @@ const CourseDetails = () => {
 	const experienceLevel = courseData?.data?.experience_level;
 	const schedule = courseData?.data?.schedule;
 
+	console.log("course", courseData);
+
 	// Extract user ID from profile
 	const user = userData?.data?.user;
 
@@ -77,10 +79,10 @@ const CourseDetails = () => {
 			<div className="py-4 px-5 pb-40 lg:pt-20 grid place-items-center h-auto rounded-[10px] relative mb-8 bg-[#F6FDFB]">
 				<div className="flex justify-center gap-8">
 					<div className="mt-20 lg:w-[660px] w-full pr-10">
-						<h1 className="font-figtree text-3xl lg:text-5xl font-semibold mt-4">
+						<h1 className="mt-4 text-3xl font-semibold font-figtree lg:text-5xl">
 							{courseData?.data?.title}
 						</h1>
-						<p className="font-normal text-lg font-figtree leading-6 mt-2">
+						<p className="mt-2 text-lg font-normal leading-6 font-figtree">
 							{courseData?.data?.description}
 						</p>
 
@@ -95,7 +97,7 @@ const CourseDetails = () => {
 					</div>
 					<div className="rounded-full md:h-[270px] md:w-[270px] lg:h-[270px] lg:w-[270px] bg-[#008056] relative">
 						<img
-							src={desktopImg}
+							src={courseData?.data?.cover_image || desktopImg}
 							alt={courseData?.data?.title}
 							className="rounded-full md:h-[270px] md:w-[270px] lg:h-[270px] lg:w-[270px] absolute top-10 right-10"
 						/>
@@ -105,7 +107,7 @@ const CourseDetails = () => {
 					{desc.map((items, index) => (
 						<div
 							key={index}
-							className="border-x w-full grid place-items-center"
+							className="grid w-full border-x place-items-center"
 						>
 							<h1 className="text-[#575858] text-xs md:text-sm font-normal leading-4 font-figtree">
 								{items.title}

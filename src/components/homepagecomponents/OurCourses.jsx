@@ -37,15 +37,15 @@ const OurCourses = () => {
 	const autoplayDelay = 2000;
 
 	return (
-		<div className="mt-12 mx-10">
+		<div className="mx-10 mt-12">
 			<h1 className={`font-figtree font-medium text-2xl  mt-4 `}>
 				Our Courses
-				<hr className="border border-black w-full " />
+				<hr className="w-full border border-black " />
 			</h1>
-			<div className="my-swiper-container mt-8 justify-center ">
+			<div className="justify-center mt-8 my-swiper-container ">
 				<Swiper
 					modules={[Pagination, Navigation, Autoplay]} // Add the Swiper modules here if needed
-					spaceBetween={10}
+					// spaceBetween={5}
 					slidesPerView={1}
 					navigation
 					pagination={{ clickable: true }}
@@ -68,16 +68,16 @@ const OurCourses = () => {
 					}}
 				>
 					{slides.map((slide, index) => (
-						<SwiperSlide key={index}>
+						<SwiperSlide key={index} className="flex items-center justify-center px-10 ">
 							<div className="py-4 px-5  bg-[#FFFFFF]  h-[367px] lg:w-[380px] rounded-[10px]  shadow-custom relative mb-8">
 								<img src={slide.img} alt="" />
-								<h1 className="font-figtree text-2xl font-medium mt-4">
+								<h1 className="mt-4 text-2xl font-medium font-figtree">
 									{slide.header}
 								</h1>
-								<p className="font-normal text-base font-figtree leading-6">
+								<p className="text-base font-normal leading-6 font-figtree">
 									{slide.text}
 								</p>
-								<div className="button-container mx-4 absolute bottom-4">
+								<div className="absolute mx-4 button-container bottom-4">
 									<button className="border  button  bg-[#008056] h-9 w-36 rounded-lg ">
 										<p
 											className={`text-base font-normal text-white font-figtree`}
@@ -91,7 +91,7 @@ const OurCourses = () => {
 					))}
 				</Swiper>
 
-				<div className=" flex-col justify-center  h-full mx-auto  items-center mb-20">
+				<div className="flex-col items-center justify-center h-full mx-auto mb-20 ">
 					<button className="w-20 h-20 rounded-[49px] flex justify-center items-center m-auto bg-[#D8F8FD] mt-4">
 						<img
 							src={vector}
@@ -101,7 +101,7 @@ const OurCourses = () => {
 							// className="item-center"
 						/>
 					</button>
-					<p className="text-center mt-2 font-figtree">View all</p>
+					<p className="mt-2 text-center font-figtree">View all</p>
 				</div>
 			</div>
 		</div>

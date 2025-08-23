@@ -163,7 +163,7 @@ const Signup = () => {
 								className="monserrat font-medium size1 formbutton mx-14 text-[#4D4D4D] py-2 px-4 rounded-md mt-10 bg-[#FED700]"
 								disabled={isPending}
 							>
-								{isPending ? <div className="w-6 h-6 border-b-2 border-white rounded-full animate-spin"/> : <p>Login</p>}
+								{isPending ? <div className="w-6 h-6 border-b-2 border-white rounded-full animate-spin"/> : <p>Signup</p>}
 							</button>
 						</form>
 
