@@ -12,7 +12,7 @@ const EnrolledCourses = () => {
 const dispatch = useDispatch();
 	console.log("dataresults", data?.data?.results);
 
-	const allenrolledcourses = data?.data?.results;
+	// const allenrolledcourses = data?.data?.results;
 
 	useEffect(() => {
 		if (isSuccess && data?.data?.results?.length > 0) {
@@ -28,7 +28,7 @@ const dispatch = useDispatch();
 	if (isError) return <p>Error: {error.message}</p>;
 
 	return (
-		<div className="p-16 w-full">
+		<div className="w-full p-16">
 			{/* <h2>Total Courses Enrolled: {data?.count}</h2> */}
 
 			{/* Pagination Links */}
@@ -75,11 +75,11 @@ const dispatch = useDispatch();
 // 	// };
 //
 // 	return (
-// 		<div className="w-full grid grid-cols-1">
+// 		<div className="grid w-full grid-cols-1">
 // 			{[courseDetails?.data].flat().map((course) => (
 // 				<div
 // 					key={course.id}
-// 					className=" flex justify-between px-4 items-center  rounded-xl shadow py-6 my-4"
+// 					className="flex items-center justify-between px-4 py-6 my-4 shadow  rounded-xl"
 // 				>
 // 					<div className="flex  w-[80%] gap-5 items-center">
 // 						<img
@@ -88,11 +88,11 @@ const dispatch = useDispatch();
 // 							className="h-[104px] w-[146px]"
 // 						/>
 //
-// 						<div className=" ">
-// 							<h1 className="font-figtree text-2xl font-medium">
+// 						<div className="">
+// 							<h1 className="text-2xl font-medium font-figtree">
 // 								{course.title}
 // 							</h1>
-// 							<p className="font-figtree text-base font-normal">
+// 							<p className="text-base font-normal font-figtree">
 // 								{course.description}
 // 							</p>
 // 						</div>

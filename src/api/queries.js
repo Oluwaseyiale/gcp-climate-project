@@ -1,6 +1,6 @@
 /** @format */
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation,useQueryClient, useQuery } from "@tanstack/react-query";
 import {
 	allCourses,
 	courseId,
@@ -57,7 +57,18 @@ export const useCourseId = (id) => {
 };
 
 export const useEnroll = () => {
-	return useMutation({ mutationFn: enroll });
+	const client = useQueryClient();
+
+	return useMutation({
+		mutationFn: enroll,
+		onSuccess: () => {
+			// invalidate queries so data refreshes automatically
+			client.invalidateQueries({ queryKey: ["enrolledCourses"] });
+			client.invalidateQueries({ queryKey: ["courses"] });
+			// optionally invalidate course details if needed
+			// client.invalidateQueries({ queryKey: ["courseDetails"] });
+		},
+	});
 };
 
 export const useEnrolledCourses = () => {
