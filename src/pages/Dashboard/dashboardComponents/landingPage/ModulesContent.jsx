@@ -27,8 +27,8 @@ const ModulesContent = () => {
   console.log("datas", data);
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      <div className="flex items-center justify-center h-screen">
+        <div className="w-12 h-12 border-b-2 border-gray-900 rounded-full animate-spin"></div>
       </div>
     );
 
@@ -74,11 +74,12 @@ const ModulesContent = () => {
                 {" "}
                 {/* 16:9 aspect ratio */}
                 <ReactPlayer
-                    url={submodule.video_link}
+                    videoUrl={submodule.video_link}
                     controls
                     width="100%"
                     height="100%"
                     className="absolute top-0 left-0"
+                    allowFullScreen
                 />
               </div>
           ) : submodule.image ? (
@@ -88,7 +89,7 @@ const ModulesContent = () => {
                   className="w-full rounded-lg"
               />
           ) : (
-              <div className="bg-gray-100 p-8 text-center rounded-lg">
+              <div className="p-8 text-center bg-gray-100 rounded-lg">
                 <p className="text-gray-500">No media content available</p>
               </div>
           )}
@@ -96,7 +97,7 @@ const ModulesContent = () => {
       }
       <p className="mt-4">{submodule.body}</p>
 
-      <div className="mt-6 flex items-end justify-end gap-4">
+      <div className="flex items-end justify-end gap-4 mt-6">
         {/* Previous button */}
         {currentIndex > 0 && (
             <button
@@ -111,7 +112,7 @@ const ModulesContent = () => {
                     )
                 }
                 // disabled={currentIndex === 0}
-                className="disabled:opacity-50 flex items-center"
+                className="flex items-center disabled:opacity-50"
             >
               <MdKeyboardArrowLeft />
               <p>Previous</p>
@@ -130,7 +131,7 @@ const ModulesContent = () => {
           ) : (
             <button
               onClick={handleNext}
-              className="font-figtree text-black text-md"
+              className="text-black font-figtree text-md"
             >
               {isLast ? (
                 <span className="flex items-center">

@@ -1,10 +1,10 @@
-/* eslint-disable react/prop-types */
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCourseId } from "../../../slice/courseSlice";
 import courses from "../../../assets/courses.jpg"; // Default image
 import { useState } from "react";
+import {useAllCourses} from "../../../api/queries.js";
 
 export const AllEnrolledCourses = ({ enrolledcourses }) => {
   const dispatch = useDispatch();
@@ -36,6 +36,16 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
     setImageError(true);
   };
 
+  // available course section
+  const availableCourses = useAllCourses();
+  console.log("availableCourses", availableCourses?.data?.results);
+
+  
+
+ 
+
+
+
   return (
     <div>
       <div className="flex items-center justify-between px-4 py-6 my-4 shadow rounded-xl">
@@ -65,6 +75,14 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
           </button>
         </Link>
       </div>
+
+      <div className='mt-20'>
+
+
+      {/*available courses section*/}
+      
+      </div>
+
     </div>
   );
 };

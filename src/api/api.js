@@ -52,6 +52,8 @@ export const submitQuiz = (quizData) => {
 	return axios.post(`/api/v1/courses/quiz-submissions/`, quizData)
 }
 
+
+
 // Function to get quiz
 export const getQuiz = (id) => {
 	return axios.get(`/api/v1/courses/quizzes/${id}`)
@@ -82,11 +84,13 @@ const getAuthHeader = () => {
 	return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-// ✅ Function to enroll in a course
 export const enroll = async (payload) => {
 	try {
-		const response = await axios.post("/api/v1/courses/enroll", payload, {
-			headers: getAuthHeader(),
+		const response = await axios.post("/api/v1/courses/enroll/", payload, {
+			headers: {
+				...getAuthHeader(), // adds Authorization: Bearer <token>
+				"Content-Type": "application/json",
+			},
 		});
 		return response.data;
 	} catch (error) {
@@ -94,6 +98,22 @@ export const enroll = async (payload) => {
 		throw error;
 	}
 };
+
+
+// ✅ Function to enroll in a course
+// export const enroll = async (payload) => {
+// 	try {
+// 		const response = await axios.post("/api/v1/courses/enroll", payload, {
+// 			headers: getAuthHeader(),
+// 		});
+// 		return response.data;
+// 	} catch (error) {
+// 		console.error("Enrollment failed:", error.response?.data || error.message);
+// 		throw error;
+// 	}
+// };
+
+
 
 // ✅ Function to get the user profile
 export const userProfile = async () => {

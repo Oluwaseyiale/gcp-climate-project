@@ -2,8 +2,8 @@
 import { PiBookBookmarkLight } from "react-icons/pi";
 import { LuClipboardList } from "react-icons/lu";
 import { PiCertificateLight } from "react-icons/pi";
-import { MdOutlinePayments } from "react-icons/md";
-import { GrUserSettings } from "react-icons/gr";
+// import { MdOutlinePayments } from "react-icons/md";
+// import { GrUserSettings } from "react-icons/gr";
 const routeBaseUrl = "/dashboard";
 
 export const data = [
@@ -22,14 +22,14 @@ export const data = [
 		route: routeBaseUrl + "/certificates/*",
 		icon: <PiCertificateLight />,
 	},
-	{
-		label: "Payment",
-		route: routeBaseUrl + "/payment/*",
-		icon: <MdOutlinePayments />,
-	},
-	{
-		label: "Profile",
-		route: routeBaseUrl + "/profile/*",
-		icon: <GrUserSettings />,
-	},
+	// {
+	// 	label: "Payment",
+	// 	route: routeBaseUrl + "/payment/*",
+	// 	icon: <MdOutlinePayments />,
+	// },
+	// {
+	// 	label: "Profile",
+	// 	route: routeBaseUrl + "/profile/*",
+	// 	icon: <GrUserSettings />,
+	// },
 ];
