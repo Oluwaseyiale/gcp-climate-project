@@ -24,7 +24,7 @@ const ModulesContent = () => {
 
   // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
-  console.log("datas", data);
+  // console.log("datas", data);
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-screen">
