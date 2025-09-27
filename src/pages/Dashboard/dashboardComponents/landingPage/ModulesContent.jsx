@@ -2,7 +2,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useGetSubModules } from "../../../../api/queries.js";
 const ModulesContent = () => {
-  const { id: moduleId, id: subModuleId } = useParams(); // ✅ moduleId + submoduleId
+  const { id: moduleId, id: subModuleId } = useParams();
 
   const courseId = useSelector((state) => state.courses.enrolledCourseIds);
   console.log("courseId", courseId);
