@@ -1,15 +1,23 @@
 /** @format */
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation,useQueryClient, useQuery } from "@tanstack/react-query";
 import {
 	allCourses,
 	courseId,
 	enroll,
-	enrolledCourses, getCourses, getSubModule,
+
+	enrolledCourses,
+	getCourses,
+	// getModules,
+	getQuiz,
+
+	 getSubModule,
+
 	login,
 	// modules,
 	resendOtp,
 	signup,
+	submitQuiz,
 	userProfile,
 	// userinfo,
 	verifyOtp,
@@ -36,6 +44,10 @@ export const useAllCourses = () => {
 	return useQuery({ queryKey: ["courses"], queryFn: allCourses });
 };
 
+export const useSubmitQuiz = () => {
+	return useMutation({ mutationFn: submitQuiz });
+}
+
 export const useCourseId = (id) => {
 	return useQuery({
 		queryKey: ["courseId", id],
@@ -45,7 +57,18 @@ export const useCourseId = (id) => {
 };
 
 export const useEnroll = () => {
-	return useMutation({ mutationFn: enroll });
+	const client = useQueryClient();
+
+	return useMutation({
+		mutationFn: enroll,
+		onSuccess: () => {
+			// invalidate queries so data refreshes automatically
+			client.invalidateQueries({ queryKey: ["enrolledCourses"] });
+			client.invalidateQueries({ queryKey: ["courses"] });
+			// optionally invalidate course details if needed
+			// client.invalidateQueries({ queryKey: ["courseDetails"] });
+		},
+	});
 };
 
 export const useEnrolledCourses = () => {
@@ -64,6 +87,15 @@ export const useGetCourses = (id) => {
 	});
 };
 
+
+export const useGetQuiz = (id) => {
+	return useQuery({
+		queryKey: ['Quiz', id],
+		queryFn: () => getQuiz(id),
+		enabled: !!id
+	})
+}
+
 // export const useCourseModules = (id) => {
 // 	return useQuery({
 // 		queryKey: ['courseModules', id],
@@ -73,6 +105,7 @@ export const useGetCourses = (id) => {
 // };
 
 
+
 export const useUserProfile = () => {
 	return useQuery({ queryKey: ["userInfo"], queryFn: userProfile });
 };
@@ -80,10 +113,11 @@ export const useUserProfile = () => {
 export const useGetModules = () => {
 	return useQuery({
 		queryKey: ["modules"],
-		queryFn: getModules,
+		// queryFn: getModules,
 
 	});
 };
+
 
 // export const useModules = () => {
 // 	return useQuery({ queryKey: ["modules"], queryFn: modules });
