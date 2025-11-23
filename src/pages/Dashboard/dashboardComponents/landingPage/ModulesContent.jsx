@@ -21,7 +21,7 @@ const ModulesContent = () => {
   const {
     submodules = [],
     currentIndex = 0,
-    moduleIdHere,
+
   } = location.state || {};
 
   // const formatted = text.replace(/\r\n/g, "<br/>");
@@ -80,8 +80,6 @@ const ModulesContent = () => {
   };
 
   return (
-    <div className="p-8" >
-      <h1 className="text-2xl font-bold text-center font-figtree">{submodule.title}</h1>
     <div className="p-8">
       <h1 className="text-2xl font-bold text-center font-figtree">
         {submodule.title}
@@ -169,6 +167,7 @@ const ModulesContent = () => {
         )}
       </div>
     </div>
+
   );
 };
 
