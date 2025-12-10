@@ -1,41 +1,30 @@
 /** @format */
 
 import { useState } from "react";
-import { useLocation } from "react-router-dom"; // For extracting query parameters
-import OtpInput from "react-otp-input";
-import { useVerifyOtp, useResendOtp } from "../../../api/queries"; // Import your mutation hook
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PinInput } from '@mantine/core';
+import { useVerifyOtp, useResendOtp } from "../../../api/queries";
 import "./otp.css";
 
 export default function OtpPage() {
 	const [otp, setOtp] = useState("");
-
 	const navigate = useNavigate();
-
 	const location = useLocation();
 	const userEmail = location.state;
 	const [isCooldown, setCooldown] = useState(false);
-	console.log("useremail", userEmail);
 
 	const { mutate: verifyOtp, isLoading: isVerifying, error } = useVerifyOtp();
 	const { mutate: resendOtp, isLoading: isResending } = useResendOtp();
 
-	// Function to resend the OTP
 	const resend = () => {
-		if (isCooldown) {
-			console.warn("Please wait before resending the OTP.");
-			return;
-		}
-		if (!userEmail) {
-			console.error("Email not found in query parameters");
-			return;
-		}
+		if (isCooldown) return console.warn("Please wait before resending the OTP.");
+		if (!userEmail) return console.error("Email not found in state");
 
-		setCooldown(true); // Start cooldown
+		setCooldown(true);
 		setTimeout(() => setCooldown(false), 30000);
 
 		resendOtp(
-			{ email: userEmail.email }, // Pass the email as payload
+			{ email: userEmail.email },
 			{
 				onSuccess: () => console.log("OTP resent successfully"),
 				onError: (error) => console.error("Error resending OTP", error),
@@ -43,26 +32,16 @@ export default function OtpPage() {
 		);
 	};
 
-	// Function to handle OTP submission
 	const handleSubmit = () => {
-		if (!userEmail) {
-			console.error("Email not found in state");
-			return;
-		}
+		if (!userEmail) return console.error("Email not found in state");
 
-		const formData = {
-			otp,
-			email: userEmail.email,
-		};
-
-		verifyOtp(formData, {
-			onSuccess: () => {
-				navigate("/login"); // Navigate on success
-			},
-			onError: () => {
-				console.error("Invalid OTP or server error");
-			},
-		});
+		verifyOtp(
+			{ otp, email: userEmail.email },
+			{
+				onSuccess: () => navigate("/login"),
+				onError: () => console.error("Invalid OTP or server error"),
+			}
+		);
 	};
 
 	return (
@@ -71,14 +50,19 @@ export default function OtpPage() {
 				Enter OTP sent to your E-mail
 			</h1>
 
-			<div className=" items-center flex-col justify-center">
-				<OtpInput
+			<div className="flex items-center justify-center  w-full p-4">
+				<PinInput
+					className="flex gap-2"
 					value={otp}
 					onChange={setOtp}
-					numInputs={6}
-					renderInput={(props) => <input {...props} />}
-					inputStyle="otp-input"
-					containerStyle="otp-input-focus"
+					length={6}
+					// type={/^[0-9]*$/}
+					inputType=""
+					inputMode="numeric"
+					classNames={{
+						// optional wrapper styles
+						input: "otp-input", // the CSS class you define in otp.css for styling each input box
+					}}
 				/>
 				{error && (
 					<p className="text-red-500 text-center mt-2">
@@ -86,6 +70,7 @@ export default function OtpPage() {
 					</p>
 				)}
 			</div>
+
 			<button
 				className="mt-4 w-40 bg-blue-500 text-white py-2 rounded"
 				onClick={handleSubmit}
@@ -93,9 +78,10 @@ export default function OtpPage() {
 			>
 				{isVerifying ? "Verifying..." : "Verify OTP"}
 			</button>
+
 			<button
 				onClick={resend}
-				disabled={isResending}
+				disabled={isResending || isCooldown}
 				className="text-black font-medium text-base ml-1 mt-4"
 			>
 				{isResending ? "Resending..." : "Resend OTP"}

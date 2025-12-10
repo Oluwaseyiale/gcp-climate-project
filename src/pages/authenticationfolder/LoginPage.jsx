@@ -67,15 +67,16 @@ const LoginPage = () => {
       />
 
       <div className="flex items-center justify-between h-screen bg-gradient-to-b from-white to-[#F2FCF9]">
-        <div className=" w-[50%] h-full  flex items-center justify-center bg-white   rounded-br-[140px]">
+        <div className="hidden w-[50%] h-full  lg:flex items-center justify-center bg-white   rounded-br-[140px]">
           <img src={signupimg} alt="" width={400} />
         </div>
 
-        <div className=" flex justify-center items-center h-full w-[50%] bg-[#F2FCF9] rounded-tl-[140px]">
+        <div className="w-full flex justify-center items-center h-full lg:w-[50%] bg-[#F2FCF9] lg:rounded-tl-[140px]">
           <div>
-            <h1 className="text-4xl font-medium font-figtree">Welcome Back!</h1>
+            <h1 className="text-center text-2xl lg:text-4xl font-medium font-figtree">Welcome Back!</h1>
             <form
-              className="flex flex-col gap-4 mt-4"
+              className="flex flex-col  items-center lg:items-start
+               gap-4 mt-4"
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
@@ -88,7 +89,7 @@ const LoginPage = () => {
                     message: "Invalid email address",
                   },
                 })}
-                className="border border-[#3F4040] rounded-lg p-2 w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
+                className="border border-[#3F4040] rounded-lg p-2 w-[250px] lg:w-[500px] h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040]"
               />
 
               {errors.email && (
@@ -97,14 +98,14 @@ const LoginPage = () => {
                 </span>
               )}
 
-              <div className="relative flex ">
+              <div className="relative flex h-[52px] bg-blue-100 w-[250px]  lg:w-[500px]  border  border-[#3F4040] rounded-lg p-2">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   {...register("password", {
                     required: "Password is required",
                   })}
-                  className="w-[500px]   mt-1  border  border-[#3F4040] rounded-lg p-2 h-[52px] bg-blue-100 placeholder:text-base placeholder:text-[#3F4040] "
+                  className="  mt-1 w-full  placeholder:text-base placeholder:text-[#3F4040] bg-blue-100 active:border-none"
                 />
                 <div
                   className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
@@ -123,7 +124,7 @@ const LoginPage = () => {
 
               <button
                 type="submit"
-                className="monserrat font-medium size1 formbutton mx-14 flex items-center justify-center text-white py-2 px-4 rounded-md mt-10 bg-[#008056]"
+                className="monserrat w-full font-medium size1 formbutton  flex items-center justify-center text-white py-2 px-4 rounded-md mt-10 bg-[#008056]"
                 disabled={isPending}
               >
                 {isPending ? (
@@ -146,9 +147,9 @@ const LoginPage = () => {
               <p>or</p>
             </div>
 
-            <div className="flex justify-center bg-[#FFFFFF] shadow-[#00000026] shadow-lg cursor-pointer gap-3 items-center lg:px-20 w-fit mx-auto h-[52px] rounded-lg">
+            <div className="flex justify-center bg-[#FFFFFF] shadow-[#00000026] shadow-lg cursor-pointer px-3 gap-3 items-center lg:px-20 w-fit mx-auto h-[52px] rounded-lg">
               <img src={google} alt="" width={24} />
-              <p>Login with google</p>
+              <p className="text-sm lg:text-lg ">Login with google</p>
               {/* <input
 								type="password"
 								placeholder=" continue with google"
