@@ -21,10 +21,10 @@ const ModulesContent = () => {
   const {
     submodules = [],
     currentIndex = 0,
-    moduleIdHere,
+
   } = location.state || {};
 
-  console.log("moduleId", moduleIdHere);
+  // const formatted = text.replace(/\r\n/g, "<br/>");
 
   // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
@@ -45,11 +45,14 @@ const ModulesContent = () => {
 
   const submodule = data?.data;
 
-  console.log("submodule", submodule);
 
   if (!submodule) return <p>No submodule found</p>;
 
   const isLast = currentIndex === submodules.length - 1;
+
+  const formattedBody = submodule.body
+      ? submodule.body.replace(/\r\n/g, "<br/>")
+      : "";
 
   const handleNext = () => {
     // ✅ calculate progress as percentage
@@ -109,7 +112,12 @@ const ModulesContent = () => {
           )}
         </div>
       }
-      <p className="mt-4">{submodule.body}</p>
+      {/*<p className="mt-4">{submodule.body}</p>*/}
+
+      <div
+          className="mt-4 prose max-w-full"
+          dangerouslySetInnerHTML={{ __html: formattedBody }}
+      />
 
       <div className="flex items-end justify-end gap-4 mt-6">
         {/* Previous button */}
@@ -159,6 +167,7 @@ const ModulesContent = () => {
         )}
       </div>
     </div>
+
   );
 };
 
