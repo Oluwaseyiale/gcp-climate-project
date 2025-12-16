@@ -55,7 +55,7 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
           </div>
 
           <div>
-            <h1 className="text-2xl font-medium font-figtree">
+            <h1 className="text-xl lg:text-2xl font-medium font-figtree">
               {enrolledcourses.course_data.title}
             </h1>
             <p className="text-base font-normal font-figtree line-clamp-2">

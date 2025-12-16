@@ -1,10 +1,12 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetSubModules } from "../../../../api/queries.js";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
+
 import { MdChevronRight } from "react-icons/md";
 import { updateProgress } from "../../../../slice/courseSlice.js";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import YouTube from "react-youtube";
 
 const ModulesContent = () => {
   const { id: moduleId, id: subModuleId } = useParams();
@@ -79,6 +81,25 @@ const ModulesContent = () => {
     }
   };
 
+  const getYouTubeId = (url) => {
+    if (!url) return null;
+
+    try {
+      // Handle youtu.be links
+      if (url.includes("youtu.be")) {
+        return url.split("youtu.be/")[1].split("?")[0];
+      }
+
+      // Handle youtube.com/watch?v=
+      const urlObj = new URL(url);
+      return urlObj.searchParams.get("v");
+    } catch {
+      return null;
+    }
+  };
+
+          const videoId = getYouTubeId(submodule.video_link);
+
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold text-center font-figtree">
@@ -86,30 +107,29 @@ const ModulesContent = () => {
       </h1>
       {
         <div className="mb-8">
-          {submodule.video_link ? (
-            <div className="relative pt-[56.25%]">
-              {" "}
-              {/* 16:9 aspect ratio */}
-              <ReactPlayer
-                videoUrl={submodule.video_link}
-                controls
-                width="100%"
-                height="100%"
-                className="absolute top-0 left-0"
-                allowFullScreen
-              />
-            </div>
-          ) : submodule.image ? (
-            <img
-              src={submodule.image}
-              alt={submodule.title}
-              className="w-full rounded-lg"
-            />
+
+          {submodule.video_link && videoId ? (
+              <div className="relative w-full pt-[56.25%] mb-8">
+                <YouTube
+                    videoId={videoId}
+                    className="absolute top-0 left-0 w-full h-full"
+                    iframeClassName="w-full h-full"
+                    opts={{
+                      playerVars: {
+                        autoplay: 0,
+                        controls: 1,
+                        rel: 0,
+                        modestbranding: 1,
+                      },
+                    }}
+                />
+              </div>
           ) : (
-            <div className="p-8 text-center bg-gray-100 rounded-lg">
-              <p className="text-gray-500">No media content available</p>
-            </div>
+              <div className="p-8 text-center bg-gray-100 rounded-lg">
+                <p className="text-gray-500">Invalid or missing video</p>
+              </div>
           )}
+
         </div>
       }
       {/*<p className="mt-4">{submodule.body}</p>*/}
