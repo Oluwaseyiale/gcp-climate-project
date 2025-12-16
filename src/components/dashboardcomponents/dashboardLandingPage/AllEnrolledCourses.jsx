@@ -4,25 +4,25 @@ import { useDispatch } from "react-redux";
 import { setCourseId } from "../../../slice/courseSlice";
 import courses from "../../../assets/courses.jpg"; // Default image
 import { useState } from "react";
-import {useAllCourses} from "../../../api/queries.js";
+import { useAllCourses } from "../../../api/queries.js";
 
 export const AllEnrolledCourses = ({ enrolledcourses }) => {
   const dispatch = useDispatch();
   const [imageError, setImageError] = useState(false);
-  
+
   const id = enrolledcourses.course_data?.id;
-  
+
   // Construct the full image URL if needed
   const getImageUrl = () => {
     if (!enrolledcourses.course_data.cover_image) {
       return courses;
     }
-    
+
     // If the image is already a full URL, use it directly
-    if (enrolledcourses.course_data.cover_image.startsWith('http')) {
+    if (enrolledcourses.course_data.cover_image.startsWith("http")) {
       return enrolledcourses.course_data.cover_image;
     }
-    
+
     // If it's a relative path, construct the full URL
     // Adjust this based on your API response structure
     return `https://res.cloudinary.com/dxfq3iotg/${enrolledcourses.course_data.cover_image}`;
@@ -40,17 +40,11 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
   const availableCourses = useAllCourses();
   console.log("availableCourses", availableCourses?.data?.results);
 
-  
-
- 
-
-
-
   return (
     <div>
-      <div className="flex items-center justify-between px-4 py-6 my-4 shadow rounded-xl">
+      <div className="flex-col flex lg:flex-row lg:items-center lg:justify-between gap-5 px-4 py-6 my-4 shadow rounded-xl">
         <div className="flex w-[80%] gap-5 items-center">
-          <div className="h-[104px] w-[446px] ">
+          <div className="lg:h-[104px] lg:w-[446px] ">
             <img
               src={imageError ? courses : getImageUrl()}
               alt="course-img"
@@ -76,13 +70,7 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
         </Link>
       </div>
 
-      <div className='mt-20'>
-
-
-      {/*available courses section*/}
-      
-      </div>
-
+      <div className="mt-20">{/*available courses section*/}</div>
     </div>
   );
 };
