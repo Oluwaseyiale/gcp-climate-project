@@ -104,7 +104,7 @@ const LandingPage = () => {
 
       {/* available courses section*/}
 
-      <h1 className="my-5 text-xl text-center font-figtree">
+      <h1 className="my-5 text-base lg:text-xl text-center font-figtree">
         See list of available courses to enroll for
       </h1>
 

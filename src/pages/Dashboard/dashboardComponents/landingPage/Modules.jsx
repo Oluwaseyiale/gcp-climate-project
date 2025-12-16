@@ -59,8 +59,8 @@ const Modules = () => {
         modules.map((module, index) => (
           <div className="border-b py-8" key={module.id}>
             {/* Module header */}
-            <div className="flex justify-between items-center">
-              <div className="w-[40rem]">
+            <div className=" lg:flex justify-between items-center">
+              <div className="lg:w-[40rem]">
                 <h1 className="font-figtree font-medium text-xl">
                   {module.title}
                 </h1>
@@ -68,11 +68,14 @@ const Modules = () => {
                   {module.objectives}
                 </p>
               </div>
-              <button onClick={() => toggleOpen(index)}>
+              <button onClick={() => toggleOpen(index)} className="mt-4 lg:mt-0">
                 {openIndex === index ? (
                   <RiArrowDropDownLine className="text-4xl" />
                 ) : (
-                  <MinimalProgressBar progress={courseProgress} />
+                  <span className="">
+                    <p className="block lg:hidden text-xs">Click here</p>
+                    <MinimalProgressBar progress={courseProgress} />
+                  </span>
                 )}
               </button>
             </div>
