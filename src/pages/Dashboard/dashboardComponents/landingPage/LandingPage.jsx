@@ -82,21 +82,23 @@ const LandingPage = () => {
   return (
     <div>
       <div className="border h-44 lg:h-40 rounded-b-full bg-[#E0EBE7] flex flex-col lg:flex-row lg:items-center lg:justify-center">
-        <img
-          src={books}
-          alt=""
-          className="w-24 h-24 lg:w-40 lg:h-40 mx-auto lg:mx-0"
-        />
-        <div className="max-w-xs mx-auto lg:max-w-none text-center lg:text-left">
-          <h1 className="text-xl font-normal font-figtree">
-            Hi, {data?.data?.user?.firstname}
-          </h1>
-          <p className="text-sm lg:text-base font-normal font-figtree">
-            Please find below a list of the courses you are enrolled in.
-          </p>
+          <div className=" lg:flex items-center">
+              <img
+                  src={books}
+                  alt=""
+                  className="w-24 h-24 lg:w-40  lg:h-40 mx-auto lg:mx-0"
+              />
+              <div className="max-w-xs  mx-auto lg:max-w-none text-center lg:text-left">
+                  <h1 className="text-xl font-normal font-figtree">
+                      Hi, {data?.data?.user?.firstname}
+                  </h1>
+                  <p className="text-sm lg:text-base font-normal font-figtree">
+                      Please find below a list of the courses you are enrolled in.
+                  </p>
 
-          {/* <UserProfile /> */}
-        </div>
+                  {/* <UserProfile /> */}
+              </div>
+          </div>
       </div>
 
       {/* <div className="flex items-center justify-center w-full "> */}

@@ -124,7 +124,14 @@ const ModulesContent = () => {
                     }}
                 />
               </div>
-          ) : (
+          ) :
+              submodule.image ? (
+                  <img
+                      src={submodule.image}
+                      alt={submodule.title}
+                      className="w-full rounded-lg"
+                  />
+          ):(
               <div className="p-8 text-center bg-gray-100 rounded-lg">
                 <p className="text-gray-500">Invalid or missing video</p>
               </div>
