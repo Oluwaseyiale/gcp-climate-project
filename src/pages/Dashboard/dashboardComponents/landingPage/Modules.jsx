@@ -16,7 +16,6 @@ const Modules = () => {
 
   const { id } = useParams(); // courseId
   const courseProgress = progressState[id] || 0;
-  console.log("id", id);
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useGetCourses(id);
   const dispatch = useDispatch();
@@ -44,10 +43,7 @@ const Modules = () => {
   }
 
   const modules = data?.data?.modules || [];
-  console.log(
-    "modules",
-    modules.map((module) => module.length)
-  );
+  
 
   return (
     <div className="mt-20 px-16">
@@ -86,14 +82,7 @@ const Modules = () => {
                         <p
                           key={submodule.id}
                           onClick={() => {
-                            console.log("Navigating with:", {
-                              submoduleId: submodule.id,
-                              submodules: module.submodules,
-                              currentIndex: module.submodules.findIndex(
-                                (s) => s.id === submodule.id
-                              ),
-                              moduleIdHere: module,
-                            });
+                            
 
                             navigate(`modulescontent/${submodule.id}`, {
                               state: {

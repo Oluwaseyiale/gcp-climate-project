@@ -38,7 +38,6 @@ export const AllEnrolledCourses = ({ enrolledcourses }) => {
 
   // available course section
   const availableCourses = useAllCourses();
-  console.log("availableCourses", availableCourses?.data?.results);
 
   
 

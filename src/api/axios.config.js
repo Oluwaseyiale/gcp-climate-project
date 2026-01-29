@@ -58,7 +58,6 @@ axiosInstance.interceptors.response.use(
 				const refreshToken = localStorage.getItem("refresh_token");
 
 				if (!refreshToken) {
-					console.error("No refresh token found, redirecting to login...");
 					sessionStorage.clear();
 					// window.location.replace(`${window.location.origin}/login`);
 					return Promise.reject(error);
@@ -76,7 +75,7 @@ axiosInstance.interceptors.response.use(
 				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 				return axios(originalRequest);
 			} catch (refreshError) {
-				console.error("Token refresh failed:", refreshError);
+				// console.error("Token refresh failed:", refreshError);
 				sessionStorage.clear();
 				// window.location.replace(`${window.location.origin}/login`);
 				return Promise.reject(refreshError);

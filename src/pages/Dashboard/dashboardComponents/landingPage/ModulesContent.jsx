@@ -12,7 +12,6 @@ const ModulesContent = () => {
   const dispatch = useDispatch();
 
   const courseId = useSelector((state) => state.courses.enrolledCourseIds);
-  console.log("courseId", courseId);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +27,7 @@ const ModulesContent = () => {
 
   // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
-  // console.log("datas", data);
+
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-screen">

@@ -19,7 +19,6 @@ const CoursesPage = () => {
 	const navigation = useNavigate();
 
 	const { data, isLoading, isError } = useAllCourses(currentPage);
-	console.log("error data", data);
 
 	// Handle input change for search
 	const handleInputChange = (event) => {
@@ -54,7 +53,6 @@ const CoursesPage = () => {
 		item.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
 	);
 
-	console.log("mycourses", filteredItems);
 
 	return (
 		<div className="bg-[#FFFFF]">

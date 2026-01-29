@@ -23,11 +23,7 @@ const LandingPage = () => {
   const [loadingCourse, setLoadingCourse] = useState(null);
 
   const availableCourses = courses?.results;
-  console.log("data", availableCourses);
-  // console.log("1" - 1);
-  // console.log("1" + 1);
-
-  // const name = data?.data?.data.user
+  
 
   if (isLoading) {
     return (
@@ -66,7 +62,6 @@ const LandingPage = () => {
         onSuccess: (data) => {
           // alert("You have been enrolled successfully!");
           toast.success("You have been enrolled successfully!");
-          console.log("Enroll success:", data);
           setLoadingCourse(null);
         },
         onError: (error) => {

@@ -13,7 +13,6 @@ const Subtasks = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const { mutate, isPending } = useSubmitQuiz();
 
-  console.log("course-details", retrievedCourses?.data?.quiz?.id);
 
   const handleSelect = (questionId, optionIndex) => {
     setAnswers((prev) => ({
@@ -41,7 +40,6 @@ const Subtasks = () => {
           };
         }),
       };
-      console.log("Submission Data:", submissionData);
 
       mutate(submissionData);
       setSubmitSuccess(true);

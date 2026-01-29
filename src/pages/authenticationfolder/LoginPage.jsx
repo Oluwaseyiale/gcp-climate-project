@@ -29,13 +29,9 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     mutate(data, {
       onSuccess(data) {
-        console.log("Login successful:", data.data.access);
         if (data?.data?.access) {
           localStorage.setItem("access_token", data.data.access);
-          // console.log(
-          // 	"Token stored in localStorage:",
-          // 	localStorage.getItem("access_token")
-          // );
+          
 
           toast.success("Login successful");
           setTimeout(() => {
@@ -44,7 +40,6 @@ const LoginPage = () => {
         } else {
           toast.error("Login error");
 
-          console.error("Login failed");
         }
       },
     });

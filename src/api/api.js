@@ -10,7 +10,6 @@ export const login = (payload) => {
 	return axios.post("/api/v1/accounts/token/", payload);
 };
 
-console.log("login", login);
 
 export const verifyOtp = (payload) => {
 	return axios.post("/api/v1/accounts/verify-email/", payload);
@@ -71,10 +70,7 @@ export const getSubModule = (id) => {
 	return axios.get(`/api/v1/courses/submodules/${id}`);
 }
 
-// export const courseModules = (id) => {
-// 	console.log("Incoming id to query:", id);
-// 	return axios.get(`/api/v1/courses/modules/${id}/`);
-// }
+
 
 
 
@@ -94,24 +90,13 @@ export const enroll = async (payload) => {
 		});
 		return response.data;
 	} catch (error) {
-		console.error("Enrollment failed:", error.response?.data || error.message);
+		// console.error("Enrollment failed:", error.response?.data || error.message);
 		throw error;
 	}
 };
 
 
-// ✅ Function to enroll in a course
-// export const enroll = async (payload) => {
-// 	try {
-// 		const response = await axios.post("/api/v1/courses/enroll", payload, {
-// 			headers: getAuthHeader(),
-// 		});
-// 		return response.data;
-// 	} catch (error) {
-// 		console.error("Enrollment failed:", error.response?.data || error.message);
-// 		throw error;
-// 	}
-// };
+
 
 
 
@@ -125,22 +110,10 @@ export const userProfile = async () => {
 	} catch (error) {
 		console.error(
 			"Failed to fetch user profile:",
-			error.response?.data || error.message
+			// error.response?.data || error.message
 		);
 		throw error;
 	}
 };
 
-// export const getModules = async () => {
-// 	const response = await axios.get(`/api/v1/courses/modules/`);
-// 	console.log("response", response);
-// 	return response.data;
-// };
 
-// export const modules = () => {
-// 	return axios.get(`/api/v1/courses/modules/`);
-// };
-
-// export const useActiveServices = () => {
-// 	return useQuery({ queryKey: ["services"], queryFn: activeServices });
-//   };
