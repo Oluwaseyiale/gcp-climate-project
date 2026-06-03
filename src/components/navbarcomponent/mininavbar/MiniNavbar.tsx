@@ -38,6 +38,8 @@ const MiniNavbar = () => {
 					<TypedMenuItem>
 						<Link
 							to="/auth/sign-up"
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-flex h-9 w-[106px] items-center justify-center rounded-lg bg-[#008056] text-white font-figtree"
 						>
 							Sign up

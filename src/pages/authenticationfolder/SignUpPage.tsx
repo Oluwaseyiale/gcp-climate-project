@@ -121,7 +121,15 @@ const Signup = () => {
 
             <div className="text-center mt-4">
               <p>
-                Already have an account? <Link to="/auth/login" className="font-bold">Login</Link>
+                Already have an account?{" "}
+                <Link
+                  to="/auth/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold"
+                >
+                  Login
+                </Link>
               </p>
             </div>
 
