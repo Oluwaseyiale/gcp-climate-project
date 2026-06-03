@@ -3,7 +3,7 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import desktopImg from "../../assets/imgA.png";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useCourseId } from "../../api/queries";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import Footer from "../../components/footercomponent/Footer";
@@ -11,11 +11,6 @@ import Footer from "../../components/footercomponent/Footer";
 const CourseDetails = () => {
 	const { id } = useParams(); // Get course ID from URL
 	const { data: courseData } = useCourseId(id);
-
-
-
-	const navigate = useNavigate();
-
 	const price = courseData?.data?.price;
 	const experienceLevel = courseData?.data?.experience_level;
 	const schedule = courseData?.data?.schedule;
@@ -45,9 +40,11 @@ const CourseDetails = () => {
 							{courseData?.data?.description}
 						</p>
 
-						<button onClick={() => {
-							navigate("/auth/login");
-						}}>
+						<button
+							onClick={() => {
+								window.open("/auth/login", "_blank", "noopener,noreferrer");
+							}}
+						>
 							<div className="border mt-4 bg-[#008056] h-9 w-36 rounded-lg flex items-center justify-center gap-4 font-figtree">
 								<h1 className="text-white">
 									Enroll Now

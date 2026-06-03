@@ -128,7 +128,13 @@ const LoginPage = () => {
               <h1>
                 Don&apos;t have an account?{" "}
                 <span className="font-bold ">
-                  <Link to="/auth/sign-up">Signup</Link>
+                  <Link
+                    to="/auth/sign-up"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Signup
+                  </Link>
                 </span>
               </h1>
             </div>
