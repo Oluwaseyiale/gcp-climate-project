@@ -7,6 +7,7 @@ import {
 	getCourses,
 	getQuiz,
 	getSubModule,
+	googleAuth,
 	login,
 	resendOtp,
 	signup,
@@ -21,6 +22,10 @@ export const useSignUp = () => {
 
 export const useLogin = () => {
 	return useMutation({ mutationFn: login });
+};
+
+export const useGoogleAuth = () => {
+	return useMutation({ mutationFn: googleAuth });
 };
 
 export const useVerifyOtp = () => {

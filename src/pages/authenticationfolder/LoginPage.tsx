@@ -2,20 +2,28 @@ import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useLogin } from "../../api/queries";
+import { useGoogleAuth, useLogin } from "../../api/queries";
 import { Slide, ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiEye } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
+import { AxiosError } from "axios";
+import { loadGoogleIdentityScript, requestGoogleAuthCode } from "./googleAuth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const { mutate, isPending } = useLogin();
+  const { mutate: authenticateWithGoogle, isPending: isGooglePending } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [isRequestingGoogleCode, setIsRequestingGoogleCode] = useState(false);
 
   const passwordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    loadGoogleIdentityScript().catch(() => undefined);
+  }, []);
 
   const {
     register,
@@ -28,6 +36,9 @@ const LoginPage = () => {
       onSuccess(data) {
         if (data?.data?.access) {
           localStorage.setItem("access_token", data.data.access);
+          if (data?.data?.refresh) {
+            localStorage.setItem("refresh_token", data.data.refresh);
+          }
 
           toast.success("Login successful");
           setTimeout(() => {
@@ -37,8 +48,54 @@ const LoginPage = () => {
           toast.error("Login error");
         }
       },
+      onError(error) {
+        const loginError = error as AxiosError<{ detail?: string; message?: string }>;
+        toast.error(
+          loginError.response?.data?.detail ||
+            loginError.response?.data?.message ||
+            "Login failed"
+        );
+      },
     });
   };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setIsRequestingGoogleCode(true);
+      const code = await requestGoogleAuthCode();
+      setIsRequestingGoogleCode(false);
+
+      authenticateWithGoogle(
+        { code },
+        {
+          onSuccess(response) {
+            localStorage.setItem("access_token", response.data.tokens.access);
+            localStorage.setItem("refresh_token", response.data.tokens.refresh);
+            toast.success("Google login successful");
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 1200);
+          },
+          onError(error) {
+            const googleError = error as AxiosError<{ error?: string; message?: string }>;
+            toast.error(
+              googleError.response?.data?.error ||
+                googleError.response?.data?.message ||
+                "Google login failed"
+            );
+          },
+        }
+      );
+    } catch (error) {
+      setIsRequestingGoogleCode(false);
+      toast.error(error instanceof Error ? error.message : "Google login failed");
+    }
+  };
+
+  const googleButtonText =
+    isRequestingGoogleCode || isGooglePending
+      ? "Connecting..."
+      : "Login with Google";
 
   return (
     <div>
@@ -143,10 +200,15 @@ const LoginPage = () => {
               <p>or</p>
             </div>
 
-            <div className="flex justify-center bg-[#FFFFFF] shadow-[#00000026] shadow-lg cursor-pointer px-3 gap-3 items-center lg:px-20 w-fit mx-auto h-[52px] rounded-lg">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              disabled={isRequestingGoogleCode || isGooglePending}
+              className="flex justify-center bg-[#FFFFFF] shadow-[#00000026] shadow-lg cursor-pointer px-3 gap-3 items-center lg:px-20 w-fit mx-auto h-[52px] rounded-lg disabled:cursor-not-allowed disabled:opacity-70"
+            >
               <img src={google} alt="" width={24} />
-              <p className="text-sm lg:text-lg ">Login with google</p>
-            </div>
+              <p className="text-sm lg:text-lg ">{googleButtonText}</p>
+            </button>
           </div>
         </div>
       </div>
