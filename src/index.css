@@ -2,20 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Figtree, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  /* font-weight: 400; */
-
- 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
 
+body {
+  min-width: 320px;
+  margin: 0;
+  background: #f6fdfb;
+  color: #111827;
+}
 
+button,
+a {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease, opacity 160ms ease;
+}
 
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@layer components {
+  .course-card {
+    @apply flex h-full flex-col rounded-lg bg-white p-4 shadow-custom;
+  }
+
+  .course-card-image {
+    @apply aspect-[16/10] w-full rounded-md object-cover;
+  }
+
+  .course-card-title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .course-card-description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .course-card-action {
+    @apply mt-auto inline-flex h-10 min-w-36 items-center justify-center rounded-lg bg-[#008056] px-6 text-base font-normal text-white hover:bg-[#006a48] disabled:opacity-70;
+  }
+}
