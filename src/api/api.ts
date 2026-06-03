@@ -1,5 +1,23 @@
 import axios from "./axios.config";
 
+export type AuthTokens = {
+	access: string;
+	refresh: string;
+};
+
+export type GoogleAuthPayload = {
+	code: string;
+};
+
+export type GoogleAuthResponse = {
+	id: string;
+	email: string;
+	firstname: string;
+	lastname: string;
+	created: boolean;
+	tokens: AuthTokens;
+};
+
 export const signup = (payload) => {
 	return axios.post("/api/v1/accounts/signup/", payload);
 };
@@ -14,6 +32,13 @@ export const verifyOtp = (payload) => {
 
 export const resendOtp = (payload) => {
 	return axios.post("/api/v1/accounts/resend-otp/", payload);
+};
+
+export const googleAuth = (payload: GoogleAuthPayload) => {
+	return axios.post<GoogleAuthResponse>(
+		"/api/v1/accounts/google-auth/",
+		payload
+	);
 };
 
 export const allCourses = async (page = 1, pageSize = 10) => {

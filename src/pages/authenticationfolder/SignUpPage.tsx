@@ -3,19 +3,26 @@ import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSignUp } from "../../api/queries";
+import { useGoogleAuth, useSignUp } from "../../api/queries";
 import { ToastContainer, toast, Slide } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiEye } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
 import { AxiosError } from "axios";
+import { loadGoogleIdentityScript, requestGoogleAuthCode } from "./googleAuth";
 
 const Signup = () => {
   const navigate = useNavigate();
   const { mutate, isPending } = useSignUp();
+  const { mutate: authenticateWithGoogle, isPending: isGooglePending } = useGoogleAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [isRequestingGoogleCode, setIsRequestingGoogleCode] = useState(false);
 
   const passwordVisibility = () => setShowPassword(!showPassword);
+
+  useEffect(() => {
+    loadGoogleIdentityScript().catch(() => undefined);
+  }, []);
 
   const {
     register,
@@ -38,6 +45,48 @@ const Signup = () => {
       },
     });
   };
+
+  const handleGoogleSignup = async () => {
+    try {
+      setIsRequestingGoogleCode(true);
+      const code = await requestGoogleAuthCode();
+      setIsRequestingGoogleCode(false);
+
+      authenticateWithGoogle(
+        { code },
+        {
+          onSuccess(response) {
+            localStorage.setItem("access_token", response.data.tokens.access);
+            localStorage.setItem("refresh_token", response.data.tokens.refresh);
+            toast.success(
+              response.data.created
+                ? "Google signup successful"
+                : "Google login successful"
+            );
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 1200);
+          },
+          onError(error) {
+            const googleError = error as AxiosError<{ error?: string; message?: string }>;
+            toast.error(
+              googleError.response?.data?.error ||
+                googleError.response?.data?.message ||
+                "Google signup failed"
+            );
+          },
+        }
+      );
+    } catch (error) {
+      setIsRequestingGoogleCode(false);
+      toast.error(error instanceof Error ? error.message : "Google signup failed");
+    }
+  };
+
+  const googleButtonText =
+    isRequestingGoogleCode || isGooglePending
+      ? "Connecting..."
+      : "Signup with Google";
 
   return (
       <div className="h-screen flex flex-col lg:flex-row bg-gradient-to-b from-white to-[#F2FCF9]">
@@ -135,10 +184,15 @@ const Signup = () => {
 
             <div className="flex justify-center py-4"><p>or</p></div>
 
-            <div className="flex justify-center items-center gap-3 w-fit mx-auto h-[52px] bg-white shadow-lg rounded-lg cursor-pointer lg:px-20">
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              disabled={isRequestingGoogleCode || isGooglePending}
+              className="flex justify-center items-center gap-3 w-fit mx-auto h-[52px] bg-white shadow-lg rounded-lg cursor-pointer lg:px-20 disabled:cursor-not-allowed disabled:opacity-70"
+            >
               <img src={google} alt="Google" width={24} />
-              <p>Signup with Google</p>
-            </div>
+              <p>{googleButtonText}</p>
+            </button>
           </div>
         </div>
       </div>
