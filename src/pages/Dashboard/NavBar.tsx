@@ -6,7 +6,7 @@ import logo from "../../assets/GCPlogo.png";
 export const NavBar = () => {
   return (
     <div className="flex  justify-between p-4   shadow-md w-full  items-center">
-      <Link to>
+      <Link to="/dashboard">
         <img src={logo} alt="logo" width={80} />
       </Link>
       <div className=" flex gap-8 mr-10">

@@ -1,13 +1,13 @@
-/** @format */
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import axios from "axios";
-
-const baseURL = import.meta.env.VITE_BASE_URL;
-axios.defaults.baseURL = baseURL;
+const baseURL = import.meta.env.DEV ? undefined : import.meta.env.VITE_BASE_URL;
 
 const axiosInstance = axios.create({
 	baseURL,
 });
+
+type RefreshSubscriber = (newToken: string) => void;
+type RetriableRequestConfig = AxiosRequestConfig & { _retry?: boolean };
 
 axiosInstance.interceptors.request.use(
 	async (config) => {
@@ -23,31 +23,34 @@ axiosInstance.interceptors.request.use(
 );
 
 let isRefreshing = false;
-let refreshSubscribers = [];
+let refreshSubscribers: RefreshSubscriber[] = [];
 
-const onTokenRefreshed = (newToken) => {
+const onTokenRefreshed = (newToken: string) => {
 	refreshSubscribers.forEach((callback) => callback(newToken));
 	refreshSubscribers = [];
 };
 
-const addRefreshSubscriber = (callback) => {
+const addRefreshSubscriber = (callback: RefreshSubscriber) => {
 	refreshSubscribers.push(callback);
 };
 
 axiosInstance.interceptors.response.use(
 	(response) => response,
-	async (error) => {
-		const originalRequest = error.config;
+	async (error: AxiosError) => {
+		const originalRequest = error.config as RetriableRequestConfig | undefined;
 
 		// Handle expired access token (401 error)
-		if (error.response?.status === 401 && !originalRequest._retry) {
+		if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
 			originalRequest._retry = true;
 
 			if (isRefreshing) {
 				return new Promise((resolve) => {
 					addRefreshSubscriber((newToken) => {
-						originalRequest.headers.Authorization = `Bearer ${newToken}`;
-						resolve(axios(originalRequest));
+						originalRequest.headers = {
+							...originalRequest.headers,
+							Authorization: `Bearer ${newToken}`,
+						};
+						resolve(axiosInstance(originalRequest));
 					});
 				});
 			}
@@ -58,27 +61,30 @@ axiosInstance.interceptors.response.use(
 				const refreshToken = localStorage.getItem("refresh_token");
 
 				if (!refreshToken) {
-					console.error("No refresh token found, redirecting to login...");
 					sessionStorage.clear();
-					// window.location.replace(`${window.location.origin}/login`);
 					return Promise.reject(error);
 				}
 
-				const { data } = await axios.post("/api/v1/accounts/token/refresh/", {
-					refresh: refreshToken,
-				});
+				const { data } = await axiosInstance.post<{ access: string }>(
+					"/api/v1/accounts/token/refresh/",
+					{
+						refresh: refreshToken,
+					}
+				);
 
 				const newAccessToken = data.access;
 				localStorage.setItem("access_token", newAccessToken);
 				isRefreshing = false;
 				onTokenRefreshed(newAccessToken);
 
-				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-				return axios(originalRequest);
+				originalRequest.headers = {
+					...originalRequest.headers,
+					Authorization: `Bearer ${newAccessToken}`,
+				};
+				return axiosInstance(originalRequest);
 			} catch (refreshError) {
-				console.error("Token refresh failed:", refreshError);
+				isRefreshing = false;
 				sessionStorage.clear();
-				// window.location.replace(`${window.location.origin}/login`);
 				return Promise.reject(refreshError);
 			}
 		}
@@ -89,6 +95,6 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance;
 
-export const _send_post_request = (url, data) => {
+export const _send_post_request = (url: string, data: unknown) => {
 	return axiosInstance.post(url, data);
 };

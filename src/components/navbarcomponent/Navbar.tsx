@@ -1,10 +1,6 @@
-/** @format */
-
 import { Link } from "react-router-dom";
 import logo from "../../assets/GCPlogo.png";
 import MiniNavbar from "./mininavbar/MiniNavbar";
-
-// import React from 'react'
 
 const Navbar = () => {
 	const navbarcontent = [
@@ -24,11 +20,10 @@ const Navbar = () => {
 	return (
 		<div>
 			<MiniNavbar />
-			<div className="border  md:flex text-base justify-between px-12 py-4 items-center hidden">
+			<div className="hidden md:flex text-base justify-between px-12 py-4 items-center bg-white/95 shadow-sm">
 				<img
 					src={logo}
-					alt="logo"
-					// className="w-14 h-[106px]"
+					alt="Good Climate Project"
 					height={56}
 					width={106}
 				/>
@@ -57,10 +52,11 @@ const Navbar = () => {
 							</nav>
 						))}
 
-						<Link to="/signup">
-							<button className=" h-9 w-[106px] rounded-lg bg-green-800 text-white font-figtree">
-								Sign up
-							</button>
+						<Link
+							to="/auth/sign-up"
+							className="inline-flex h-9 w-[106px] items-center justify-center rounded-lg bg-[#008056] text-white font-figtree hover:bg-[#006a48]"
+						>
+							Sign up
 						</Link>
 					</div>
 				</div>

@@ -1,22 +1,22 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetCourses } from "../../../../api/queries.js";
-import MinimalProgressBar from "../../../../components/ProgressBar.jsx";
+import { useGetCourses } from "../../../../api/queries";
+import MinimalProgressBar from "../../../../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { setCourseId } from "../../../../slice/courseSlice.js";
+import { setCourseId } from "../../../../slice/courseSlice";
+import { RootState } from "../../../../store/store";
 
 const Modules = () => {
-  const progressState = useSelector((state) => state.courses.progress);
-  const [openIndex, setOpenIndex] = useState(null);
-  const toggleOpen = (index) => {
+  const progressState = useSelector((state: RootState) => state.courses.progress);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const toggleOpen = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const { id } = useParams(); // courseId
-  const courseProgress = progressState[id] || 0;
-  console.log("id", id);
+  const { id } = useParams();
+  const courseProgress = id ? progressState[id] || 0 : 0;
   const navigate = useNavigate();
   const { data, isLoading, isError, error } = useGetCourses(id);
   const dispatch = useDispatch();
@@ -44,10 +44,6 @@ const Modules = () => {
   }
 
   const modules = data?.data?.modules || [];
-  console.log(
-    "modules",
-    modules.map((module) => module.length)
-  );
 
   return (
     <div className="mt-20 px-16">
@@ -58,7 +54,6 @@ const Modules = () => {
       ) : (
         modules.map((module, index) => (
           <div className="border-b py-8" key={module.id}>
-            {/* Module header */}
             <div className=" lg:flex justify-between items-center">
               <div className="lg:w-[40rem]">
                 <h1 className="font-figtree font-medium text-xl">
@@ -80,7 +75,6 @@ const Modules = () => {
               </button>
             </div>
 
-            {/* Submodules */}
             {openIndex === index && (
               <div className="mt-4 text-gray-600">
                 {module.submodules?.length > 0
@@ -89,15 +83,6 @@ const Modules = () => {
                         <p
                           key={submodule.id}
                           onClick={() => {
-                            console.log("Navigating with:", {
-                              submoduleId: submodule.id,
-                              submodules: module.submodules,
-                              currentIndex: module.submodules.findIndex(
-                                (s) => s.id === submodule.id
-                              ),
-                              moduleIdHere: module,
-                            });
-
                             navigate(`modulescontent/${submodule.id}`, {
                               state: {
                                 submodules: module.submodules,

@@ -1,7 +1,7 @@
 /** @format */
 import noCertificate from "../../../assets/noCertificate.png";
 import ballons from "../../../assets/ballons.png";
-import {useUserProfile} from "../../../api/queries.js";
+import {useUserProfile} from "../../../api/queries";
 // import React from 'react'
 
 const Certificates = () => {

@@ -46,7 +46,7 @@ const CourseDetails = () => {
 						</p>
 
 						<button onClick={() => {
-							navigate("/login");
+							navigate("/auth/login");
 						}}>
 							<div className="border mt-4 bg-[#008056] h-9 w-36 rounded-lg flex items-center justify-center gap-4 font-figtree">
 								<h1 className="text-white">

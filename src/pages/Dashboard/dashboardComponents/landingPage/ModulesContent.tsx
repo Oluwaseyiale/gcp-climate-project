@@ -1,36 +1,38 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetSubModules } from "../../../../api/queries.js";
-// import ReactPlayer from "react-player";
-
+import { useGetSubModules } from "../../../../api/queries";
 import { MdChevronRight } from "react-icons/md";
-import { updateProgress } from "../../../../slice/courseSlice.js";
+import { updateProgress } from "../../../../slice/courseSlice";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import YouTube from "react-youtube";
+import { RootState } from "../../../../store/store";
+
+type SubmoduleItem = {
+  id: string | number;
+  title?: string;
+};
 
 const ModulesContent = () => {
   const { id: moduleId, id: subModuleId } = useParams();
 
   const dispatch = useDispatch();
 
-  const courseId = useSelector((state) => state.courses.enrolledCourseIds);
-  console.log("courseId", courseId);
+  const courseId = useSelector((state: RootState) => state.courses.enrolledCourseIds);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 👇 these come from navigate(..., { state: { submodules, currentIndex } })
   const {
     submodules = [],
     currentIndex = 0,
 
-  } = location.state || {};
+  } = (location.state || {}) as {
+    submodules?: SubmoduleItem[];
+    currentIndex?: number;
+  };
 
-  // const formatted = text.replace(/\r\n/g, "<br/>");
-
-  // fetch submodule content by id
   const { data, isLoading, isError, error } = useGetSubModules(subModuleId);
-  // console.log("datas", data);
+
   if (isLoading)
     return (
       <div className="flex items-center justify-center h-screen">
@@ -57,19 +59,15 @@ const ModulesContent = () => {
       : "";
 
   const handleNext = () => {
-    // ✅ calculate progress as percentage
     const progressPercent = Math.round(
       ((currentIndex + 1) / submodules.length) * 100
     );
 
-    // ✅ save progress in redux
-    dispatch(updateProgress({ courseId, progress: progressPercent }));
+    dispatch(updateProgress({ courseId: courseId ?? "", progress: progressPercent }));
 
     if (isLast) {
-      // ✅ Finished last submodule → back to modules list
       navigate(`/dashboard/modules/${courseId}`);
     } else {
-      // ✅ Go to next submodule
       navigate(
         `/dashboard/modules/${moduleId}/modulescontent/${
           submodules[currentIndex + 1].id
@@ -81,16 +79,14 @@ const ModulesContent = () => {
     }
   };
 
-  const getYouTubeId = (url) => {
+  const getYouTubeId = (url?: string) => {
     if (!url) return null;
 
     try {
-      // Handle youtu.be links
       if (url.includes("youtu.be")) {
         return url.split("youtu.be/")[1].split("?")[0];
       }
 
-      // Handle youtube.com/watch?v=
       const urlObj = new URL(url);
       return urlObj.searchParams.get("v");
     } catch {
@@ -139,15 +135,12 @@ const ModulesContent = () => {
 
         </div>
       }
-      {/*<p className="mt-4">{submodule.body}</p>*/}
-
       <div
           className="mt-4 prose max-w-full"
           dangerouslySetInnerHTML={{ __html: formattedBody }}
       />
 
       <div className="flex items-end justify-end gap-4 mt-6">
-        {/* Previous button */}
         {currentIndex > 0 && (
           <button
             onClick={() =>
@@ -160,7 +153,6 @@ const ModulesContent = () => {
                 }
               )
             }
-            // disabled={currentIndex === 0}
             className="flex items-center disabled:opacity-50"
           >
             <MdKeyboardArrowLeft />
@@ -168,7 +160,6 @@ const ModulesContent = () => {
           </button>
         )}
 
-        {/* Next / Finish button */}
         {currentIndex === 0 ? (
           <button
             onClick={handleNext}

@@ -8,14 +8,12 @@ const Subtasks = () => {
   const { id } = useParams();
   const { data: retrievedCourses, isLoading, isError } = useGetCourses(id);
   const { data: profile } = useUserProfile();
-  const [answers, setAnswers] = useState({});
-  const [submitError, setSubmitError] = useState(null);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const { mutate, isPending } = useSubmitQuiz();
 
-  console.log("course-details", retrievedCourses?.data?.quiz?.id);
-
-  const handleSelect = (questionId, optionIndex) => {
+  const handleSelect = (questionId: string | number, optionIndex: number) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: optionIndex,
@@ -31,7 +29,7 @@ const Subtasks = () => {
         quiz: retrievedCourses?.data?.quiz?.id,
         answers: Object.entries(answers).map(([questionId, optionIndex]) => {
           const question = retrievedCourses?.data?.quiz?.questions.find(
-            (q) => q.id === questionId
+            (q) => String(q.id) === questionId
           );
           const selectedOption = question?.options[optionIndex];
 
@@ -41,26 +39,12 @@ const Subtasks = () => {
           };
         }),
       };
-      console.log("Submission Data:", submissionData);
-
       mutate(submissionData);
       setSubmitSuccess(true);
     } catch (error) {
-      setSubmitError(error.message);
-    } finally {
-      // setIsSubmitting(false);
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit quiz");
     }
   };
-
-  {
-    submitError && <div className="mt-4 text-red-600">{submitError}</div>;
-  }
-
-  {
-    submitSuccess && (
-      <div className="mt-4 text-green-600">Quiz submitted successfully!</div>
-    );
-  }
 
   if (isLoading) return <div className="p-4">Loading...</div>;
   if (isError)
@@ -75,6 +59,10 @@ const Subtasks = () => {
           {retrievedCourses?.data?.title}
         </h2>
         <p className="text-lg font-medium text-center mb-10">Quiz</p>
+        {submitError && <div className="mt-4 text-red-600">{submitError}</div>}
+        {submitSuccess && (
+          <div className="mt-4 text-green-600">Quiz submitted successfully!</div>
+        )}
 
         {questions?.map((q, index) => (
           <div key={q.id} className="mb-8">

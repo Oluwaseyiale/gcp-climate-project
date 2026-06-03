@@ -8,6 +8,7 @@ import { ToastContainer, toast, Slide } from "react-toastify";
 import { useState } from "react";
 import { HiEye } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
+import { AxiosError } from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -28,11 +29,12 @@ const Signup = () => {
         const datas = response?.data?.data;
         toast.success("Signup successful");
         setTimeout(() => {
-          navigate("/otp", { state: { email: datas?.email } });
+          navigate("/auth/otp", { state: { email: datas?.email } });
         }, 1500);
       },
       onError(err) {
-        toast.error(err.response?.data?.message || "Something went wrong");
+        const error = err as AxiosError<{ message?: string }>;
+        toast.error(error.response?.data?.message || "Something went wrong");
       },
     });
   };
@@ -71,7 +73,7 @@ const Signup = () => {
                   {...register("firstname", { required: "First Name is required" })}
                   className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
               />
-              {errors.firstname && <span className="text-red-500">{errors.firstname.message}</span>}
+              {errors.firstname && <span className="text-red-500">{String(errors.firstname.message)}</span>}
 
               <input
                   type="text"
@@ -79,7 +81,7 @@ const Signup = () => {
                   {...register("lastname", { required: "Last Name is required" })}
                   className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
               />
-              {errors.lastname && <span className="text-red-500">{errors.lastname.message}</span>}
+              {errors.lastname && <span className="text-red-500">{String(errors.lastname.message)}</span>}
 
               <input
                   type="email"
@@ -90,7 +92,7 @@ const Signup = () => {
                   })}
                   className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
               />
-              {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+              {errors.email && <span className="text-red-500">{String(errors.email.message)}</span>}
 
               <div className="relative">
                 <input
@@ -106,7 +108,7 @@ const Signup = () => {
                   <HiEye />
                 </div>
               </div>
-              {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+              {errors.password && <span className="text-red-500">{String(errors.password.message)}</span>}
 
               <button
                   type="submit"
@@ -119,7 +121,7 @@ const Signup = () => {
 
             <div className="text-center mt-4">
               <p>
-                Already have an account? <Link to="/login" className="font-bold">Login</Link>
+                Already have an account? <Link to="/auth/login" className="font-bold">Login</Link>
               </p>
             </div>
 

@@ -1,10 +1,6 @@
-/** @format */
-
-// import React from 'react'
 import "../dashboard.css";
 import books from "../../../../assets/books.png";
 import EnrolledCourses from "../../../../components/dashboardcomponents/dashboardLandingPage/EnrolledCourses";
-// import UserProfile from "../../../components/dashboardcomponents/userProfile/userProfile";
 import {
   useUserProfile,
   useAllCourses,
@@ -13,6 +9,7 @@ import {
 import { useState } from "react";
 import desktopImg from "../../../../assets/imgA.png";
 import { Slide, ToastContainer, toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 const LandingPage = () => {
   const { data } = useUserProfile();
@@ -20,14 +17,9 @@ const LandingPage = () => {
   const { data: user, isError, error } = useUserProfile();
   const { mutate } = useEnroll();
 
-  const [loadingCourse, setLoadingCourse] = useState(null);
+  const [loadingCourse, setLoadingCourse] = useState<string | number | null>(null);
 
-  const availableCourses = courses?.results;
-  console.log("data", availableCourses);
-  // console.log("1" - 1);
-  // console.log("1" + 1);
-
-  // const name = data?.data?.data.user
+  const availableCourses = courses?.results || [];
 
   if (isLoading) {
     return (
@@ -45,15 +37,13 @@ const LandingPage = () => {
     );
   }
 
-  const handleEnroll = (courseId) => {
+  const handleEnroll = (courseId: string | number) => {
     if (isLoading) {
-      // alert("Checking authentication...");
       toast.warn("Checking authentication...");
       return;
     }
 
     if (!user) {
-      // alert("Please log in to enroll in this course.");
       toast.warn("Please log in to enroll in this course.");
       return;
     }
@@ -64,15 +54,12 @@ const LandingPage = () => {
       { course: courseId },
       {
         onSuccess: (data) => {
-          // alert("You have been enrolled successfully!");
           toast.success("You have been enrolled successfully!");
-          console.log("Enroll success:", data);
           setLoadingCourse(null);
         },
         onError: (error) => {
-          // alert(error?.response?.data?.message || "Enrollment failed.");
-          toast.error(error?.response?.data?.message || "Enrollment failed.");
-          console.error("Enroll error:", error);
+          const enrollError = error as AxiosError<{ message?: string }>;
+          toast.error(enrollError.response?.data?.message || "Enrollment failed.");
           setLoadingCourse(null);
         },
       }
@@ -95,53 +82,43 @@ const LandingPage = () => {
                   <p className="text-sm lg:text-base font-normal font-figtree">
                       Please find below a list of the courses you are enrolled in.
                   </p>
-
-                  {/* <UserProfile /> */}
               </div>
           </div>
       </div>
 
-      {/* <div className="flex items-center justify-center w-full "> */}
       <EnrolledCourses />
-
-      {/* available courses section*/}
 
       <h1 className="my-5 text-base lg:text-xl text-center font-figtree">
         See list of available courses to enroll for
       </h1>
 
-      <div className="flex flex-wrap gap-6 px-10">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,17rem),1fr))] gap-6 px-4 sm:px-6 lg:px-10">
         {availableCourses.map((course) => (
-          <div
+          <article
             key={course.id}
-            className="py-4 flex-1 px-5 bg-[#FFFFFF] h-[360px] w-[290px] border rounded-[10px] flex flex-col shadow-custom  mb-8"
+            className="course-card min-h-[380px] mb-8"
           >
             <img
               src={course.cover_image || desktopImg}
               alt={course.title}
-              className="object-cover w-full h-40 rounded-md"
+              className="course-card-image"
             />
-            <h1 className="mt-4 text-lg font-medium font-figtree">
+            <h2 className="course-card-title mt-4 text-lg font-medium leading-snug font-figtree">
               {course.title}
-            </h1>
-            <p className="text-base font-normal leading-6 truncate font-figtree">
+            </h2>
+            <p className="course-card-description mt-2 text-base font-normal leading-6 font-figtree">
               {course.description}
             </p>
-            <div className="mt-4 button-container">
-              <button
-                onClick={() => handleEnroll(course.id)}
-                disabled={loadingCourse === course.id}
-                className="border button bg-[#008056] h-9 w-32 rounded-lg text-white font-figtree"
-              >
-                {loadingCourse === course.id ? "Enrolling..." : "Enroll Now"}
-              </button>
-            </div>
-          </div>
+            <button
+              onClick={() => handleEnroll(course.id)}
+              disabled={loadingCourse === course.id}
+              className="course-card-action mt-6 self-start font-figtree"
+            >
+              {loadingCourse === course.id ? "Enrolling..." : "Enroll Now"}
+            </button>
+          </article>
         ))}
       </div>
-      <div></div>
-
-      {/* </div> */}
       <ToastContainer
         position="top-center"
         autoClose={1500}
