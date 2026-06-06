@@ -14,7 +14,7 @@ type SubmoduleItem = {
 };
 
 const ModulesContent = () => {
-  const { id: moduleId, subModuleId } = useParams();
+  const { id: courseRouteId, subModuleId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -24,10 +24,12 @@ const ModulesContent = () => {
   const location = useLocation();
 
   const {
+    moduleId,
     submodules = [],
     currentIndex = 0,
 
   } = (location.state || {}) as {
+    moduleId?: string | number;
     submodules?: SubmoduleItem[];
     currentIndex?: number;
   };
@@ -54,27 +56,32 @@ const ModulesContent = () => {
   if (!submodule) return <p>No submodule found</p>;
 
   const isLast = currentIndex === submodules.length - 1;
+  const activeCourseId = courseId ?? courseRouteId;
 
   const formattedBody = submodule.body
       ? submodule.body.replace(/\r\n/g, "<br/>")
       : "";
 
   const handleNext = () => {
+    const totalSubmodules = Math.max(submodules.length, 1);
     const progressPercent = Math.round(
-      ((currentIndex + 1) / submodules.length) * 100
+      ((currentIndex + 1) / totalSubmodules) * 100
     );
 
-    dispatch(updateProgress({ courseId: courseId ?? "", progress: progressPercent }));
+    const progressKey = moduleId ?? submodules[currentIndex]?.id ?? subModuleId;
+    if (progressKey) {
+      dispatch(updateProgress({ progressKey, progress: progressPercent }));
+    }
 
     if (isLast) {
-      navigate(`/dashboard/modules/${courseId}`);
+      navigate(`/dashboard/modules/${activeCourseId}`);
     } else {
       navigate(
-        `/dashboard/modules/${moduleId}/modulescontent/${
+        `/dashboard/modules/${courseRouteId}/modulescontent/${
           submodules[currentIndex + 1].id
         }`,
         {
-          state: { submodules, currentIndex: currentIndex + 1 },
+          state: { moduleId, submodules, currentIndex: currentIndex + 1 },
         }
       );
     }
@@ -146,11 +153,11 @@ const ModulesContent = () => {
           <button
             onClick={() =>
               navigate(
-                `/dashboard/modules/${moduleId}/modulescontent/${
+                `/dashboard/modules/${courseRouteId}/modulescontent/${
                   submodules[currentIndex - 1]?.id
                 }`,
                 {
-                  state: { submodules, currentIndex: currentIndex - 1 },
+                  state: { moduleId, submodules, currentIndex: currentIndex - 1 },
                 }
               )
             }
