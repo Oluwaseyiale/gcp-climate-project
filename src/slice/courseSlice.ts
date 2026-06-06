@@ -6,7 +6,7 @@ type CourseState = {
 };
 
 type ProgressPayload = {
-	courseId: string | number;
+	progressKey: string | number;
 	progress: number;
 };
 
@@ -27,8 +27,9 @@ const courseSlice = createSlice({
 			state.progress = {};
 		},
 		updateProgress: (state, action: PayloadAction<ProgressPayload>) => {
-			const { courseId, progress } = action.payload;
-			state.progress[String(courseId)] = progress;
+			const { progressKey, progress } = action.payload;
+			const key = String(progressKey);
+			state.progress[key] = Math.max(state.progress[key] || 0, progress);
 		},
 	},
 });

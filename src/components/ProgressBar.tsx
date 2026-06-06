@@ -2,7 +2,7 @@ type MinimalProgressBarProps = {
     progress?: number;
 };
 
-export default function MinimalProgressBar({ progress = 10 }: MinimalProgressBarProps) {
+export default function MinimalProgressBar({ progress = 0 }: MinimalProgressBarProps) {
     const clamped = Math.max(0, Math.min(100, progress));
 
     return (
