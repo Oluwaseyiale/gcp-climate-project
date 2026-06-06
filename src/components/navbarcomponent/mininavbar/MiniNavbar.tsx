@@ -17,11 +17,18 @@ const MiniNavbar = () => {
 	return (
 		<div className="md:hidden py-2 flex justify-between items-center px-5 bg-white shadow-sm">
 			<div className="h-10 w-14 flex items-center">
-				<img src={logo} alt="Good Climate Project" className="w-full h-full object-contain" />
+				<img
+					src={logo}
+					alt="Good Climate Project"
+					className="w-full h-full object-contain transition-transform duration-200 hover:scale-105"
+				/>
 			</div>
 			<Menu>
 				<MenuHandler>
-					<button className="text-black p-2 rounded-md shadow-sm" aria-label="Open menu">
+					<button
+						className="text-black p-2 rounded-md shadow-sm transition hover:-translate-y-0.5 hover:bg-[#F2FCF9] active:scale-95"
+						aria-label="Open menu"
+					>
 						<IoMenu size={22} />
 					</button>
 				</MenuHandler>

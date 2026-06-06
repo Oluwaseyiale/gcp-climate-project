@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGetCourses, useSubmitQuiz } from "../../../../api/queries";
-import { useUserProfile } from "../../../../api/queries";
+import { useGetCourses, useSubmitQuiz, useUserProfile } from "../../api/queries";
+import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 
-const Subtasks = () => {
+const SubtasksPage = () => {
   const { id } = useParams();
   const { data: retrievedCourses, isLoading, isError } = useGetCourses(id);
   const { data: profile } = useUserProfile();
@@ -46,7 +46,7 @@ const Subtasks = () => {
     }
   };
 
-  if (isLoading) return <div className="p-4">Loading...</div>;
+  if (isLoading) return <LoadingSpinner label="Loading quiz..." className="min-h-screen" />;
   if (isError)
     return <div className="p-4 text-red-600">Failed to load quiz.</div>;
 
@@ -113,4 +113,4 @@ const Subtasks = () => {
     </div>
   );
 };
-export default Subtasks;
+export default SubtasksPage;

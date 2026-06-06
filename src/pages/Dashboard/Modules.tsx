@@ -1,12 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useGetCourses } from "../../../../api/queries";
-import MinimalProgressBar from "../../../../components/ProgressBar";
+import { useGetCourses } from "../../api/queries";
+import MinimalProgressBar from "../../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { setCourseId } from "../../../../slice/courseSlice";
-import { RootState } from "../../../../store/store";
+import { setCourseId } from "../../slice/courseSlice";
+import { RootState } from "../../store/store";
+import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 
 const Modules = () => {
   const progressState = useSelector((state: RootState) => state.courses.progress);
@@ -29,8 +30,8 @@ const Modules = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      <div className="px-4 py-10">
+        <LoadingSpinner label="Loading modules..." />
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { PinInput } from '@mantine/core';
 import { useVerifyOtp, useResendOtp } from "../../../api/queries";
 import "./otp.css";
+import { getApiErrorMessage } from "../../../utils/apiError";
 
 export default function OtpPage() {
 	const [otp, setOtp] = useState("");
@@ -34,7 +35,8 @@ export default function OtpPage() {
 			{ email: userEmail.email },
 			{
 				onSuccess: () => setMessage("OTP resent successfully."),
-				onError: () => setMessage("Unable to resend OTP. Please try again."),
+				onError: (error) =>
+					setMessage(getApiErrorMessage(error, "Unable to resend OTP. Please try again.")),
 			}
 		);
 	};
@@ -49,7 +51,8 @@ export default function OtpPage() {
 			{ otp, email: userEmail.email },
 			{
 				onSuccess: () => navigate("/auth/login"),
-				onError: () => setMessage("Invalid OTP or server error."),
+				onError: (error) =>
+					setMessage(getApiErrorMessage(error, "Invalid OTP or server error.")),
 			}
 		);
 	};

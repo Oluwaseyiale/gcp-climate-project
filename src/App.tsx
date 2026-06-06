@@ -8,21 +8,21 @@ import {
 import HomePage from "./pages/homefolder/HomePage";
 import AboutUsPage from "./pages/aboutUs/AboutUsPage";
 import CoursesPage from "./pages/courses/CoursesPage";
-import LandingPage from "./pages/Dashboard/dashboardComponents/landingPage/LandingPage";
+import LandingPage from "./pages/Dashboard/LandingPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import SecondPage from "./pages/Dashboard/dashboardComponents/tasks/Tasks";
-import Certificates from "./pages/Dashboard/dashboardComponents/Certificates";
-import Payment from "./pages/Dashboard/dashboardComponents/Payment";
-import Profile from "./pages/Dashboard/dashboardComponents/Profile";
+import TasksPage from "./pages/Dashboard/TasksPage";
+import CertificatesPage from "./pages/Dashboard/CertificatesPage";
+import PaymentPage from "./pages/Dashboard/PaymentPage";
+import ProfilePage from "./pages/Dashboard/ProfilePage";
 import Signup from "./pages/authenticationfolder/SignUpPage";
 import LoginPage from "./pages/authenticationfolder/LoginPage";
 import OtpPage from "./pages/authenticationfolder/otp/OtpVerification";
 import CourseDetails from "./pages/courses/CourseDetails";
-import Modules from "./pages/Dashboard/dashboardComponents/landingPage/Modules";
-import ModulesContent from "./pages/Dashboard/dashboardComponents/landingPage/ModulesContent";
+import Modules from "./pages/Dashboard/Modules";
+import ModulesContent from "./pages/Dashboard/ModulesContent";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import Subtasks from "./pages/Dashboard/dashboardComponents/tasks/Subtasks";
+import SubtasksPage from "./pages/Dashboard/SubtasksPage";
 
 const AppContent = () => {
 	return (
@@ -49,17 +49,17 @@ const AppContent = () => {
 					<Route path="modules/:id/*">
 						<Route index element={<Modules />}></Route>
 						<Route
-							path="modulescontent/:id/*"
+							path="modulescontent/:subModuleId/*"
 							element={<ModulesContent />}
 						></Route>
 					</Route>
-					<Route path="tasks/*" element={<SecondPage />}>
+					<Route path="tasks/*" element={<TasksPage />}>
 					</Route>
-					<Route path="subtasks/:id" element={<Subtasks />} />
+					<Route path="subtasks/:id" element={<SubtasksPage />} />
 
-					<Route path="certificates/*" element={<Certificates />}></Route>
-					<Route path="payment/*" element={<Payment />}></Route>
-					<Route path="profile/*" element={<Profile />}></Route>
+					<Route path="certificates/*" element={<CertificatesPage />}></Route>
+					<Route path="payment/*" element={<PaymentPage />}></Route>
+					<Route path="profile/*" element={<ProfilePage />}></Route>
 				</Route>
 			</Routes>
 		</>
