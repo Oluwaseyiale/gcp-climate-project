@@ -2,23 +2,28 @@
 import signupimg from "../../assets/signupimg.png";
 import google from "../../assets/googleicocn.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useGoogleAuth, useSignUp } from "../../api/queries";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import { useEffect, useState } from "react";
-import { HiEye } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
-import { AxiosError } from "axios";
 import { loadGoogleIdentityScript, requestGoogleAuthCode } from "./googleAuth";
+import FormInput from "../../components/forms/FormInput";
+import PasswordInput from "../../components/forms/PasswordInput";
+import { getApiErrorMessage } from "../../utils/apiError";
+
+type SignupFormValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+};
 
 const Signup = () => {
   const navigate = useNavigate();
   const { mutate, isPending } = useSignUp();
   const { mutate: authenticateWithGoogle, isPending: isGooglePending } = useGoogleAuth();
-  const [showPassword, setShowPassword] = useState(false);
   const [isRequestingGoogleCode, setIsRequestingGoogleCode] = useState(false);
-
-  const passwordVisibility = () => setShowPassword(!showPassword);
 
   useEffect(() => {
     loadGoogleIdentityScript().catch(() => undefined);
@@ -28,9 +33,9 @@ const Signup = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<SignupFormValues>();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     mutate(data, {
       onSuccess(response) {
         const datas = response?.data?.data;
@@ -40,8 +45,7 @@ const Signup = () => {
         }, 1500);
       },
       onError(err) {
-        const error = err as AxiosError<{ message?: string }>;
-        toast.error(error.response?.data?.message || "Something went wrong");
+        toast.error(getApiErrorMessage(err, "Something went wrong"));
       },
     });
   };
@@ -68,12 +72,7 @@ const Signup = () => {
             }, 1200);
           },
           onError(error) {
-            const googleError = error as AxiosError<{ error?: string; message?: string }>;
-            toast.error(
-              googleError.response?.data?.error ||
-                googleError.response?.data?.message ||
-                "Google signup failed"
-            );
+            toast.error(getApiErrorMessage(error, "Google signup failed"));
           },
         }
       );
@@ -116,48 +115,43 @@ const Signup = () => {
               Welcome
             </h1>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-              <input
+              <FormInput<SignupFormValues>
                   type="text"
                   placeholder="First Name"
-                  {...register("firstname", { required: "First Name is required" })}
-                  className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
+                  name="firstname"
+                  register={register}
+                  rules={{ required: "First Name is required" }}
+                  error={errors.firstname}
               />
-              {errors.firstname && <span className="text-red-500">{String(errors.firstname.message)}</span>}
 
-              <input
+              <FormInput<SignupFormValues>
                   type="text"
                   placeholder="Last Name"
-                  {...register("lastname", { required: "Last Name is required" })}
-                  className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
+                  name="lastname"
+                  register={register}
+                  rules={{ required: "Last Name is required" }}
+                  error={errors.lastname}
               />
-              {errors.lastname && <span className="text-red-500">{String(errors.lastname.message)}</span>}
 
-              <input
+              <FormInput<SignupFormValues>
                   type="email"
                   placeholder="Email"
-                  {...register("email", {
+                  name="email"
+                  register={register}
+                  rules={{
                     required: "Email is required",
                     pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Invalid email address" },
-                  })}
-                  className="border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
+                  }}
+                  error={errors.email}
               />
-              {errors.email && <span className="text-red-500">{String(errors.email.message)}</span>}
 
-              <div className="relative">
-                <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    {...register("password", { required: "Password is required" })}
-                    className="w-full border border-[#3F4040] rounded-lg p-2 h-[52px] placeholder:text-[#3F4040]"
-                />
-                <div
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
-                    onClick={passwordVisibility}
-                >
-                  <HiEye />
-                </div>
-              </div>
-              {errors.password && <span className="text-red-500">{String(errors.password.message)}</span>}
+              <PasswordInput<SignupFormValues>
+                  placeholder="Password"
+                  name="password"
+                  register={register}
+                  rules={{ required: "Password is required" }}
+                  error={errors.password}
+              />
 
               <button
                   type="submit"

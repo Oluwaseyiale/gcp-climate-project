@@ -1,29 +1,43 @@
-/** @format */
+import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
-// Dashboard.js
-import { Outlet } from "react-router-dom";
-
-import { SideBar } from "./SideBar";
-import { NavBar } from "./NavBar";
+import { SideBar } from "../../components/dashboard/layout/SideBar";
+import { NavBar } from "../../components/dashboard/layout/NavBar";
+import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 
 const Dashboard = () => {
+	const location = useLocation();
+	const isFirstRender = useRef(true);
+	const [isNavigating, setIsNavigating] = useState(false);
+
+	useEffect(() => {
+		if (isFirstRender.current) {
+			isFirstRender.current = false;
+			return;
+		}
+
+		setIsNavigating(true);
+		const timer = window.setTimeout(() => setIsNavigating(false), 260);
+
+		return () => window.clearTimeout(timer);
+	}, [location.pathname]);
+
 	return (
 		<div className="h-screen overflow-hidden ">
-			{/* Header with fixed height */}
-			{/* <div className="border"> */}
 			<NavBar />
 
-			{/* Main content area */}
 			<div className=" flex h-[80%] ">
 				<SideBar />
-				{/* Sidebar with fixed width */}
 
-				{/* Outlet fills the remaining space */}
-				<div className="flex-1 overflow-y-scroll">
+				<div className="relative flex-1 overflow-y-scroll">
+					{isNavigating && (
+						<div className="animate-fade-in absolute inset-0 z-20 flex items-center justify-center bg-white/75 backdrop-blur-[1px]">
+							<LoadingSpinner label="Loading dashboard..." centered={false} />
+						</div>
+					)}
 					<Outlet />
 				</div>
 			</div>
-			{/* </div> */}
 		</div>
 	);
 };

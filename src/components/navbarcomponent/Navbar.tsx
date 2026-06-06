@@ -18,7 +18,7 @@ const Navbar = () => {
 		},
 	];
 	return (
-		<div>
+		<div className="animate-nav-enter">
 			<MiniNavbar />
 			<div className="hidden md:flex text-base justify-between px-12 py-4 items-center bg-white/95 shadow-sm">
 				<img
@@ -26,6 +26,7 @@ const Navbar = () => {
 					alt="Good Climate Project"
 					height={56}
 					width={106}
+					className="transition-transform duration-200 hover:scale-105"
 				/>
 				<div>
 					<div className="flex justify-end  p-2">
@@ -46,7 +47,12 @@ const Navbar = () => {
 							<nav key={index}>
 								<ul>
 									<li>
-										<Link to={navigator.routeDir}>{navigator.routeName}</Link>
+										<Link
+											to={navigator.routeDir}
+											className="inline-block hover:-translate-y-0.5 hover:text-[#008056]"
+										>
+											{navigator.routeName}
+										</Link>
 									</li>
 								</ul>
 							</nav>
@@ -56,7 +62,7 @@ const Navbar = () => {
 							to="/auth/sign-up"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex h-9 w-[106px] items-center justify-center rounded-lg bg-[#008056] text-white font-figtree hover:bg-[#006a48]"
+							className="inline-flex h-9 w-[106px] items-center justify-center rounded-lg bg-[#008056] text-white font-figtree hover:-translate-y-0.5 hover:bg-[#006a48] active:scale-95"
 						>
 							Sign up
 						</Link>

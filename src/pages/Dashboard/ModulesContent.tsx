@@ -1,11 +1,12 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetSubModules } from "../../../../api/queries";
+import { useGetSubModules } from "../../api/queries";
 import { MdChevronRight } from "react-icons/md";
-import { updateProgress } from "../../../../slice/courseSlice";
+import { updateProgress } from "../../slice/courseSlice";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import YouTube from "react-youtube";
-import { RootState } from "../../../../store/store";
+import { RootState } from "../../store/store";
+import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 
 type SubmoduleItem = {
   id: string | number;
@@ -13,7 +14,7 @@ type SubmoduleItem = {
 };
 
 const ModulesContent = () => {
-  const { id: moduleId, id: subModuleId } = useParams();
+  const { id: moduleId, subModuleId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -35,8 +36,8 @@ const ModulesContent = () => {
 
   if (isLoading)
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="w-12 h-12 border-b-2 border-gray-900 rounded-full animate-spin"></div>
+      <div className="px-4 py-10">
+        <LoadingSpinner label="Loading lesson..." />
       </div>
     );
 

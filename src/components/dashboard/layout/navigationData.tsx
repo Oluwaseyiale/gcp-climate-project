@@ -10,16 +10,19 @@ export const data = [
 	{
 		label: "Dashboard",
 		route: routeBaseUrl,
+		matchRoute: routeBaseUrl,
 		icon: <PiBookBookmarkLight />,
 	},
 	{
 		label: "Tasks",
-		route: routeBaseUrl + "/tasks/*",
+		route: routeBaseUrl + "/tasks",
+		matchRoute: routeBaseUrl + "/tasks/*",
 		icon: <LuClipboardList />,
 	},
 	{
 		label: "Certificates",
-		route: routeBaseUrl + "/certificates/*",
+		route: routeBaseUrl + "/certificates",
+		matchRoute: routeBaseUrl + "/certificates/*",
 		icon: <PiCertificateLight />,
 	},
 	// {

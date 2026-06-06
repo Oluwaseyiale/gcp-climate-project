@@ -1,16 +1,27 @@
 import { useNavigate } from "react-router-dom";
 
-import books from "../../../../assets/books.png";
-import { useEnrolledCourses, useUserProfile } from "../../../../api/queries";
+import books from "../../assets/books.png";
+import { useEnrolledCourses, useUserProfile } from "../../api/queries";
+import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 
-const SecondPage = () => {
-  const { data } = useUserProfile();
-  const { data: courses } = useEnrolledCourses();
+const TasksPage = () => {
+  const {
+    data,
+    isLoading: isProfileLoading,
+    isError: isProfileError,
+    error: profileError,
+  } = useUserProfile();
+  const {
+    data: courses,
+    isLoading: isCoursesLoading,
+    isError: isCoursesError,
+    error: coursesError,
+  } = useEnrolledCourses();
   const enrolledCourses = courses?.data?.results;
 
   const navigate = useNavigate();
 
-  const routeTo = (id) => {
+  const routeTo = (id: string | number) => {
     navigate(`/dashboard/subtasks/${id}`);
   };
 
@@ -20,14 +31,27 @@ const SecondPage = () => {
         <img src={books} alt="" className="w-24 h-24 lg:h-40 lg:w-40" />
         <div>
           <h1 className="font-figtree font-normal text-base">
-            Hi, {data?.data?.user?.firstname}
+            Hi, {isProfileLoading ? "..." : data?.data?.user?.firstname}
           </h1>
           <p className="font-figtree font-semibold text-xl">Your Tasks</p>
         </div>
       </div>
 
       <div className="text-center mt-12 lg:mt-16 lg:w-9/12 lg:mx-auto p-3">
-        {enrolledCourses?.map((course) => (
+        {isProfileError ? (
+          <p className="text-red-600">
+            {profileError?.message || "Unable to load your profile."}
+          </p>
+        ) : isCoursesLoading ? (
+          <LoadingSpinner label="Loading your tasks..." />
+        ) : isCoursesError ? (
+          <p className="text-red-600">
+            {coursesError?.message || "Unable to load your tasks."}
+          </p>
+        ) : enrolledCourses?.length === 0 ? (
+          <p>No tasks available yet.</p>
+        ) : (
+          enrolledCourses?.map((course) => (
           <div
             key={course?.course_data.id}
             className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mt-4"
@@ -48,10 +72,11 @@ const SecondPage = () => {
               Take Quiz
             </button>
           </div>
-        ))}
+          ))
+        )}
       </div>
     </section>
   );
 };
 
-export default SecondPage;
+export default TasksPage;
