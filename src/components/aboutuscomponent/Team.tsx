@@ -1,8 +1,8 @@
 /** @format */
 
-import teamA from "../../assets/teamA.png";
-import teamB from "../../assets/teamB.png";
-import teamC from "../../assets/teamC.png";
+import teamA from "../../assets/team-a.jpg";
+import teamB from "../../assets/team-b.jpg";
+import teamC from "../../assets/team-c.jpg";
 
 const Team = () => {
 	const team = [
@@ -23,7 +23,7 @@ const Team = () => {
 		},
 	];
 	return (
-		<div className="mt-20 lg:mt-40 px-8">
+		<div id="team" className="mt-20 scroll-mt-24 lg:mt-40 px-8">
 			<h1
 				className={`font-figtree font-medium text-2xl text-center lg:text-start mt-4 `}
 			>

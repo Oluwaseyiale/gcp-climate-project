@@ -2,7 +2,7 @@
 
 import { FaArrowRightLong } from "react-icons/fa6";
 import PropTypes from "prop-types";
-import desktopImg from "../../assets/imgA.png";
+import desktopImg from "../../assets/course-a.jpg";
 import { useParams } from "react-router-dom";
 import { useCourseId } from "../../api/queries";
 import Navbar from "../../components/navbarcomponent/Navbar";

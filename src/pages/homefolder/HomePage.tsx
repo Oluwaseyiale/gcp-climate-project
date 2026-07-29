@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
 import Footer from "../../components/footercomponent/Footer";
-import AboutUs from "../../components/homepagecomponents/AboutUs";
-import OurCourses from "../../components/homepagecomponents/OurCourses";
 import OurImpacts from "../../components/homepagecomponents/OurImpacts";
-import OurPrograms from "../../components/homepagecomponents/OurPrograms";
+import ApproachPillars from "../../components/homepagecomponents/ApproachPillars";
+import AudienceSegments from "../../components/homepagecomponents/AudienceSegments";
+import PartnerLogos from "../../components/homepagecomponents/PartnerLogos";
+import StoriesPreview from "../../components/homepagecomponents/StoriesPreview";
+import DonateCTA from "../../components/homepagecomponents/DonateCTA";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import "./homePage.css";
 
@@ -19,12 +22,21 @@ const HomePage = () => {
 					<p className="mt-4 text-base font-normal leading-7 text-white md:text-2xl md:text-black">
 						Your journey to Sustainability and Climate Advocacy starts here
 					</p>
+
+					<Link
+						to="/programs"
+						className="mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-[#008056] px-7 font-figtree font-medium text-white hover:-translate-y-0.5 hover:bg-[#006a48] active:scale-95"
+					>
+						Explore our programs
+					</Link>
 				</div>
 			</section>
-			<OurPrograms />
-			<OurCourses />
+			<ApproachPillars />
+			<AudienceSegments />
+			<PartnerLogos />
 			<OurImpacts />
-			<AboutUs />
+			<StoriesPreview />
+			<DonateCTA />
 			<Footer />
 		</div>
 	);

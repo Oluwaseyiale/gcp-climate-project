@@ -2,17 +2,14 @@
 
 .image1 {
 	background-image: linear-gradient(to bottom, #57575772, #0000008a),
-		url("../../assets/image1.JPEG");
+		url("../../assets/program-leaders.jpg");
 	background-size: cover;
 	background-position: center;
-
-	/* height: "100vh";
-	width: "100%"; */
 }
 
 .image2 {
 	background-image: linear-gradient(to bottom, #57575772, #000000d0),
-		url("../../assets/image2.JPG");
+		url("../../assets/image2.jpg");
 	background-size: cover;
 	background-position: center;
 	/* height: "100vh";
@@ -21,9 +18,7 @@
 
 .image3 {
 	background-image: linear-gradient(to bottom, #57575772, #000000d0),
-		url("../../assets/image3.jpg");
+		url("../../assets/program-scholars.jpg");
 	background-size: cover;
 	background-position: center;
-	/* height: "100vh";
-	width: "100%"; */
 }

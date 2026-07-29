@@ -1,6 +1,6 @@
 /** @format */
-import noCertificate from "../../assets/noCertificate.png";
-import ballons from "../../assets/ballons.png";
+import noCertificate from "../../assets/no-certificate-opt.png";
+import ballons from "../../assets/balloons-opt.png";
 import { useUserProfile } from "../../api/queries";
 import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 

@@ -23,6 +23,9 @@ import ModulesContent from "./pages/Dashboard/ModulesContent";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import SubtasksPage from "./pages/Dashboard/SubtasksPage";
+import PlaceholderPage from "./pages/placeholder/PlaceholderPage";
+import ProgramsPage from "./pages/programs/ProgramsPage";
+import ProgramDetailPage from "./pages/programs/ProgramDetailPage";
 
 const AppContent = () => {
 	return (
@@ -30,8 +33,56 @@ const AppContent = () => {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/about" element={<AboutUsPage />} />
+				<Route path="/programs" element={<ProgramsPage />} />
+				<Route path="/programs/:slug" element={<ProgramDetailPage />} />
 				<Route path="/courses" element={<CoursesPage />} />
 				<Route path="/courses/:id" element={<CourseDetails />} />
+
+				<Route
+					path="/volunteer"
+					element={
+						<PlaceholderPage
+							title="Volunteer With Us"
+							description="Our volunteer program is being finalized. Check back soon, or reach out to admin@goodclimateproject.org to get involved early."
+						/>
+					}
+				/>
+				<Route
+					path="/blog"
+					element={
+						<PlaceholderPage
+							title="Blog"
+							description="We're building out our blog. In the meantime, follow our social channels for updates from the field."
+						/>
+					}
+				/>
+				<Route
+					path="/donate"
+					element={
+						<PlaceholderPage
+							title="Donate"
+							description="Our online donation flow is coming soon. To support Good Climate Project today, please reach out to admin@goodclimateproject.org."
+						/>
+					}
+				/>
+				<Route
+					path="/our-solution"
+					element={
+						<PlaceholderPage
+							title="Our Solution"
+							description="A dedicated page on our approach and solution is on the way."
+						/>
+					}
+				/>
+				<Route
+					path="/our-story"
+					element={
+						<PlaceholderPage
+							title="Our Story"
+							description="The story of how Good Climate Project started is coming soon."
+						/>
+					}
+				/>
 
 				<Route path="/auth">
 					<Route index element={<Navigate to="/auth/login" replace />} />

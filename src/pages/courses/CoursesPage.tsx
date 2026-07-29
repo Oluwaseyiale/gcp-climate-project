@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from "react";
-import courseimg from "../../assets/coursesbg.png";
+import courseimg from "../../assets/courses-bg.jpg";
 import Footer from "../../components/footercomponent/Footer";
 import ReactPaginate from "react-paginate";
 import Navbar from "../../components/navbarcomponent/Navbar";

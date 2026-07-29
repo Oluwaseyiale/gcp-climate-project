@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import books from "../../assets/books.png";
+import books from "../../assets/books-opt.png";
 import { useEnrolledCourses, useUserProfile } from "../../api/queries";
 import LoadingSpinner from "../../components/widgets/LoadingSpinner";
 

@@ -1,6 +1,6 @@
 .homeimgbg {
 	background-image: linear-gradient(90deg, #f6fdfb 0%, #f6fdfbe6 34%, #001f1766 72%),
-		url("../../assets/secondBgImage.png");
+		url("../../assets/hero-bg.jpg");
 	background-size: cover;
 	background-position: center;
 }

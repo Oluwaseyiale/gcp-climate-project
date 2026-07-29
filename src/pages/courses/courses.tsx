@@ -1,8 +1,8 @@
 
-import imgA from "../../assets/imgA.png";
-import imgB from "../../assets/imgB.png";
-import imgC from "../../assets/imgC.png";
-import imgD from "../../assets/imgD.png";
+import imgA from "../../assets/course-a.jpg";
+import imgB from "../../assets/course-b.jpg";
+import imgC from "../../assets/course-c.jpg";
+import imgD from "../../assets/course-d.jpg";
 
 
 export const courses = [

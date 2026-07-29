@@ -1,4 +1,6 @@
 /** @format */
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import BeliefsAndObjectives from "../../components/aboutuscomponent/BeliefsAndObjectives";
 import MissionAndVision from "../../components/aboutuscomponent/MissionAndVision";
 import Team from "../../components/aboutuscomponent/Team";
@@ -7,6 +9,14 @@ import OurPrograms from "../../components/homepagecomponents/OurPrograms";
 import Navbar from "../../components/navbarcomponent/Navbar";
 import "./about.css";
 const AboutUsPage = () => {
+	const { hash } = useLocation();
+
+	useEffect(() => {
+		if (!hash) return;
+		const target = document.querySelector(hash);
+		target?.scrollIntoView({ behavior: "smooth" });
+	}, [hash]);
+
 	return (
 		<div className="bg-[#F6FDFB]">
 			<Navbar />

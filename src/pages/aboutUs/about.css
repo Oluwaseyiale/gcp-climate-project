@@ -7,20 +7,10 @@
 }
 
 .imgbackground {
-	/* height: 1512px; */
-	background-image: linear-gradient(
-			to bottom,
-			rgba(0, 0, 0, 0.75),
-			rgba(0, 0, 0, 0.75)
-		),
-		/* Linear gradient */ url("../../assets/aboutusimg.png"); /* Background image */
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+	background-color: #2a6f59;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* padding: 4rem 16rem ; */
 }
 .aboutheader {
 	font-weight: 600;

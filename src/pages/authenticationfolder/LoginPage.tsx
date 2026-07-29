@@ -1,4 +1,4 @@
-import signupimg from "../../assets/signupimg.png";
+import signupimg from "../../assets/signup-img.jpg";
 import google from "../../assets/googleicocn.png";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";

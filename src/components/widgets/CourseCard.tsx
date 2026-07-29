@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fallbackCourseImage from "../../assets/imgA.png";
+import fallbackCourseImage from "../../assets/course-a.jpg";
 
 export type CourseCardProps = {
   title: string;

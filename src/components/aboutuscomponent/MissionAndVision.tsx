@@ -1,5 +1,5 @@
 /** @format */
-import missionimg from "../../assets/missionimg.png";
+import missionimg from "../../assets/mission-img.jpg";
 
 const MissionAndVision = () => {
 	return (

@@ -1,4 +1,4 @@
-import books from "../../assets/books.png";
+import books from "../../assets/books-opt.png";
 import EnrolledCourses from "../../components/dashboard/EnrolledCourses";
 import {
   useUserProfile,

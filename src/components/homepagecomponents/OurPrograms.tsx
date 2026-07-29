@@ -1,25 +1,6 @@
+import { Link } from "react-router-dom";
+import { programs } from "../../data/programs";
 import "./homepagecomponents.css";
-
-const programs = [
-	{
-		className: "image1",
-		title: "Leaders for Sustainable Tomorrow",
-		description:
-			"A flagship program dedicated to cultivating visionary climate leaders through immersive mentorship, skill development, and impactful sustainability projects.",
-	},
-	{
-		className: "image2",
-		title: "Pathways to Climate Knowledge",
-		description:
-			"Cutting-edge online courses that explore the intersection of climate change and sustainable development, tailored to inspire learners and professionals alike to take action.",
-	},
-	{
-		className: "image3",
-		title: "Climate Scholars Academy",
-		description:
-			"Igniting young minds with innovative climate education and equipping students and educators to lead the charge through dynamic, interactive training.",
-	},
-];
 
 const OurPrograms = () => {
 	return (
@@ -28,13 +9,14 @@ const OurPrograms = () => {
 				Our Program
 				<hr className="border border-black w-full" />
 			</h1>
-			<div className="flex flex-wrap justify-center gap-5 mt-8">
+			<div className="grid grid-cols-1 gap-5 mt-8 md:grid-cols-2 lg:grid-cols-3">
 				{programs.map((program) => (
-					<article
-						key={program.title}
-						className={`${program.className} w-full lg:w-96 min-h-72 rounded-lg overflow-hidden flex items-end`}
+					<Link
+						key={program.slug}
+						to={`/programs/${program.slug}`}
+						className={`${program.className} group w-full min-h-72 rounded-lg overflow-hidden flex items-end transition-transform duration-300 hover:-translate-y-1`}
 					>
-						<div className="w-full p-5 text-center bg-black/35">
+						<div className="w-full p-5 text-center bg-black/35 transition-colors group-hover:bg-black/45">
 							<h2 className="font-semibold font-figtree text-xl lg:text-2xl text-white">
 								{program.title}
 							</h2>
@@ -42,7 +24,7 @@ const OurPrograms = () => {
 								{program.description}
 							</p>
 						</div>
-					</article>
+					</Link>
 				))}
 			</div>
 		</section>
